@@ -18,7 +18,7 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:PREV_MD5('18 lines')=c4552696e56b85af79186eb4b3ef46fc0d9e731238cb81f70047ca2e7271afad
 
 if [ "${2}" == "" ]
 then
@@ -57,8 +57,10 @@ else
     for n in $(find . -type f | grep -v .git)
     do
       sed -i "$(cat ${tmpurls} | sed 's/\//\\\//g' | awk -vp1=s/ -vp2=/ -vp3=/g\;\  -F',' '{printf p1 $1 p2 $2 p3}')" $n
-      for m in {1..$(sourcefrom
-      sourcefrom http://bit.ly/ayevdi-csum-regen $n
+      for m in {1..$(sourcefrom https://bit.ly/ayevdi-csum-depth)}
+      do
+        sourcefrom http://bit.ly/ayevdi-csum-regen $n
+      done
       git add $n
     done
     git commit -m "$(echo 'Shifted links from ' ${fromrepo} ' ' ${torepo} | sed 's/\\//g')"
@@ -66,5 +68,3 @@ else
   popd
   
 fi
-
-# AYESEC:PREV_MD5('18 lines')=416af82e090a0c88d18740e738c3f4a376b79b6142f6f3c6aa208fba89da11331d2907e919913812af6f156fd75fe7b0b3a8f08d975c69277221c5eee59b7f6f
