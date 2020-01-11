@@ -32,6 +32,7 @@ else
 fi
 
 export certify_list=$(tempfile)
+echo "Generating certification sequence for ${1} at ${certify_list}"
 cat ${1} | awk -F"'" -vfn=${1} 'BEGIN {ln=1};
 /^\# AYESEC:POST_SHS\(/  {print "echo \"" $1 FS $2 FS ")=\"$(cat " fn " | head -" (ln + $2) " | tail -" $2 " | sha512sum - | cut -d\\  -f1)"; 
                           ln=ln+1; next};
@@ -39,5 +40,7 @@ cat ${1} | awk -F"'" -vfn=${1} 'BEGIN {ln=1};
                           ln=ln+1; next};
 /.*/                     {print "cat " fn " | head -" ln " | tail -1"; ln=ln+1};' | sed 's/lines\ //g' >${certify_list}
 export tmpscript=$(tempfile)
+echo "Certifying ${1} with ${certify_list} at ${tmpscript}"
 . ${certify_list} >${tmpscript}
+echo "Replacing ${1} with ${tmpscript}"
 cat ${tmpscript} >${1}
