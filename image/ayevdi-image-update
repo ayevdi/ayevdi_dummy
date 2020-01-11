@@ -1,4 +1,4 @@
-# AYESEC:POST_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:POST_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
@@ -17,7 +17,7 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
 
 ayevdi_img_common=$(sourcefrom https://bit.ly/ayevdi-image-common)
 docker pull ayeai/ayevdi:${ayevdi_img_common}
