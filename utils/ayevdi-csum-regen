@@ -29,7 +29,7 @@ else
 fi
 
 certify_list=$(tempfile)
-cat ${2} | awk -F"'" -vfn=${1} 'BEGIN {ln=1};
+cat ${1} | awk -F"'" -vfn=${1} 'BEGIN {ln=1};
 /^\# AYESEC:POST_SHS\(/  {print "echo \"" $1 FS $2 FS ")=\"$(cat " fn " | head -" (ln + $2) " | tail -" $2 " | sha512sum - | cut -d\\  -f1)"; 
                           ln=ln+1; next};
 /^\# AYESEC:PREV_SHS\(/  {print "echo \"" $1 FS $2 FS ")=\"$(cat " fn " | head -" (ln - 1) " | tail -" $2 " | sha512sum - | cut -d\\  -f1)"; 
@@ -37,4 +37,4 @@ cat ${2} | awk -F"'" -vfn=${1} 'BEGIN {ln=1};
 /.*/                     {print "cat " fn " | head -" ln " | tail -1"; ln=ln+1};' | sed 's/lines\ //g' >${certify_list}
 tmpscript=$(tempfile)
 . ${certify_list} >${tmpscript}
-cat ${tmpscript} >${2}
+cat ${tmpscript} >${1}
