@@ -36,4 +36,3 @@ cat ${1} | awk -F"'" -vfn=${1} 'BEGIN {ln=1};
 tmpscript=$(tempfile)
 . ${certify_list} >${tmpscript}
 cat ${tmpscript} >${1}
-
