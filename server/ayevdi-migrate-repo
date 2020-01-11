@@ -1,5 +1,5 @@
 #!/bin//bash
-# AYESEC:POST_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:POST_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
@@ -18,7 +18,7 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_MD5('18 lines')=c4552696e56b85af79186eb4b3ef46fc0d9e731238cb81f70047ca2e7271afad
+# AYESEC:PREV_SHS('18 lines')=c4552696e56b85af79186eb4b3ef46fc0d9e731238cb81f70047ca2e7271afad
 
 if [ "${2}" == "" ]
 then

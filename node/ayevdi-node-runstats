@@ -1,4 +1,4 @@
-# AYESEC:POST_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:POST_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
@@ -17,7 +17,7 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:PREV_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 
 #(c) Copyright 2019 Abhishek Choudhary
 # Released un GNU GPL v2 license

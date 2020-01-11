@@ -176,9 +176,9 @@ sourcefrom https://bit.ly/ayevdi-pool-rm-all
 ### Utils
 Some quick utilities for both AyeVDI users and developers 
 
-#### Get lines and md5sum
+#### Get lines and sha512sum
 ```
-(cat | tee >(echo LINES=$(wc -l)) >(echo CSUM=$(md5sum)) >/dev/null) && echo ""
+(cat | tee >(echo LINES=$(wc -l)) >(echo CSUM=$(sha512sum)) >/dev/null) && echo ""
 ```
 
 #### Release fatal error lockdown

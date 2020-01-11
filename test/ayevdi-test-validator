@@ -1,4 +1,4 @@
-# AYESEC:POST_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:POST_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
@@ -17,17 +17,17 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:PREV_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 
-# AYESEC:POST_MD5('3 lines')=dbe8b4efe198a3f426da6eab689df7a0
+# AYESEC:POST_SHS('3 lines')=dbe8b4efe198a3f426da6eab689df7a0
 echo "Test-validator"
 logger "Test-validator"
 # NOTE: The following line must contain an INVALID checksum
-# AYESEC:PREV_MD5('3 lines')=bb8d8a5e9360945467dec750af177aed
+# AYESEC:PREV_SHS('3 lines')=bb8d8a5e9360945467dec750af177aed
 
-# AYESEC:POST_MD5('3 lines')=dbe8b4efe198a3f426da6eab689df7a0
+# AYESEC:POST_SHS('3 lines')=dbe8b4efe198a3f426da6eab689df7a0
 # NOTE: The above line must contain an INVALID checksum
 echo "Test-validator"
 logger "Test-validator"
-# AYESEC:PREV_MD5('3 lines')=bb8d8a5e9360945467dec750af177aed
+# AYESEC:PREV_SHS('3 lines')=bb8d8a5e9360945467dec750af177aed
 

@@ -1,4 +1,4 @@
-# AYESEC:POST_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:POST_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
@@ -17,6 +17,6 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_MD5('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
+# AYESEC:PREV_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 
 shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p $2 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && bash -i'" --disable-ssl
