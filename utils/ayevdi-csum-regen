@@ -19,6 +19,8 @@ fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
 # AYESEC:PREV_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 
+# Call with "bsf" option to sourcefrom in case of SHS infrastructure modifications
+
 if [ "$1" == "bsf" ]
 then
   shift 2
