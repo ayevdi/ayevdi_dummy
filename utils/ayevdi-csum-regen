@@ -22,6 +22,7 @@ fi
 # Note: Call with "bsf" option to sourcefrom in case of SHS framework modifications
 # Note: The sourcefrom alias can be modified ignore validation if needed
 # Note: Default SHS is set to SHA512, but any other SHS will work
+# Note: Changes may require manual fixes
 
 if [ "$1" == "bsf" ]
 then
