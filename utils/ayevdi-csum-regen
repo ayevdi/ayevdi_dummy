@@ -19,7 +19,7 @@ fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
 # AYESEC:PREV_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 
-# Note Call with "bsf" option to sourcefrom in case of SHS framework modifications
+# Note: Call with "bsf" option to sourcefrom in case of SHS framework modifications
 # Note: The sourcefrom alias can be modified ignore validation if needed
 
 if [ "$1" == "bsf" ]
