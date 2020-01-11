@@ -19,7 +19,7 @@ fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
 # AYESEC:PREV_SHS('18 lines')=9e65a33c9f13130a71e5588e1211b9d2
 
-# Note: The SHS must be common across the framework - changes may need manual fix
+# Note: The SHS must be common across the framework - changes may require manual fixes
 
 if [ "$1" == "bsf" ]
 then
