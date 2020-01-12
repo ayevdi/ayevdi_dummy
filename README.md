@@ -131,7 +131,7 @@ screen -S "ayevdi-gui-${USER}" -d -m sourcefrom https://bit.ly/ayevdi-gui-init
 ```
 #### Launch a host based shell session on port 4203
 ```
-screen -S "ayevdi-gui-${USER}" -d -m sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4203
+screen -S "ayevdi-shell-${USER}" -d -m sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4203
 ```
 ### Setup front-end
 Note: TBD - OST needed for scripted deployment of profiles and scenarios
