@@ -1,0 +1,47 @@
+#!/bin/bash
+# AYESEC:POST_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:STATUTORY_HEADER
+if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
+then
+  echo "AyeVDI by https://ayeai.xyz"
+  echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+  echo ""
+  echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
+  echo "Further usage of these software, artifacts or methods"
+  echo "are subject to the 'latest' license agreement avaialble at"
+  echo "https://raw.githubusercontent.com/ayeai/spl/master/LICENSE"
+  echo ""
+  echo "AyeVDI not activated. Please use the following command to"
+  echo "activate AyeVDI"
+  echo '  ayesh=$(tempfile) && wget https://bit.ly/ayevdi-sfrom-init -O${ayesh} -q && . ${ayesh}'
+  echo ""
+  exit
+fi
+# AYESEC:STATUTORY_HEADER_COMPLETED
+# AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+
+# Clear the older VNC logs
+export tmpfldr=${HOME}/.vnc/$(date +%s)
+mkdir -p ${tmpfldr}
+mv ${HOME}/.vnc/*.log ${tmpfldr}
+mv ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
+
+# Daemonize GUI service
+screen -S "ayevdi-gui-${USER}" -d -m bash -lci 'sourcefrom https://bit.ly/ayevdi-gui-init'
+
+# Wait for VNC server to be ready
+while [ $(if [ -e ${HOME}/.vnc/*.log ]; then cat ${HOME}/.vnc/*.log; fi | grep 'created VNC server' | wc -l) -lt 1 ]
+do
+  echo Waiting for VNC server...
+  sleep 1
+done
+
+# Wait for noVNC / websockify to be ready
+while [ $(if [ -e mv ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ]; then cat mv ${HOME}/.ayevdi/ayevdi-gui-${USER}.log; fi | grep 'Press Ctrl-C to exit' | wc -l) -lt 1 ]
+do
+  echo Waiting for noVNC / websockify...
+  sleep 1
+done
+
+export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
+echo "http://${extip}:6080/vnc_auto.html is the GUI console"
