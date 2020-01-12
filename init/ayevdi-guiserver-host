@@ -37,7 +37,7 @@ do
 done
 
 # Wait for noVNC / websockify to be ready
-while [ $(if [ -e mv ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ]; then cat mv ${HOME}/.ayevdi/ayevdi-gui-${USER}.log; fi | grep 'Press Ctrl-C to exit' | wc -l) -lt 1 ]
+while [ $(if [ -e ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ]; then cat ${HOME}/.ayevdi/ayevdi-gui-${USER}.log; fi | grep 'Press Ctrl-C to exit' | wc -l) -lt 1 ]
 do
   echo Waiting for noVNC / websockify...
   sleep 1
