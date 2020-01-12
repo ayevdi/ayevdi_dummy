@@ -36,12 +36,15 @@ do
   sleep 1
 done
 
+export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
+
 # Wait for noVNC / websockify to be ready
-while [ $(if [ -e ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ]; then cat ${HOME}/.ayevdi/ayevdi-gui-${USER}.log; fi | grep 'Press Ctrl-C to exit' | wc -l) -lt 1 ]
+curl http://${extip}:6080/vnc_auto.html >/dev/null
+while [ $? -gt 0 ]
 do
   echo Waiting for noVNC / websockify...
   sleep 1
+  curl http://${extip}:6080/vnc_auto.html >/dev/null
 done
 
-export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
 echo "http://${extip}:6080/vnc_auto.html is the GUI console"
