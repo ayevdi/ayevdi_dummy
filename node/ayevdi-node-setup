@@ -22,14 +22,16 @@ fi
 
 # Install basic dependencies
 # TODO: Ensure these are reflected correctly in packages
-# htop   - needed for system monitoring
-# curl   - required for url shortener 301 dereferencing
-# wget   - required for sourcefrom
-# expect - required for automation such as profile tools
-# screen - required for daemonizing services
-# gawk   - required for 
-sudo apt install -y htop curl wget expect screen gawk
-logger "NODE:SETUP:Installed htop curl wget expect screen gawk"
+# htop      - needed for system monitoring
+# curl      - required for url shortener 301 dereferencing
+# wget      - required for sourcefrom
+# expect    - required for automation such as profile tools
+# screen    - required for daemonizing services
+# gawk      - required for scripting
+# lolcat    - required for standard coloring of console output
+# sharutils - required for managing uuencoded content
+sudo apt install -y htop curl wget expect screen gawk lolcat sharutils
+logger "NODE:SETUP:Installed htop curl wget expect screen gawk lolcat sharutils"
 
 # Install apache and enable necessary modules
 # proxy, proxy_http, ssl - required for redirecting shell and gui
