@@ -20,11 +20,10 @@ fi
 # AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
 
 export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
+echo "WARNING: Later links may not work. Use the link below"
+echo "http://${extip}:6080/vnc_auto.html is the internet link for GUI console."
 
 echo "Note: The links shown by noVNC will only work if the fully qualified domain names are setup"
 vncserver --kill :*
 vncserver --geometry 800x600 -SecurityTypes None
-/usr/share/novnc/utils/launch.sh --vnc localhost:5901 --listen 6080
-
-echo "WARNING: Above links may not work. Use the link below"
-echo "http://${extip}:6080/vnc_auto.html is the internet link for GUI console."
+/usr/share/novnc/utils/launch.sh --vnc localhost:5901 --listen 6080 | sed "s/$(hostname)/${extip}/g"
