@@ -39,17 +39,11 @@ logger "SUCCESS:AYECNTR:${ayecntr} for ${USER}"
 # Done creating docker container for ${USER}
 
 # Now lets get VDI started
-docker exec ${ayecntr} wget https://bit.ly/ayevdi-init -P /home/ayeuser/
-docker exec ${ayecntr} chmod 777 /home/ayeuser/ayevdi-init
-(docker exec ${ayecntr} /bin/bash -c /home/ayeuser/ayevdi-init > /dev/null 2>&1) &
+screen -S "ayevdi-gui-${USER}" -d -m docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-init'
+screen -S "ayevdi-shell-${USER}" docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4200'
 
 #TODO: Tune the wait needed for VDI to start. Ideally, fix it to wait on VDI state instead of blind wait
 for i in {1..10};do echo Waiting for VDI...;sleep 1; done
-
-docker exec ${ayecntr} wget https://bit.ly/ayevdi-ayeuser-shell -P /home/ayeuser/
-docker exec ${ayecntr} chmod 777 /home/ayeuser/ayevdi-ayeuser-shell
-docker exec ${ayecntr} screen -d -m /home/ayeuser/ayevdi-ayeuser-shell
-
 #TODO: Tune the wait needed for VDI to start. Ideally, fix it to wait on VDI state instead of blind wait
 for i in {1..5};do echo Waiting for VDI...;sleep 1; done
 
