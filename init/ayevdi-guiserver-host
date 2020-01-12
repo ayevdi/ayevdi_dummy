@@ -39,12 +39,12 @@ done
 export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
 
 # Wait for noVNC / websockify to be ready
-curl http://${extip}:6080/vnc_auto.html >/dev/null
+wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
 while [ $? -gt 0 ]
 do
   echo Waiting for noVNC / websockify...
   sleep 1
-  curl http://${extip}:6080/vnc_auto.html >/dev/null
+  wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
 done
 
 echo "http://${extip}:6080/vnc_auto.html is the GUI console"
