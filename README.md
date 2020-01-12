@@ -127,7 +127,7 @@ sourcefrom https://bit.ly/ayevdi-setup-basic
 #### Launch a host based GUI session
 Note: This will provide a GUI from the host on port 6080
 ```
-sourcefrom https://bit.ly/ayevdi-init
+sourcefrom https://bit.ly/ayevdi-gui-init
 ```
 #### Launch a host based shell session on port 4203
 ```
