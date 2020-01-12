@@ -133,6 +133,8 @@ sourcefrom https://bit.ly/ayevdi-init
 ```
 sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4203
 ```
+### Setup front-end
+Note: TBD - OST needed for scripted deployment of profiles and scenarios
 
 ### AyeVDI Images
 
@@ -142,7 +144,54 @@ Note: This script requires user interaction. Push will only work with account au
 ```
 sourcefrom https://bit.ly/ayevdi-image-gen
 ```
+### AyeVDI in container
+Note: Run on host only - Does not run nested in AyeVDI sessions as of now!
 
+#### AyeVDI in container with current / persistent user
+```
+sourcefrom https://bit.ly/ayevdi-docker
+```
+
+#### AyeVDI in container with ephemeral user
+```
+sourcefrom https://bit.ly/ayevdi-ephemeral
+```
+
+## Production
+Warning: This project is still pre-release alpha. No warranties whatsoever
+
+### Deploy servers
+
+#### Daemonize front-end server with RR load balancer
+```
+export ayeport=4203 && screen -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p ${ayeport} -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'wget -q https://bit.ly/ayevdi-sched-rr -O${HOME}/.ayevdi/ayevdi-sched-rr.awk && curl https://raw.githubusercontent.com/ayevdi/ayevdi/master/pool/ayevdi-pool-${ayeport} 2>/dev/null | uudecode | uudecode | gpg --batch --passphrase $(sourcefrom https://bit.ly//ayevdi-passkey) 2>/dev/null -d | awk -vstrobefile=${HOME}/.ayevdi/ayestrobe_${ayeport} -f ${HOME}/.ayevdi/ayevdi-sched-rr.awk'" --disable-ssl
+```
+
+#### Daemonize GUI service
+```
+screen -S "ayevdi-service-gui" -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && (while [ 1 ]; do printf "."; sleep 1; done) || echo Server busy'" --disable-ssl
+```
+
+#### Daemonize shell service
+```
+screen -S "ayevdi-service-shell" -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && (while [ 1 ]; do printf "."; sleep 1; done) || echo Server busy'" --disable-ssl
+```
+
+#### Daemonize abandoned container stopper
+TODO: Log IP addresses from where connections were recieved prior to stopping
+```
+screen -S "ayevdi-service-garbageCollector" -d -m bash -c 'while [ 1 ]; do sleep 10;sourcefrom https://bit.ly/ayevdi-node-stop-abandoned; done'
+```
+
+#### Daemonize policy for time based exit
+```
+screen -S "ayevdi-service-timePolicy" -d -m bash -c 'while [ 1 ]; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-policy-timeout; done'
+```
+
+#### Daemonize policy for idle timeout
+```
+screen -S "ayevdi-service-idlePolicy" -d -m bash -c 'while [ 1 ]; do sleep 10;sourcefrom https://bit.ly/ayevdi-node-policy-idle; done'
+```
 
 ### Working with AyeVDI pools
 Note: Pools are defined per exposed port / service. A single node may offer multiple ports.
@@ -213,6 +262,41 @@ sourcefrom https://bit.ly/ayevdi-node-stop-abandoned-test
 ```
 sourcefrom https://bit.ly/ayevdi-node-policy-timeout-test
 ```
+
+### Load testing AyeVDI ephemeral mode with 200 simultaneous GUI users
+```
+(for n in {1..10}; do sourcefrom https://bit.ly/ayevdi-ephemeral; done) | grep vnc_auto > terms.txt
+cat terms.txt
+(for n in {1..190}; do sourcefrom https://bit.ly/ayevdi-ephemeral; done) | grep vnc_auto > terms.txt
+```
+### Integration Testing
+
+#### Build, deploy, test SIAB combo on host with Shell
+```
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb  && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+```
+#### Build, deploy, test SIAB combo on host with GUI
+```
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb  && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+```
+#### Host - Test with GUI in container
+```
+shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+```
+#### Host - Test with Shell in container
+```
+shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+```
+
+#### Container - Test Shell directly on container
+```
+sourcefrom https://bit.ly/ayevdi-ayeuser-shell
+```
+#### Test RR load balancer
+```
+export ayeport=4203 && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p ${ayeport} -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'wget -q https://bit.ly/ayevdi-sched-rr -O${HOME}/.ayevdi/ayevdi-sched-rr.awk && curl https://raw.githubusercontent.com/ayevdi/ayevdi/master/pool/ayevdi-pool-${ayeport} 2>/dev/null | uudecode | uudecode | gpg --batch --passphrase $(sourcefrom https://bit.ly/ayevdi-passkey) 2>/dev/null -d | awk -vstrobefile=${HOME}/.ayevdi/ayestrobe_${ayeport} -f ${HOME}/.ayevdi/ayevdi-sched-rr.awk'" --disable-ssl
+```
+
 
 ### Administration and management
 
@@ -286,126 +370,6 @@ The above list have been generated using the following command
 ```
 git clone https://github.com/ayevdi/ayevdi; cd ayevdi; for n in $(find . -type f | grep -v .git | xargs cat | tr "()' =;" '\n\n\n\n\n\n' | grep bit.ly | grep http | sort -u); do printf "%s," ${n}; curl ${n} 2>/dev/null | grep href | cut -d'"' -f2 | grep http; done | wc -l
 ```
+#### The immediate next sections are being captured into OSTs (one step tricks). Please skip ahead to launching the server
 TODO: Need OSTs for migrating to different servers, repo-hosts, url shorteners, across cloud providers etc.
 TODO: Enable local hosting / OSTs to build infra from scratch
-
-
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-````
-
-## Setup front-end
-Note: TBD - OST needed for scripted deployment of profiles and scenarios
-
-## The immediate next sections are being captured into OSTs (one step tricks). Please skip ahead to launching the server
-
-### Test RR load balancer
-```
-export ayeport=4203 && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p ${ayeport} -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'wget -q https://bit.ly/ayevdi-sched-rr -O${HOME}/.ayevdi/ayevdi-sched-rr.awk && curl https://raw.githubusercontent.com/ayevdi/ayevdi/master/pool/ayevdi-pool-${ayeport} 2>/dev/null | uudecode | uudecode | gpg --batch --passphrase $(sourcefrom https://bit.ly/ayevdi-passkey) 2>/dev/null -d | awk -vstrobefile=${HOME}/.ayevdi/ayestrobe_${ayeport} -f ${HOME}/.ayevdi/ayevdi-sched-rr.awk'" --disable-ssl
-```
-```
-
-
-
-
-
-
-
-
-```
-
-### AyeVDI in container
-Note: Run on host only - Does not run nested in AyeVDI sessions as of now!
-
-#### AyeVDI in container with current / persistent user
-```
-sourcefrom https://bit.ly/ayevdi-docker
-```
-
-#### AyeVDI in container with ephemeral user
-```
-sourcefrom https://bit.ly/ayevdi-ephemeral
-```
-
-## Load testing AyeVDI ephemeral mode with 200 simultaneous GUI users
-```
-(for n in {1..10}; do sourcefrom https://bit.ly/ayevdi-ephemeral; done) | grep vnc_auto > terms.txt
-cat terms.txt
-(for n in {1..190}; do sourcefrom https://bit.ly/ayevdi-ephemeral; done) | grep vnc_auto > terms.txt
-```
-
-## Integration Testing
-
-### Build, deploy, test SIAB combo on host with Shell
-```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb  && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
-```
-### Build, deploy, test SIAB combo on host with GUI
-```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb  && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
-```
-### Host - Test with GUI in container
-```
-shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
-```
-### Host - Test with Shell in container
-```
-shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
-```
-
-### Container - Test Shell directly on container
-```
-sourcefrom https://bit.ly/ayevdi-ayeuser-shell
-```
-
-# Production
-Warning: This project is still pre-release alpha. No warranties whatsoever
-
-## Deploy servers
-
-### Daemonize front-end server with RR load balancer
-```
-export ayeport=4203 && screen -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p ${ayeport} -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'wget -q https://bit.ly/ayevdi-sched-rr -O${HOME}/.ayevdi/ayevdi-sched-rr.awk && curl https://raw.githubusercontent.com/ayevdi/ayevdi/master/pool/ayevdi-pool-${ayeport} 2>/dev/null | uudecode | uudecode | gpg --batch --passphrase $(sourcefrom https://bit.ly//ayevdi-passkey) 2>/dev/null -d | awk -vstrobefile=${HOME}/.ayevdi/ayestrobe_${ayeport} -f ${HOME}/.ayevdi/ayevdi-sched-rr.awk'" --disable-ssl
-```
-
-### Daemonize GUI service
-```
-screen -S "ayevdi-service-gui" -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && (while [ 1 ]; do printf "."; sleep 1; done) || echo Server busy'" --disable-ssl
-```
-
-### Daemonize shell service
-```
-screen -S "ayevdi-service-shell" -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && (while [ 1 ]; do printf "."; sleep 1; done) || echo Server busy'" --disable-ssl
-```
-
-### Daemonize abandoned container stopper
-TODO: Log IP addresses from where connections were recieved prior to stopping
-```
-screen -S "ayevdi-service-garbageCollector" -d -m bash -c 'while [ 1 ]; do sleep 10;sourcefrom https://bit.ly/ayevdi-node-stop-abandoned; done'
-```
-
-### Daemonize policy for time based exit
-```
-screen -S "ayevdi-service-timePolicy" -d -m bash -c 'while [ 1 ]; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-policy-timeout; done'
-```
-
-### Daemonize policy for idle timeout
-```
-screen -S "ayevdi-service-idlePolicy" -d -m bash -c 'while [ 1 ]; do sleep 10;sourcefrom https://bit.ly/ayevdi-node-policy-idle; done'
-```
-
