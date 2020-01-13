@@ -19,37 +19,10 @@ fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
 # AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
 
-# Create docker container for ${USER} 
-export ayevdi_img_common=$(sourcefrom https://bit.ly/ayevdi-image-common)
-docker pull ayeai/ayevdi:${ayevdi_img_common}
+sourcefrom http://bit.ly/ayevdi-host-user-setup
 
-export ayeuid=$(expr $(id -u ${USER}) + 12345)
-export ayesid=$(expr $(id -u ${USER}) + 15432)
+# TBD: Check for errors and attacks at this stage
+echo Running ayevdi-docker-stub-shell
+sourcefrom https://bit.ly/ayevdi-docker-stub-shell
+echo Done ayevdi-docker-stub-shell
 
-export ayecntr=ayevdi_${ayeuid}
-export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
-
-docker container stop ${ayecntr}
-docker container rm ${ayecntr}
-export ayetime_label="ayetime="$(date +%s)
-docker run -l ${ayetime_label} -p ${ayeuid}:6080 -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common}
-
-docker exec ${ayecntr} ls /home/ayeuser &&\
-logger "SUCCESS:AYECNTR:${ayecntr} for ${USER}" 
-# Done creating docker container for ${USER}
-
-docker exec ${ayecntr} wget http://bit.ly/ayevdi-ayeuser-shell -P /home/ayeuser/
-docker exec ${ayecntr} chmod 777 /home/ayeuser/ayevdi-ayeuser-shell
-docker exec ${ayecntr} screen -d -m /home/ayeuser/ayevdi-ayeuser-shell
-
-#TODO: Tune the wait needed for VDI to start. Ideally, fix it to wait on VDI state instead of blind wait
-for i in {1..3};do echo Waiting for VDI...;sleep 1; done
-
-#The last two lines must carry the urls for shell and gui terminals respectively
-clear
-echo AyeVDI by AyeAI
-echo http://${extip}:${ayesid}/ is the Shell console
-echo http://${extip}:${ayesid}/ only Shell console is live
-
-echo Connecting VDI... 
-for n in {1..30}; do printf "."; sleep 1; done)
