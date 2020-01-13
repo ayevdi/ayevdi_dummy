@@ -30,13 +30,11 @@ wget --no-cache -O/dev/null -q http://${extip}:${ayeuid}/vnc_auto.html
 if [ $? -gt 0 ]
 then
 
-  # Clear the older VNC logs
-  # TODO: This creates a scenario where user may not have permission to remove
-  # TODO: Figure out how to do this without sudo
-  export tmpfldr=${HOME}/.ayevdi/.vnc_${ayeuid}_$(date +%s)
-  mkdir -p ${tmpfldr}
-  mv -f ${HOME}/.ayevdi/.vnc_${ayeuid}/*.log ${tmpfldr}
+  # Create a temporal folder to hold session logs
+  export tmplogfldr=${HOME}/.ayevdi/.vnc_${ayeuid}_$(date +%s)
+  mkdir -p ${tmplogfldr}
   # TODO: Correct the following reference
+  # TBD: Needed?
   # mv -f ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
 
   # Create docker container for ${USER} 
@@ -46,7 +44,7 @@ then
   docker container stop ${ayecntr}
   docker container rm ${ayecntr}
   export ayetime_label="ayetime="$(date +%s)
-  docker run -l ${ayetime_label} -p ${ayeuid}:6080 -v ${HOME}/.ayevdi/.vnc_${ayeuid}:/root/.vnc -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common}
+  docker run -l ${ayetime_label} -p ${ayeuid}:6080 -v ${tmplogfldr}:/root/.vnc -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common}
 
   docker exec ${ayecntr} ls /home/ayeuser &&\
   logger "SUCCESS:AYECNTR:${ayecntr} for ${USER}" 
@@ -59,7 +57,7 @@ then
   # Wait for VNC server to be ready
   # TODO: This can get into a busy wait - set max limit
   # TBD: What should be the timeout limit?
-  while [ $(if [ -e ${HOME}/.ayevdi/.vnc_${ayeuid}/*.log ]; then cat ${HOME}/.ayevdi/.vnc_${ayeuid}/*.log; fi | grep 'created VNC server' | wc -l) -lt 1 ]
+  while [ $(if [ -e ${tmplogfldr}/*.log ]; then cat ${tmplogfldr}/*.log; fi | grep 'created VNC server' | wc -l) -lt 1 ]
   do
     echo Waiting for VNC server...
     sleep 1
