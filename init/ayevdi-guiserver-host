@@ -27,7 +27,7 @@ mv ${HOME}/.vnc/*.log ${tmpfldr}
 mv ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
 
 # Daemonize GUI service
-screen -S "ayevdi-gui-${USER}" -d -m bash -lci 'sourcefrom https://bit.ly/ayevdi-gui-init'
+sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-gui-${USER}" 'sourcefrom https://bit.ly/ayevdi-gui-init'
 
 # Wait for VNC server to be ready
 while [ $(if [ -e ${HOME}/.vnc/*.log ]; then cat ${HOME}/.vnc/*.log; fi | grep 'created VNC server' | wc -l) -lt 1 ]
