@@ -61,3 +61,6 @@ then
 fi
 
 echo "http://${extip}:6080/vnc_auto.html is the GUI console"
+
+# TODO: The above output may be misleading in some cases of errors - Fix
+# TODO: Handle errors
