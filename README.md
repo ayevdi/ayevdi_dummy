@@ -150,12 +150,16 @@ Note: This script requires user interaction. Push will only work with account au
 ```
 sourcefrom https://bit.ly/ayevdi-image-gen
 ```
-### AyeVDI in container
+### AyeVDI in containers
 Note: Run on host only - Does not run nested in AyeVDI sessions as of now!
 
-#### AyeVDI in container with current / persistent user
+#### AyeVDI with GUI and shell in container with current / persistent user
 ```
 sourcefrom https://bit.ly/ayevdi-docker-gui
+```
+#### AyeVDI with only shell in container with current / persistent user
+```
+sourcefrom https://bit.ly/ayevdi-docker-shell
 ```
 
 #### AyeVDI in container with ephemeral user
