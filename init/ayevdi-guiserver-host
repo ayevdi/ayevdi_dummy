@@ -21,7 +21,7 @@ fi
 # AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
 
 # Start only if not found
-wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
+wget --no-cache -O/dev/null -q http://${extip}:6080/vnc_auto.html
 if [ $? -lt 1 ]
 then
 
@@ -50,12 +50,12 @@ then
   export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
 
   # Wait for noVNC / websockify to be ready
-  wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
+  wget --no-cache -O/dev/null -q http://${extip}:6080/vnc_auto.html
   while [ $? -gt 0 ]
   do
     echo Waiting for noVNC / websockify...
     sleep 1
-    wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
+    wget --no-cache -O/dev/null -q http://${extip}:6080/vnc_auto.html
   done
 
 fi
