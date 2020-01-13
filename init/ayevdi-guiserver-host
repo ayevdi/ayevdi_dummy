@@ -23,8 +23,8 @@ fi
 # Clear the older VNC logs
 export tmpfldr=${HOME}/.vnc/$(date +%s)
 mkdir -p ${tmpfldr}
-mv ${HOME}/.vnc/*.log ${tmpfldr}
-mv ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
+mv -f ${HOME}/.vnc/*.log ${tmpfldr}
+mv -f ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
 
 # Daemonize GUI service
 sourcefrom https://bit.ly/ayevdi-restart-daemon "ayevdi-gui-${USER}" 'sourcefrom https://bit.ly/ayevdi-gui-init'
