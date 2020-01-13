@@ -263,6 +263,13 @@ sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb
 
 ### Testing
 
+#### Load-test backend - for ephemeral GUI and shell
+TODO: Capture into an OST
+```
+while :; do time sourcefrom https://bit.ly/ayevdi-daemon-stop-all; for n in {1..20}; do time sourcefrom http://b
+it.ly/ayevdi-ephemeral-shell; time sourcefrom http://bit.ly/ayevdi-ephemeral-gui; done; docker stop $(docker ps -aq); docker rm $(docker ps -aq); done
+```
+
 #### Test rr scheduler algo and integration
 NOTE: This requires a pool for port 9999 to have been created. It can be a dummy pool
 ```
