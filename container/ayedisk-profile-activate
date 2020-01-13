@@ -1,9 +1,9 @@
-# AYESEC:POST_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:POST_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
   echo "AyeVDI by https://ayeai.xyz"
-  echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+  echo "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
   echo ""
   echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
   echo "Further usage of these software, artifacts or methods"
@@ -17,7 +17,7 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:PREV_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 
 sourcefrom http://bit.ly/ayevdi-fx
 sourcefrom ${AYEDISK_PROFILE} 

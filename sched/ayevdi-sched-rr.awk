@@ -1,6 +1,6 @@
 # AYESEC:STATUTORY_HEADER('awk')
 # print "AyeVDI by https://ayeai.xyz"
-# print "Copyright (C) 2019-2020 Abhishek Choudhary"
+# print "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
 # print ""
 # print "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
 # print "Further usage of these software, artifacts or methods"

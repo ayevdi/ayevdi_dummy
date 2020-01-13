@@ -3,7 +3,7 @@
 #if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 #then
 #  echo "AyeVDI by https://ayeai.xyz"
-#  echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+#  echo "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
 #  echo ""
 #  echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
 #  echo "Further usage of these software, artifacts or methods"

@@ -3,7 +3,7 @@
 
 #### AyeVDI - Virtualized Deployment IaaS (VDI) by AyeAI
 
-Copyright (C) 2019-2020 Abhishek Choudhary<br>
+Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta<br>
 AyeVDI is claimed as a trademark and a businessmark by
 the author in Inida and other geographies.<br>
 

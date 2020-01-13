@@ -1,15 +1,15 @@
 #!/bin/bash
-# AYESEC:POST_SHS('173 lines')=bfb48986a83e5b56779f41b6fdec96f570465ec1d8aa32173fb6195724342f06495e7d043a1801d25a502d870c7b391658f660b57e87bd063510c7ed08a3d335
+# AYESEC:POST_SHS('173 lines')=afc922a587788d88ea7a210ce68795262117a7c0d115a7c27d988da631363f02ffc7cabf7dbef04bf6b5c7f858dd77823606626b7f7e95f77403fe4ca9d73486
 # AYESEC:FILE_TOP('ayevdi/ost/ayevdi-sfrom-init')
 
-# AYESEC:POST_SHS('26 lines')=272515defb7777eb73959f62fb7f004628400e8e66dadb19ccb1f6883f447122586f135d837bb633e54e5e168c3d1f6c9a8f2193f7403c374eb62ff6aaf76943
+# AYESEC:POST_SHS('26 lines')=c108bc8dce63695b1554023282d716f23813136ddbba66c941c6e9f3bc86e775cfeddd1fea5ab66d9f8316f37ae727f7810fa872452b63983878f16c0b5714d2
 # AYESEC:MASTPOST_NOTICE
-# AYESEC:POST_SHS('22 lines')=054d5ac9e9941d78e7554e69ef705ff64408edc2174bd0b2190f2da0e679f6bad6ae770bd18123941a2c21a95cd5d96f09409e24c4f4ae61ff08072b9b316bd3
+# AYESEC:POST_SHS('22 lines')=e9160e0b3075069c3a634cf1cccf76273426e72c86687d176f6bc33f33c3db2c53e6c793abc71a5a639adde8c14f2ebfc0f39da0874785106a43907d96448344
 # AyeVDI
 # Virtualized Deployment IaaS (VDI) by AyeAI
 # 
 # NOTICE
-# Copyright (C) 2019-2020 Abhishek Choudhary
+# Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta
 # 
 # To all WHO IT MAY CONCERN,
 # Greetings,
@@ -27,11 +27,11 @@
 # must STRICTLY be IN ACCORDANCE, and this notice must be 
 # reproduced in derivatives along with the original assertions
 # of copyrights and other rights reserved.
-# AYESEC:PREV_SHS('22 lines')=054d5ac9e9941d78e7554e69ef705ff64408edc2174bd0b2190f2da0e679f6bad6ae770bd18123941a2c21a95cd5d96f09409e24c4f4ae61ff08072b9b316bd3
+# AYESEC:PREV_SHS('22 lines')=e9160e0b3075069c3a634cf1cccf76273426e72c86687d176f6bc33f33c3db2c53e6c793abc71a5a639adde8c14f2ebfc0f39da0874785106a43907d96448344
 # AYESEC:MASTPOST_NOTICE_COMPLETED
-# AYESEC:PREV_SHS('26 lines')=272515defb7777eb73959f62fb7f004628400e8e66dadb19ccb1f6883f447122586f135d837bb633e54e5e168c3d1f6c9a8f2193f7403c374eb62ff6aaf76943
+# AYESEC:PREV_SHS('26 lines')=c108bc8dce63695b1554023282d716f23813136ddbba66c941c6e9f3bc86e775cfeddd1fea5ab66d9f8316f37ae727f7810fa872452b63983878f16c0b5714d2
 
-# AYESEC:POST_SHS('39 lines')=4f4ade32768e760ff3f8d89318ff13ed21ef6598226f2aa68b51244adc7f83e67e3472b25b7f010ba0b2a10c740fb1a4dda5aa2a0ab4e0b1c7692c4c475ae32e
+# AYESEC:POST_SHS('39 lines')=dfe7bded8bc5c9f15b58dae691ec611775d67b0d39e3daf370808ba6a680834c5595a03ed7d2debe1657d9a1f451831daf992d76b0da5d1fdee11eb19baa73a8
 # AYESEC:ONE_FILE_EXCEPTION("ayevdi-sfrom-init")
 # This is an exception header for ayevdi-sfrom-init as AyeVDI
 # is not expected to have been initialized till this file is
@@ -46,7 +46,7 @@
 #if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 #then
 #  echo "AyeVDI by https://ayeai.xyz"
-#  echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+#  echo "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
 #  echo ""
 #  echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
 #  echo "Further usage of these software, artifacts or methods"
@@ -71,14 +71,14 @@ fi
 export ayevdi_sourcefrom=${HOME}/.ayevdi/ayevdi-sourcefrom
 
 # AYESEC:ONE_FILE_EXCEPTION_COMPLETED
-# AYESEC:PREV_SHS('39 lines')=4f4ade32768e760ff3f8d89318ff13ed21ef6598226f2aa68b51244adc7f83e67e3472b25b7f010ba0b2a10c740fb1a4dda5aa2a0ab4e0b1c7692c4c475ae32e
+# AYESEC:PREV_SHS('39 lines')=dfe7bded8bc5c9f15b58dae691ec611775d67b0d39e3daf370808ba6a680834c5595a03ed7d2debe1657d9a1f451831daf992d76b0da5d1fdee11eb19baa73a8
 
-# AYESEC:POST_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:POST_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
   echo "AyeVDI by https://ayeai.xyz"
-  echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+  echo "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
   echo ""
   echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
   echo "Further usage of these software, artifacts or methods"
@@ -92,7 +92,7 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:PREV_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 
 # AYEINTERNS:TASK:Automate generation of file level and section MD5 sum
 # Suggestions: Use tags to autofill the lines covered and the md5 sum
@@ -102,13 +102,13 @@ fi
 # Suggestions: Ensure correctness and validity of the vaidator itself!
 # AYEINTERNS:TASK_END
 
-# AYESEC:POST_SHS('28 lines')=5145780cf47784d7df6ffa7aff81821dbf03216a6172032ef84fe06de2b65e2738b34e60a28f49fb3d7cf5ce1219bda3a0f76824eacef04f617e5c01f35c5873
+# AYESEC:POST_SHS('28 lines')=1cc96e4c5a9575e6f62bdea75639e8f35492dab688dd36ad6c36717a8bf995c84499ab83b7c64058d9c5647007228d313754eea698382d76e1e0dba5e344172c
 # AYESEC_NOTICE:'The following 27 lines must not be modified or removed'
-# AYESEC:POST_SHS('25 lines')=f2834e08b6c2d91061fbdcdbbf4cdb51adf32820d5501887d2ed1b29b5fad864cc43f464ceb912de86874c75b293838b574d9e48edbeb359007afe17ae38283b
+# AYESEC:POST_SHS('25 lines')=d7cf84cf411f1f3156171dcd1c618c2c95ebb7219b1aea3c6af0ffc54688e9ba587baef4440e8ef0365918ab101120304711128a03ac01504e8718655c36e200
 # AYESEC:SIGNATURE_PLAINTEXT_SOURCEFROM
 # Line 2
 echo "Welocome to AyeVDI by https://ayeai.xyz"
-echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+echo "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
 echo ""
 # Line 6
 echo "AyeVDI sourcefrom activated!"
@@ -130,8 +130,8 @@ echo "Towards greater glories with peace on Earth and beyond..."
 echo ""
 # Line 24
 # AYESEC:SIGNATURE_PLAINTEXT_SOURCEFROM_COMPLETED
-# AYESEC:PREV_SHS('25 lines')=f2834e08b6c2d91061fbdcdbbf4cdb51adf32820d5501887d2ed1b29b5fad864cc43f464ceb912de86874c75b293838b574d9e48edbeb359007afe17ae38283b
-# AYESEC:PREV_SHS('28 lines')=5145780cf47784d7df6ffa7aff81821dbf03216a6172032ef84fe06de2b65e2738b34e60a28f49fb3d7cf5ce1219bda3a0f76824eacef04f617e5c01f35c5873
+# AYESEC:PREV_SHS('25 lines')=d7cf84cf411f1f3156171dcd1c618c2c95ebb7219b1aea3c6af0ffc54688e9ba587baef4440e8ef0365918ab101120304711128a03ac01504e8718655c36e200
+# AYESEC:PREV_SHS('28 lines')=1cc96e4c5a9575e6f62bdea75639e8f35492dab688dd36ad6c36717a8bf995c84499ab83b7c64058d9c5647007228d313754eea698382d76e1e0dba5e344172c
 
 # NOTICE: The use of aliases is convenient but exposes a potential
 # man-in-the-middle threat
@@ -173,4 +173,4 @@ then
 fi
 
 # AYESEC:FILE_END('ayevdi/ost/ayevdi-sfrom-init')
-# AYESEC:PREV_SHS('173 lines')=bfb48986a83e5b56779f41b6fdec96f570465ec1d8aa32173fb6195724342f06495e7d043a1801d25a502d870c7b391658f660b57e87bd063510c7ed08a3d335
+# AYESEC:PREV_SHS('173 lines')=afc922a587788d88ea7a210ce68795262117a7c0d115a7c27d988da631363f02ffc7cabf7dbef04bf6b5c7f858dd77823606626b7f7e95f77403fe4ca9d73486

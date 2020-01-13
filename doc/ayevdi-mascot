@@ -1,13 +1,13 @@
 #!/bin/bash
-# AYESEC:POST_SHS('64 lines')=f9f2efc7551fc3ba9a754ee24ac56b42568368e62a48f815f9aec596d347be9263cd11dcd2778997026b91a3681e6eb233ccd679fe99c0115564086f70f6865a
+# AYESEC:POST_SHS('64 lines')=4ad095ff53e957876ca12c34d9bf2f8b441b13da1b811dd656be353a8854fe65d202018acd7626a4d87cc657b0833b4d873bd33d2f332bf6ecdde7aa6a2dbd60
 # AYESEC:FILE_TOP('ayevdi/doc/ayevdi-mascot')
 
-# AYESEC:POST_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:POST_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 # AYESEC:STATUTORY_HEADER
 if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
 then
   echo "AyeVDI by https://ayeai.xyz"
-  echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+  echo "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
   echo ""
   echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
   echo "Further usage of these software, artifacts or methods"
@@ -21,7 +21,7 @@ then
   exit
 fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
-# AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:PREV_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 
 # AYESEC:POST_SHS('37 lines')=59bb78cc3155a4d455657084340f110604a36fc858ccc986e14baa9344d2221b815d6ec4ff8d6a7c8d0bbd6ebb8804a775267b549a3bbafd84339230d6fa63bb
 # AYESEC:REPRESENTATION_NOTICE_START
@@ -82,4 +82,4 @@ fi
 # AYESEC:PREV_SHS('37 lines')=e322f9f2cfd4cc13397edfd9b3e0f7ad7afe10beb96739d4995617ad595c6b2549c553980f4b91ac3fe4c53607c19d956c2663b4b809e1c0f3f85eb0eee9edc6
 
 # AYESEC:FILE_END('ayevdi/doc/ayevdi-mascot')
-# AYESEC:PREV_SHS('64 lines')=fadeb0d6cbd167596b4df0eb7e3da4c11d8bd7dbdfb4d430962b41989f761c7cef0ef14b12d676bf62aa0c493040b2d18b619641436dfa5f3b2673191b33a655
+# AYESEC:PREV_SHS('64 lines')=83a147d6c12af5dd1880cbc7ff296fd6e54c7ecc1f4a461a1169ac98befe7d3542bd9dfec25f095ee3e0fc43a3b7bbebf226bf2ae0844e917fdac1a7dc83956a
