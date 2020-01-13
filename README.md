@@ -162,9 +162,13 @@ sourcefrom https://bit.ly/ayevdi-docker-gui
 sourcefrom https://bit.ly/ayevdi-docker-shell
 ```
 
-#### AyeVDI in container with ephemeral user
+#### AyeVDI with GUI and shell in container with ephemeral user
 ```
-sourcefrom https://bit.ly/ayevdi-ephemeral
+sourcefrom https://bit.ly/ayevdi-ephemeral-gui
+```
+#### AyeVDI with only shell in container with ephemeral user
+```
+sourcefrom https://bit.ly/ayevdi-ephemeral-shell
 ```
 
 ## Production
