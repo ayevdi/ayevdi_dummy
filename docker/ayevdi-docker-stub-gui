@@ -39,7 +39,7 @@ then
   docker container stop ${ayecntr}
   docker container rm ${ayecntr}
   export ayetime_label="ayetime="$(date +%s)
-  docker run -l ${ayetime_label} -p ${ayeuid}:6080 -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common} -v ${HOME}/.ayevdi/.vnc_${ayeuid}:/root/.vnc
+  docker run -l ${ayetime_label} -p ${ayeuid}:6080 -v ${HOME}/.ayevdi/.vnc_${ayeuid}:/root/.vnc -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common}
 
   docker exec ${ayecntr} ls /home/ayeuser &&\
   logger "SUCCESS:AYECNTR:${ayecntr} for ${USER}" 
