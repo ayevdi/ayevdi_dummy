@@ -41,6 +41,8 @@ then
 
   sudo apt install -y lolcat expect gawk sharutils
   sudo ln -sf /usr/games/lolcat /usr/bin/lolcat
+  
+  date +%s >${HOME}/.ayevdi/ayevdi-ephemeral-user-setup.done
 fi
 
 # Generate ephemeral user id
