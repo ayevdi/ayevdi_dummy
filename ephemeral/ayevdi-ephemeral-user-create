@@ -1,0 +1,70 @@
+#!/bin/bash
+# AYESEC:POST_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+# AYESEC:STATUTORY_HEADER
+if [ "${ayevdi_sourcefrom}" != "${HOME}/.ayevdi/ayevdi-sourcefrom" ]
+then
+  echo "AyeVDI by https://ayeai.xyz"
+  echo "Copyright (C) 2019-2020 Abhishek Choudhary"
+  echo ""
+  echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
+  echo "Further usage of these software, artifacts or methods"
+  echo "are subject to the 'latest' license agreement avaialble at"
+  echo "https://raw.githubusercontent.com/ayeai/spl/master/LICENSE"
+  echo ""
+  echo "AyeVDI not activated. Please use the following command to"
+  echo "activate AyeVDI"
+  echo '  ayesh=$(tempfile) && wget https://bit.ly/ayevdi-sfrom-init -O${ayesh} -q && . ${ayesh}'
+  echo ""
+  exit
+fi
+# AYESEC:STATUTORY_HEADER_COMPLETED
+# AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
+
+# NOTE: Earlier versions of this script gave sudo privs
+# WARNING: Do NOT give sudo access to users from AyeVDI scripts
+# TODO: Write a filter to test whether any AyeVDI script give sudo privs
+
+# These commands should not be run at every instance - only the first time
+if [ ! -e ${HOME}/.ayevdi/ayevdi-ephemeral-user-setup.done ]
+then
+
+  # TBD: Create abstraction to call other containerization infra
+  # like Singularity or AyeCons
+  
+  # Install docker.io and enable docker service
+  logger "Installing docker.io"
+  sudo apt update -y
+  sudo apt install -y docker.io
+  sudo systemctl enable docker &&\
+  logger "SUCESS:INSTALL:docker.io"
+  # TBD: Abstract installation and validation
+
+fi
+
+# Generate ephemeral user id
+export uuid=ayeuser_$(date +%s)_$RANDOM
+sudo adduser --disabled-password --gecos "" ${uuid} && (echo ${uuid}:ayeaye | sudo chpasswd)
+logger "EPHEMERAL:CREATE:Created user ${uuid}"
+
+# Enable the new user to execute docker commands
+logger "EPHEMERAL:DOCKERPRIV:Enabling docker privileges for ${uuid}"
+sudo groupadd docker
+sudo mkdir -p /home/${uuid}/.docker
+sudo chown ${uuid}:${uuid} /home/${uuid}/.docker -R
+sudo chmod g+rwx /home/${uuid}/.docker -R
+sudo usermod -aG docker ${uuid} &&\
+logger "SUCCESS:CONFIG:docker privileges"
+
+# Activate AyeVDI and set to autoload
+sudo -u ${uuid} (ayesh=$(tempfile) && wget https://bit.ly/ayevdi-sfrom-init -O${ayesh} -q && . ${ayesh} &&\
+                   sourcefrom https://bit.ly/ayevdi-host-autoload)
+
+# TBD: Does ephemeral user need sudo privilegess? Not safe!
+# TODO: Decide and uncomment below or delete these 3 lines
+# Note: Commenting out for now s per above
+#sudo usermod -aG sudo ${uuid}
+
+# TBD: Does it require a newgrp?
+# TODO: Decide and update - commenting out for now
+# Note: newgrp drops into a new shell - that can terminate execution flow
+#newgrp docker
