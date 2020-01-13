@@ -22,6 +22,6 @@ fi
 
 # Output the running AyeVDI services and their PID
 date +%s | awk '{printf "%40s\t%7s\t@%s\n","AyeVDI Service","PID",$1}'
-screen -ls | grep -i ayevdi | tr '\t' ' ' | cut -d' ' -f2 | awk -F'.' '{printf "%40s\t %s\n",$2,$1}'
+screen -ls | grep -i ayevdi | tr '\t' ' ' | cut -d' ' -f2 | awk -F'.' '{printf "%40s\t%7s\n",$2,$1}'
 
 # TODO: Handle errors
