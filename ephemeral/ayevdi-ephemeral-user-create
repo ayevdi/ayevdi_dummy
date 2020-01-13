@@ -39,6 +39,8 @@ then
   logger "SUCESS:INSTALL:docker.io"
   # TBD: Abstract installation and validation
 
+  sudo apt install -y lolcat expect gawk sharutils
+  sudo ln -sf /usr/games/lolcat /usr/bin/lolcat
 fi
 
 # Generate ephemeral user id
@@ -56,8 +58,8 @@ sudo usermod -aG docker ${uuid} &&\
 logger "SUCCESS:CONFIG:docker privileges"
 
 # Activate AyeVDI and set to autoload
-sudo -u ${uuid} bash -lci 'ayesh=$(tempfile) && wget https://bit.ly/ayevdi-sfrom-init -O${ayesh} -q && . ${ayesh} &&\
-                   sourcefrom https://bit.ly/ayevdi-host-autoload'
+HOME=/home/${uuid} USER=${uuid} sudo -u ${uuid} bash -lci 'ayesh=$(tempfile) && wget https://bit.ly/ayevdi-sfrom-init -O${ayesh} -q && . ${ayesh} &&\
+                   . ${HOME}/.ayevdi/ayevdi-sourcefrom https://bit.ly/ayevdi-host-autoload'
 
 # TBD: Does ephemeral user need sudo privilegess? Not safe!
 # TODO: Decide and uncomment below or delete these 3 lines
