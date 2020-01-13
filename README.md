@@ -266,8 +266,9 @@ sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb
 #### Load-test backend - for ephemeral GUI and shell
 TODO: Capture into an OST
 ```
-while :; do time sourcefrom https://bit.ly/ayevdi-daemon-stop-all; for n in {1..20}; do time sourcefrom http://b
-it.ly/ayevdi-ephemeral-shell; time sourcefrom http://bit.ly/ayevdi-ephemeral-gui; done; docker stop $(docker ps -aq); docker rm $(docker ps -aq); done
+# 5 simultaneous requests for upto 40 concurrent users (20 shell + 20 gui) - tested on 2cpu 8gb x86_64 Ubuntu 18.04 LTS
+# Note: Do not name these screens "*ayevdi*"
+for m in {1..5}; do screen -dmS "ayetester-${m}" bash -lci 'while :; do time sourcefrom https://bit.ly/ayevdi-daemon-stop-all; for n in {1..4}; do time sourcefrom http://bit.ly/ayevdi-ephemeral-shell; time sourcefrom http://bit.ly/ayevdi-ephemeral-gui; done; docker stop $(docker ps -aq); docker rm $(docker ps -aq); done'; done
 ```
 
 #### Test rr scheduler algo and integration
