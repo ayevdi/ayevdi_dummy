@@ -155,7 +155,7 @@ Note: Run on host only - Does not run nested in AyeVDI sessions as of now!
 
 #### AyeVDI in container with current / persistent user
 ```
-sourcefrom https://bit.ly/ayevdi-docker
+sourcefrom https://bit.ly/ayevdi-docker-gui
 ```
 
 #### AyeVDI in container with ephemeral user
