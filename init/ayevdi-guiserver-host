@@ -24,31 +24,40 @@ fi
 wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
 if [ $? -lt 1 ]
 then
-# Clear the older VNC logs
-export tmpfldr=${HOME}/.vnc/$(date +%s)
-mkdir -p ${tmpfldr}
-mv -f ${HOME}/.vnc/*.log ${tmpfldr}
-mv -f ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
 
-# Daemonize GUI service
-sourcefrom https://bit.ly/ayevdi-start-daemon "ayevdi-gui-${USER}" 'sourcefrom https://bit.ly/ayevdi-gui-init'
+  # Clear the older VNC logs
+  export tmpfldr=${HOME}/.vnc/$(date +%s)
+  mkdir -p ${tmpfldr}
+  mv -f ${HOME}/.vnc/*.log ${tmpfldr}
+  mv -f ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
 
-# Wait for VNC server to be ready
-while [ $(if [ -e ${HOME}/.vnc/*.log ]; then cat ${HOME}/.vnc/*.log; fi | grep 'created VNC server' | wc -l) -lt 1 ]
-do
-  echo Waiting for VNC server...
-  sleep 1
-done
+  # Kill all VNC sessions
+  # TBD: Is it a fair policy to allow only 1 VNC session per host?
+  vncserver --kill :*
 
-export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
+  # Daemonize GUI service
+  sourcefrom https://bit.ly/ayevdi-start-daemon "ayevdi-gui-${USER}" 'sourcefrom https://bit.ly/ayevdi-gui-init'
 
-# Wait for noVNC / websockify to be ready
-wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
-while [ $? -gt 0 ]
-do
-  echo Waiting for noVNC / websockify...
-  sleep 1
+  # Wait for VNC server to be ready
+  # TODO: This can get into a busy wait - set max limit
+  # TBD: What should be the timeout limit?
+  while [ $(if [ -e ${HOME}/.vnc/*.log ]; then cat ${HOME}/.vnc/*.log; fi | grep 'created VNC server' | wc -l) -lt 1 ]
+  do
+    echo Waiting for VNC server...
+    sleep 1
+  done
+
+  export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
+
+  # Wait for noVNC / websockify to be ready
   wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
-done
+  while [ $? -gt 0 ]
+  do
+    echo Waiting for noVNC / websockify...
+    sleep 1
+    wget -O/dev/null -q http://${extip}:6080/vnc_auto.html
+  done
+
 fi
+
 echo "http://${extip}:6080/vnc_auto.html is the GUI console"
