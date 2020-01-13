@@ -27,6 +27,8 @@ else
   shift 1
 fi
 
+# Emit the content to stdout
+# TODO: Check whether we are in a tty context or not
 wget ${1} -O- -q
 if [ $? -gt 0 ]
 then
