@@ -61,6 +61,8 @@ logger "SUCCESS:CONFIG:docker privileges"
 HOME=/home/${uuid} USER=${uuid} sudo -u ${uuid} bash -lci 'ayesh=$(tempfile) && wget https://bit.ly/ayevdi-sfrom-init -O${ayesh} -q && . ${ayesh} &&\
                    . ${HOME}/.ayevdi/ayevdi-sourcefrom https://bit.ly/ayevdi-host-autoload'
 
+echo "Created and activated user ${uuid}"
+
 # TBD: Does ephemeral user need sudo privilegess? Not safe!
 # TODO: Decide and uncomment below or delete these 3 lines
 # Note: Commenting out for now s per above
