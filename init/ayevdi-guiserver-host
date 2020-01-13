@@ -32,8 +32,8 @@ then
   mv -f ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
 
   # Kill all VNC sessions
-  # TBD: Is it a fair policy to allow only 1 VNC session per host?
-  vncserver --kill :*
+  # TBD: Is it a fair policy to allow only 1 VNC session per host? Disabling till decided
+  # vncserver --kill :*
 
   # Daemonize GUI service
   sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-gui-${USER}" 'sourcefrom https://bit.ly/ayevdi-gui-init'
