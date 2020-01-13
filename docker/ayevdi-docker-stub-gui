@@ -31,6 +31,8 @@ if [ $? -gt 0 ]
 then
 
   # Clear the older VNC logs
+  # TODO: This creates a scenario where user may not have permission to remove
+  # TODO: Figure out how to do this without sudo
   export tmpfldr=${HOME}/.ayevdi/.vnc_${ayeuid}_$(date +%s)
   mkdir -p ${tmpfldr}
   mv -f ${HOME}/.ayevdi/.vnc_${ayeuid}/*.log ${tmpfldr}
