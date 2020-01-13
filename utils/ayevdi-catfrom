@@ -26,7 +26,7 @@ else
   shift 1
 fi
 
-wget $1 -O- -q >${ayescript}
+wget $1 -O- -q
 if [ $? -gt 0 ]
 then
   echo "CATFROM:Error accessing ${1}"
