@@ -25,4 +25,8 @@ do
   sourcefrom http://bit.ly/ayevdi-daemon-stop $n
 done
 
+# Stop all docker containers, as we are stopping all services 
+# TBD: Check the logic that all containers must be stopped
+docker stop $(docker ps -aq)
+
 # TODO: Handle errors
