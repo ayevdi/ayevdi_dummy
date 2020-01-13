@@ -133,6 +133,12 @@ sourcefrom https://bit.ly/ayevdi-guiserver-host
 ```
 sourcefrom https://bit.ly/ayevdi-shellserver-host
 ```
+#### Stop all running services
+WARNING: Do NOT run on a production server unless bringing it down
+```
+sourcefrom https://bit.ly/ayevdi-daemon-stop-all
+```
+
 ### Setup front-end
 Note: TBD - OST needed for scripted deployment of profiles and scenarios
 
