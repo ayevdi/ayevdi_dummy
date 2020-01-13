@@ -30,11 +30,16 @@ wget --no-cache -O/dev/null -q http://${extip}:${ayeuid}/vnc_auto.html
 if [ $? -gt 0 ]
 then
 
+  # Clear the older VNC logs
+  export tmpfldr=${HOME}/.ayevdi/.vnc_${ayeuid}/$(date +%s)
+  mkdir -p ${tmpfldr}
+  mv -f ${HOME}/.ayevdi/.vnc_${ayeuid}/*.log ${tmpfldr}
+  # TODO: Correct the following reference
+  # mv -f ${HOME}/.ayevdi/ayevdi-gui-${USER}.log ${HOME}/.ayevdi/ayevdi-gui-${USER}.log.$(date +%s)
+
   # Create docker container for ${USER} 
   export ayevdi_img_common=$(sourcefrom https://bit.ly/ayevdi-image-common)
   docker pull ayeai/ayevdi:${ayevdi_img_common}
-
-
 
   docker container stop ${ayecntr}
   docker container rm ${ayecntr}
