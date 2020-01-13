@@ -22,8 +22,8 @@ fi
 sourcefrom http://bit.ly/ayevdi-ephemeral-adduser
 
 # TBD: Check for errors and attacks at this stage
-echo Running ayevdi-docker-stub-gui as ${uuid}
-logger "Running ayevdi-docker-stub-gui as ${uuid}"
-HOME=/home/${uuid} USER=${uuid} sudo -u ${uuid} bash -lci 'sourcefrom http://bit.ly/ayevdi-docker-stub-gui'
-echo Done ayevdi-docker-stub-gui as ${uuid}
-logger "Done ayevdi-docker-stub-gui as ${uuid}"
+echo Running ayevdi-docker-stub-shell as ${uuid}
+logger "Running ayevdi-docker-stub-shell as ${uuid}"
+HOME=/home/${uuid} USER=${uuid} sudo -u ${uuid} bash -lci 'sourcefrom http://bit.ly/ayevdi-docker-stub-shell'
+echo Done ayevdi-docker-stub-shell as ${uuid}
+logger "Done ayevdi-docker-stub-shell as ${uuid}"
