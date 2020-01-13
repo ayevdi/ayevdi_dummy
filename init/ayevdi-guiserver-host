@@ -36,7 +36,7 @@ then
   vncserver --kill :*
 
   # Daemonize GUI service
-  sourcefrom https://bit.ly/ayevdi-start-daemon "ayevdi-gui-${USER}" 'sourcefrom https://bit.ly/ayevdi-gui-init'
+  sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-gui-${USER}" 'sourcefrom https://bit.ly/ayevdi-gui-init'
 
   # Wait for VNC server to be ready
   # TODO: This can get into a busy wait - set max limit
