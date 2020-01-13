@@ -34,10 +34,12 @@ then
   export ayevdi_img_common=$(sourcefrom https://bit.ly/ayevdi-image-common)
   docker pull ayeai/ayevdi:${ayevdi_img_common}
 
+
+
   docker container stop ${ayecntr}
   docker container rm ${ayecntr}
   export ayetime_label="ayetime="$(date +%s)
-  docker run -l ${ayetime_label} -p ${ayeuid}:6080 -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common}
+  docker run -l ${ayetime_label} -p ${ayeuid}:6080 -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common} -v ${HOME}/.ayevdi/.vnc_${ayeuid}:/root/.vnc
 
   docker exec ${ayecntr} ls /home/ayeuser &&\
   logger "SUCCESS:AYECNTR:${ayecntr} for ${USER}" 
@@ -47,6 +49,15 @@ then
   sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-gui-${USER}" "docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-gui-init'"
   sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-shell-${USER}" "docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4200'"
 
+  # Wait for VNC server to be ready
+  # TODO: This can get into a busy wait - set max limit
+  # TBD: What should be the timeout limit?
+  while [ $(if [ -e ${HOME}/.ayevdi/.vnc_${ayeuid}/*.log ]; then cat ${HOME}/.ayevdi/.vnc_${ayeuid}/*.log; fi | grep 'created VNC server' | wc -l) -lt 1 ]
+  do
+    echo Waiting for VNC server...
+    sleep 1
+  done
+  
   # Wait for noVNC / websockify to be ready
   wget --no-cache -O/dev/null -q http://${extip}:${ayeuid}/vnc_auto.html
   while [ $? -gt 0 ]
