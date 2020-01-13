@@ -19,42 +19,38 @@ fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
 # AYESEC:PREV_SHS('18 lines')=2491a7b198bb222613f4dc0915ff3c56f7e969296d7d2a8120bf3b7b89bca9ffa8118fffa9c187227a1b4553d1873fd2628cff883a723756f38e374a9762a75e
 
-# Create docker container for ${USER} 
-export ayevdi_img_common=$(sourcefrom https://bit.ly/ayevdi-image-common)
-docker pull ayeai/ayevdi:${ayevdi_img_common}
-
+# TODO: Replace extip with fully qualified name
+export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
 export ayeuid=$(expr $(id -u ${USER}) + 12345)
 export ayesid=$(expr $(id -u ${USER}) + 15432)
-
 export ayecntr=ayevdi_${ayeuid}
-export extip=$(dig @resolver1.opendns.com ANY myip.opendns.com +short)
 
-docker container stop ${ayecntr}
-docker container rm ${ayecntr}
-export ayetime_label="ayetime="$(date +%s)
-docker run -l ${ayetime_label} -p ${ayeuid}:6080 -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common}
+# Start only if not found
+wget --no-cache -O/dev/null -q http://${extip}:${ayeuid}/vnc_auto.html
+if [ $? -gt 0 ]
+then
 
-docker exec ${ayecntr} ls /home/ayeuser &&\
-logger "SUCCESS:AYECNTR:${ayecntr} for ${USER}" 
-# Done creating docker container for ${USER}
+  # Create docker container for ${USER} 
+  export ayevdi_img_common=$(sourcefrom https://bit.ly/ayevdi-image-common)
+  docker pull ayeai/ayevdi:${ayevdi_img_common}
 
-# Now lets get VDI started
-screen -S "ayevdi-gui-${USER}" -d -m docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-init'
-screen -S "ayevdi-shell-${USER}" -d -m docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4200'
+  docker container stop ${ayecntr}
+  docker container rm ${ayecntr}
+  export ayetime_label="ayetime="$(date +%s)
+  docker run -l ${ayetime_label} -p ${ayeuid}:6080 -p ${ayesid}:4200 --name ${ayecntr} -dt ayeai/ayevdi:${ayevdi_img_common}
 
-#TODO: Tune the wait needed for VDI to start. Ideally, fix it to wait on VDI state instead of blind wait
-# for i in {1..10};do echo Waiting for VDI...;sleep 1; done
-#TODO: Tune the wait needed for VDI to start. Ideally, fix it to wait on VDI state instead of blind wait
-# for i in {1..5};do echo Waiting for VDI...;sleep 1; done
+  docker exec ${ayecntr} ls /home/ayeuser &&\
+  logger "SUCCESS:AYECNTR:${ayecntr} for ${USER}" 
+  # Done creating docker container for ${USER}
+
+  # Now lets get VDI started
+  sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-gui-${USER}" "docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-gui-init'"
+  sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-shell-${USER}" "docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4200'"
+
+fi
 
 #The last two lines must carry the urls for shell and gui terminals respectively
-# clear
 echo AyeVDI by AyeAI
 echo http://${extip}:${ayesid}/ is the Shell console
-#silent sleep only - to let the shell connect
-# TODO: Check integration architecture - whether this is needed
-#sleep 2
 echo http://${extip}:${ayeuid}/vnc_auto.html is the GUI console
 
-echo Connecting VDI... 
-#for n in {1..30}; do sleep 1; done
