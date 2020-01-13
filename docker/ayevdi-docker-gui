@@ -22,7 +22,7 @@ fi
 sourcefrom http://bit.ly/ayevdi-host-user-setup
 
 # TBD: Check for errors and attacks at this stage
-echo Running ayevdi-docker-stub
-sourcefrom https://bit.ly/ayevdi-docker-stub
-echo Done ayevdi-docker-stub
+echo Running ayevdi-docker-stub-gui
+sourcefrom httpw://bit.ly/ayevdi-docker-stub-gui
+echo Done ayevdi-docker-stub-gui
 
