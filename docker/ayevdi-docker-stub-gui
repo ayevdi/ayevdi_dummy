@@ -47,6 +47,14 @@ then
   sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-gui-${USER}" "docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-gui-init'"
   sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-shell-${USER}" "docker exec -it ${ayecntr} bash -lci 'sourcefrom https://bit.ly/ayevdi-ayeuser-shell 4200'"
 
+  # Wait for noVNC / websockify to be ready
+  wget --no-cache -O/dev/null -q http://${extip}:${ayeuid}/vnc_auto.html
+  while [ $? -gt 0 ]
+  do
+    echo Waiting for noVNC / websockify...
+    sleep 1
+    wget --no-cache -O/dev/null -q http://${extip}:${ayeuid}/vnc_auto.html
+  done
 fi
 
 #The last two lines must carry the urls for shell and gui terminals respectively
