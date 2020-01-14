@@ -35,6 +35,9 @@ then
   logger "Installing docker.io"
   sudo apt update -y
   sudo apt install -y docker.io
+  # TBD: Adding the docker group should be an one time affair, shouldn't it?
+  # TODO: Test functionality with fresh install and update here
+  sudo groupadd docker
   sudo systemctl enable docker &&\
   logger "SUCESS:INSTALL:docker.io"
   # TBD: Abstract installation and validation
@@ -42,11 +45,20 @@ then
   sudo apt install -y lolcat expect gawk sharutils
   sudo ln -sf /usr/games/lolcat /usr/bin/lolcat
   
+  # TODO: Here, and elsewhere, whenever installing something ensure the following?
+  # TODO:        1. Whether installation was successful?
+  # TODO:        2. Whether the version dependencies are met?
+  # TODO:        3. Whether the expected functionality are met?
+  # TODO:        4. Whether safety and security advisories are met?
+  # TODO:        5. Whether patching is at correct level?
+  
   date +%s >${HOME}/.ayevdi/ayevdi-ephemeral-user-setup.done
+  # TODO: Use the install or setup timestamps to check for updates and refreshes needed
 fi
 
 # Generate ephemeral user id
 # TODO: User creation does not seem to be properly reentrant in Ubuntu 18.04 - see history of this file
+# TODO: Possible busy wait, or at least infinite loop likely.
 export addusrres=1
 while [ ${addusrres} -ne 0 ]
 do
@@ -67,7 +79,6 @@ logger "EPHEMERAL:CREATE:Created user ${uuid}"
 
 # Enable the new user to execute docker commands
 logger "EPHEMERAL:DOCKERPRIV:Enabling docker privileges for ${uuid}"
-sudo groupadd docker
 sudo mkdir -p /home/${uuid}/.docker
 sudo chown ${uuid}:${uuid} /home/${uuid}/.docker -R
 sudo chmod g+rwx /home/${uuid}/.docker -R
@@ -83,9 +94,11 @@ echo "Created and activated user ${uuid}"
 # TBD: Does ephemeral user need sudo privilegess? Not safe!
 # TODO: Decide and uncomment below or delete these 3 lines
 # Note: Commenting out for now s per above
-#sudo usermod -aG sudo ${uuid}
+# sudo usermod -aG sudo ${uuid}
+# Update: Not needed! Please do NOT delete this comment
 
 # TBD: Does it require a newgrp?
 # TODO: Decide and update - commenting out for now
 # Note: newgrp drops into a new shell - that can terminate execution flow
-#newgrp docker
+# newgrp docker
+# Update: Not needed! Please do NOT delete this comment
