@@ -47,18 +47,21 @@ fi
 
 # Generate ephemeral user id
 # TODO: User creation does not seem to be properly reentrant in Ubuntu 18.04 - see history of this file
-export uuid=ayeuser_$(date +%s)_$RANDOM
 export addusrres=1
 while [ ${addusrres} -ne 0 ]
 do
+  export uuid=ayeuser_$(date +%s)_$RANDOM
   sudo deluser ${uuid}
   sudo delgroup ${uuid}
   sudo rm -rf /home/${uuid}
+  sleep 0.5
   sudo adduser --disabled-password --gecos "" ${uuid} && (echo ${uuid}:ayeaye | sudo chpasswd)
+  sleep 0.7
   # TODO: Add error checks
   # Now check whether the user is sane
   sudo -u ${uuid} ls >/dev/null 2>&1
   export addusrres=$?
+  sleep 0.3
 done
 logger "EPHEMERAL:CREATE:Created user ${uuid}"
 
