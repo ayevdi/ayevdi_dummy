@@ -173,38 +173,49 @@ sourcefrom https://bit.ly/ayevdi-ephemeral-shell
 
 ## Production
 Warning: This project is still pre-release alpha. No warranties whatsoever
+Production AyeVDI installations use ephemeral user instances held in 
+isolated containers.
+
+### Integrated back-end launchers
+These launchers provide OSTs to automate the back-end tasks and are used in
+front-end OSTs.
+
+#### Back-end gui and shell
+```
+sourcefrom https://bit.ly/ayevdi-backend-gui
+```
+#### Back-end shell only
+```
+sourcefrom https://bit.ly/ayevdi-backend-shell
+```
 
 ### Deploy servers
 
-#### Daemonize front-end server with RR load balancer
-```
-export ayeport=4203 && screen -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p ${ayeport} -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'wget -q https://bit.ly/ayevdi-sched-rr -O${HOME}/.ayevdi/ayevdi-sched-rr.awk && curl https://raw.githubusercontent.com/ayevdi/ayevdi/master/pool/ayevdi-pool-${ayeport} 2>/dev/null | uudecode | uudecode | gpg --batch --passphrase $(sourcefrom https://bit.ly//ayevdi-passkey) 2>/dev/null -d | awk -vstrobefile=${HOME}/.ayevdi/ayestrobe_${ayeport} -f ${HOME}/.ayevdi/ayevdi-sched-rr.awk'" --disable-ssl
-```
-
 #### Daemonize GUI service
 ```
-screen -S "ayevdi-service-gui" -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && (while [ 1 ]; do printf "."; sleep 1; done) || echo Server busy'" --disable-ssl
+sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-guiTerminal" "shellinaboxd --disable-ssl --css /et
+c/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s \"/:$(id -u):$(id -g):${PWD}:/bin/bash -lci 'clear && sourcefrom http://bit.ly/ayevdi-backend-gui && while :; do printf .; sleep 60; done'\""
 ```
 
 #### Daemonize shell service
 ```
-screen -S "ayevdi-service-shell" -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && (while [ 1 ]; do printf "."; sleep 1; done) || echo Server busy'" --disable-ssl
+sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-guiTerminal" "shellinaboxd --disable-ssl --css /et
+c/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s \"/:$(id -u):$(id -g):${PWD}:/bin/bash -lci 'clear && sourcefrom http://bit.ly/ayevdi-backend-shell && while :; do printf .; sleep 60; done'\""
 ```
 
-#### Daemonize abandoned container stopper
-TODO: Log IP addresses from where connections were recieved prior to stopping
+#### Daemonize garbage collector (abandoned container stopper)
 ```
-screen -S "ayevdi-service-garbageCollector" -d -m bash -c 'while [ 1 ]; do sleep 10;sourcefrom https://bit.ly/ayevdi-node-stop-abandoned; done'
+sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-garbageCollector" "bash -lci 'while :; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-stop-abandoned; done'"
 ```
 
 #### Daemonize policy for time based exit
 ```
-screen -S "ayevdi-service-timePolicy" -d -m bash -c 'while [ 1 ]; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-policy-timeout; done'
+sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-timePolicy" "bash -lci 'while :; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-policy-timeout; done'"
 ```
 
 #### Daemonize policy for idle timeout
 ```
-screen -S "ayevdi-service-idlePolicy" -d -m bash -c 'while [ 1 ]; do sleep 10;sourcefrom https://bit.ly/ayevdi-node-policy-idle; done'
+sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-idlePolicy" "bash -c 'while :; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-policy-idle; done'"
 ```
 
 ### Working with AyeVDI pools
@@ -236,6 +247,11 @@ sourcefrom https://bit.ly/ayevdi-pool-rm 9999
 ```
 sourcefrom https://bit.ly/ayevdi-pool-rm-all
 ```
+#### Daemonize front-end server with RR load balancer
+```
+export ayeport=4203 && screen -d -m shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p ${ayeport} -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'wget -q https://bit.ly/ayevdi-sched-rr -O${HOME}/.ayevdi/ayevdi-sched-rr.awk && curl https://raw.githubusercontent.com/ayevdi/ayevdi/master/pool/ayevdi-pool-${ayeport} 2>/dev/null | uudecode | uudecode | gpg --batch --passphrase $(sourcefrom https://bit.ly//ayevdi-passkey) 2>/dev/null -d | awk -vstrobefile=${HOME}/.ayevdi/ayestrobe_${ayeport} -f ${HOME}/.ayevdi/ayevdi-sched-rr.awk'" --disable-ssl
+```
+
 ### Utils
 Some quick utilities for both AyeVDI users and developers 
 
