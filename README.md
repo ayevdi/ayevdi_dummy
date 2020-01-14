@@ -314,11 +314,11 @@ cat terms.txt
 
 #### Build, deploy, test SIAB combo with Shell
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-daemon-stop-all && sourcefrom https://bit.ly/ayevdi-shellserver-host
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-daemon-stop-all; sourcefrom https://bit.ly/ayevdi-backend-shell
 ```
 #### Build, deploy, test SIAB combo with GUI
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-daemon-stop-all && sourcefrom https://bit.ly/ayevdi-guiserver-host
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-daemon-stop-all; sourcefrom https://bit.ly/ayevdi-backend-gui
 ```
 
 #### Test RR load balancer
