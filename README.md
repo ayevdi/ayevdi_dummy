@@ -197,14 +197,12 @@ sourcefrom https://bit.ly/ayevdi-backend-shell
 
 #### Front-end GUI service (includes shell)
 ```
-sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-guiTerminal" "shellinaboxd --disable-ssl --css /et
-c/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s \"/:$(id -u):$(id -g):${PWD}:/bin/bash -lci 'clear && sourcefrom http://bit.ly/ayevdi-backend-gui && while :; do printf .; sleep 60; done'\""
+sourcefrom https://bit.ly/ayevdi-frontend-gui
 ```
 
 #### Front-end shell only service
 ```
-sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-shellTerminal" "shellinaboxd --disable-ssl --css /et
-c/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s \"/:$(id -u):$(id -g):${PWD}:/bin/bash -lci 'clear && sourcefrom http://bit.ly/ayevdi-backend-shell && while :; do printf .; sleep 60; done'\""
+sourcefrom https://bit.ly/ayevdi-frontend-shell
 ```
 ### Deploy management and control services
 
