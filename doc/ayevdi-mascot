@@ -1,5 +1,5 @@
 #!/bin/bash
-# AYESEC:POST_SHS('64 lines')=32ac30f8380e63fd89de4226f7322fe0e92c4c9c6e1f3265eea1584cec57de9816ce1f372152dea1a51eafb7b18a02de41d81846cc1401e0e05c617a40f0bb7f
+# AYESEC:POST_SHS('64 lines')=e785940040e33493187af61d1b671d97469bb6f5e3152cee80ade863c5da6d53c4eceb05bd4d195699884355b10513c52617dce97142187a6138fc0d8861ce2d
 # AYESEC:FILE_TOP('ayevdi/doc/ayevdi-mascot')
 
 # AYESEC:POST_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
@@ -23,23 +23,23 @@ fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
 # AYESEC:PREV_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 
-# AYESEC:POST_SHS('37 lines')=d7406885dc95ce18c75133e45677a1bcd302b1e0ed6496989c715594f676fcb2fb9d6d72e949486efd28bdd678ffaf0978f801c399302c1ae33669f0b8279588
+# AYESEC:POST_SHS('37 lines')=53d674d0ebea19d9256ac7e72caadb4779d971776e1826af5f7142c8cd702708a209eddcb9769a62bc9817a5ceee7ab965641cdba9eb10a17b69df59d22161ee
 # AYESEC:REPRESENTATION_NOTICE_START
 
-# AYESEC:POST_SHS('11 lines')=59e7b80631c8eae9d8883ff178a2ffbbc49359328a42a5e8c679cc886237a289612f14d5a802c9705b7febcc6aa9d45382706d697b77e0cd1e76bcdebcc060bc
+# AYESEC:POST_SHS('11 lines')=6b666aaa94f5a98de2a057ab1b492b552db74aa9fa2f0c7be9714cb39c13a6da20133d70ac169cc1c255a28315465394c0f677bea5a068f0741f3744efc38382
 # AYESEC:DRIKSH_START
-#                    AyeVDI   ##@###&
-#                /^^^^^^^"""####  o ##:
-#               /      Driksh      ##''
-#               (  The Immutable  ##{,,
-#               { \   /++++++++/  #### 
-#                 /  /  \     /  /  \  
-#                /__/ \__\   /__/ \__\ 
-# ©Copyright 2019-2020 Abhishek Choudhary, Dr Srija Katta
-# All rights reserved. MADE IN INDIA | BHARAT MEIN NIRMIT
+#                     AyeVDI   ##@###&
+#                 /^^^^^^^"""####  o ##:
+#                /      Driksh      ##''
+#                (  The Immutable  ##{,,
+#                { \   /++++++++/  #### 
+#                  /  /  \     /  /  \  
+#                 /__/ \__\   /__/ \__\ 
+# (C) Copyright 2019-2020 Abhishek Choudhary, Dr Srija Katta
+#   All rights reserved. MADE IN INDIA | BHARAT MEIN NIRMIT
 #                      भारत में निर्मित
 # AYESEC:DRIKSH_COMPLETE
-# AYESEC:PREV_SHS('11 lines')=772f03d71cfa0f3a414aa94347e80d6bf5a92e37d7cc7ebdeeeb8c51e454742c7c7c5fcc8f6e5674b5990abdadb2de01bd97dcc9055ee6cead0f1b509dd73161
+# AYESEC:PREV_SHS('11 lines')=e265c3aa4c59b5cdb44f55f18618826fce794e0c94884f7fa89d5a59644b0d0040dc4e95e689a64ee2bd3042b99689c1ebd775e9391761b71c77cd6a6f19c0d3
 
 # NOTICE: This above lines 30-40 are NOT TO BE USED IN DERIVATIVES.
 # The above artwork, the business marks AyeVDI, Driksh, and 
@@ -83,4 +83,4 @@ fi
 # AYESEC:PREV_SHS('37 lines')=e322f9f2cfd4cc13397edfd9b3e0f7ad7afe10beb96739d4995617ad595c6b2549c553980f4b91ac3fe4c53607c19d956c2663b4b809e1c0f3f85eb0eee9edc6
 
 # AYESEC:FILE_END('ayevdi/doc/ayevdi-mascot')
-# AYESEC:PREV_SHS('64 lines')=a7a9a4dcf1c1eed33c7f201498bdfa1a6029a8cbdb0e7b09f7e007e0f7c651b35bd50ca1a3522dcc786b5582240f7f9136029e5b50e5324e3dbd1b407ad21a9f
+# AYESEC:PREV_SHS('64 lines')=c9e0dc58da266c8a6a150d64864d315ac674072b72f928240b53aebab718d32c09b608b79859ef249a1ea41520471a517a19cf25cfa99b3b734d2a5336585466
