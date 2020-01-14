@@ -314,11 +314,11 @@ cat terms.txt
 
 #### Build, deploy, test SIAB combo on host with Shell
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom sourcefrom https://bit.ly/ayevdi-shellserver-host
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-shellserver-host
 ```
 #### Build, deploy, test SIAB combo on host with GUI
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom sourcefrom https://bit.ly/ayevdi-guiserver-host
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-guiserver-host
 ```
 #### Host - Test with GUI in container
 ```
