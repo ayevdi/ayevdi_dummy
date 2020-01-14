@@ -208,17 +208,17 @@ sourcefrom https://bit.ly/ayevdi-frontend-shell
 
 #### Daemonize garbage collector (abandoned container stopper)
 ```
-sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-garbageCollector" "bash -lci 'while :; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-stop-abandoned; done'"
+sourcefrom https://bit.ly/ayevdi-service-gc
 ```
 
 #### Daemonize policy for time based exit
 ```
-sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-timePolicy" "bash -lci 'while :; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-policy-timeout; done'"
+sourcefrom https://bit.ly/ayevdi-policy-time
 ```
 
 #### Daemonize policy for idle timeout
 ```
-sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-idlePolicy" "bash -c 'while :; do sleep 10; sourcefrom https://bit.ly/ayevdi-node-policy-idle; done'"
+sourcefrom https://bit.ly/ayevdi-policy-idle
 ```
 
 ### Working with AyeVDI pools
@@ -314,19 +314,19 @@ cat terms.txt
 
 #### Build, deploy, test SIAB combo on host with Shell
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb  && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom sourcefrom https://bit.ly/ayevdi-shellserver-host
 ```
 #### Build, deploy, test SIAB combo on host with GUI
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb  && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom sourcefrom https://bit.ly/ayevdi-guiserver-host
 ```
 #### Host - Test with GUI in container
 ```
-shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+sourcefrom https://bit.ly/ayevdi-docker-gui
 ```
 #### Host - Test with Shell in container
 ```
-shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'echo AyeVDI by https://ayeai.xyz && (sourcefrom https://bit.ly/ayevdi-ephemeral-shell) 2>&1 | tee >(tail -2) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk ) && bash -i'" --disable-ssl
+sourcefrom https://bit.ly/ayevdi-docker-shell
 ```
 
 #### Container - Test Shell directly on container
