@@ -27,7 +27,6 @@ echo https://raw.githubusercontent.com/ayeai/spl/master/LICENSE
 echo ""
 sourcefrom https://bit.ly/ayevdi-mascot-anim
 echo ""
-sourcefrom http://bit.ly/ayevdi-ephemeral-gui 2>/dev/null | tail -3
-#| tee >(tail -3) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk)
+sourcefrom http://bit.ly/ayevdi-ephemeral-gui 2>/dev/null | tee >(tail -3) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk)
 sleep 1
 echo Click on the above links \(or paste in browser\) to access your session
