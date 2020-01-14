@@ -38,34 +38,39 @@ The nodes stand behind load balancers which keep the service levels optimal.
 
 The highest level abstraction is of the zoners / orchetrators - AI based optimizers for AyeVDI, which are also in the pipeline for near future releases.
 ```
- O   -->  |   |   |   _________________________________________________       ___________
-/|\  -->  |   |   |   | :Node                                         |  ...  | :Node 1 |
-/ \  -->  |   |   |   |   -AyeVDI services                            |       -----------
-Users     |   |   |   |     +Ephemeral sessions                       |       ___________
-          |   |   |   |     +Shell terminal                           |  ...  | :Node 2 |
- O   -->  |   |   |   |     +GUI terminal                             |       -----------
-/|\  -->  |   |   |   |     +Garbage collector                        |            .
-/ \  -->  |   |   |   |     +Policy services                          |            .
-Users     |   | L |   |                                               |            .
-          |   | O |   |   -AyeSec tools                               |            .
- O   -->  |   | A |   |     +Secure web scripts                       |            .
-/|\  -->  |   | D |   |     +Logging & forensics                      |
-/ \  -->  | Z |   |   |     +OSTs for ssl automation                  |
-Users     | O | B |   |     +OSTs for vpn automation                  |
-          | N | A |   |                                               |
- O   -->  | E | L |   |   -AyeLearn tools                             |
-/|\  -->  | R | A |   |     +VOIP automation                          |
-/ \  -->  | S | N |   |     +Conferencing                             |
-Users     |   | C |   |     +Screen sharing                           |
-          |   | E |   |     +Multicasting                             |
- O   -->  |   | R |   |     +ValidCV Automation                       |            .
-/|\  -->  |   | S |   |   _____________________        ___________    |            .
-/ \  -->  |   |   |   |   | :Core             |  ...   | :Core 1 |    |            .
-Users     |   |   |   |   |   -Images         |        -----------    |            .
-          |   |   |   |   |   -Containers     |        ___________    |            .
- O   -->  |   |   |   |   |   -AyeVDI drivers |  ...   | :Core n |    |       ___________
-/|\  -->  |   |   |   |   ---------------------        -----------    |  ...  | :Node n |
-/ \  -->  |   |   |   -------------------------------------------------       -----------
+          _______________________________________________________________________________
+          | |                                                                         | |
+          | |  <----------------     O R C H E S T R A T O R S     ---------------->  | |
+          | v                                                                         v |
+          -------------------------------------------------------------------------------
+ o   -->  |   |___|    _________________________________________________       ___________
+/|\  -->  |   | ^ |   | :Node                                         |  ...  | :Node 1 |
+/ \  -->  |   | | |   |   -AyeVDI services                            |       -----------
+Users     | . | | |   |     +Ephemeral sessions                       |       ___________
+          | . | | |   |     +Shell terminal                           |  ...  | :Node 2 |
+ o   -->  | . | | |   |     +GUI terminal                             |       -----------
+/|\  -->  | . |   |   |     +Garbage collector                        |            .
+/ \  -->  | . | L |   |     +Policy services                          |            .
+Users     |   | O |   |                                               |            .
+          |   | A |   |   -AyeSec tools                               |            .
+ o   -->  |   | D |   |     +Secure web scripts                       |            .
+/|\  -->  | Z |   |   |     +Logging & forensics                      |
+/ \  -->  | O | B |   |     +OSTs for ssl automation                  |
+Users     | N | A |   |     +OSTs for vpn automation                  |
+          | E | L |   |                                               |
+ o   -->  | R | A |   |   -AyeLearn tools                             |
+/|\  -->  | S | N |   |     +VOIP automation                          |
+/ \  -->  |   | C |   |     +Conferencing                             |
+Users     |   | E |   |     +Screen sharing                           |
+          |   | R |   |     +Multicasting                             |
+ o   -->  | . | S |   |     +ValidCV Automation                       |            .
+/|\  -->  | . |   |   |   _____________________        ___________    |            .
+/ \  -->  | . | | |   |   | :Core             |  ...   | :Core 1 |    |            .
+Users     | . | | |   |   |   -Images         |        -----------    |            .
+          | . | | |   |   |   -Containers     |        ___________    |            .
+ o   -->  |   | | |   |   |   -AyeVDI drivers |  ...   | :Core n |    |       ___________
+/|\  -->  |   | v |   |   ---------------------        -----------    |  ...  | :Node n |
+/ \  -->  |   |---|   -------------------------------------------------       -----------
 Users
 ```
 
@@ -172,7 +177,7 @@ sourcefrom https://bit.ly/ayevdi-ephemeral-shell
 ```
 
 ## Production
-Warning: This project is still pre-release alpha. No warranties whatsoever
+:skull_and_crossbones: Warning: This project is still pre-release alpha. No warranties whatsoever
 Production AyeVDI installations use ephemeral user instances held in 
 isolated containers.
 
@@ -188,20 +193,20 @@ sourcefrom https://bit.ly/ayevdi-backend-gui
 ```
 sourcefrom https://bit.ly/ayevdi-backend-shell
 ```
+### Integrated back-end launchers
 
-### Deploy servers
-
-#### Daemonize GUI service
+#### Front-end GUI service (includes shell)
 ```
 sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-guiTerminal" "shellinaboxd --disable-ssl --css /et
 c/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s \"/:$(id -u):$(id -g):${PWD}:/bin/bash -lci 'clear && sourcefrom http://bit.ly/ayevdi-backend-gui && while :; do printf .; sleep 60; done'\""
 ```
 
-#### Daemonize shell service
+#### Front-end shell only service
 ```
-sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-guiTerminal" "shellinaboxd --disable-ssl --css /et
-c/shellinabox/options-enabled/00_White\ On\ Black.css -p 4202 -s \"/:$(id -u):$(id -g):${PWD}:/bin/bash -lci 'clear && sourcefrom http://bit.ly/ayevdi-backend-shell && while :; do printf .; sleep 60; done'\""
+sourcefrom https://bit.ly/ayevdi-daemon-start "ayevdi-service-shellTerminal" "shellinaboxd --disable-ssl --css /et
+c/shellinabox/options-enabled/00_White\ On\ Black.css -p 4203 -s \"/:$(id -u):$(id -g):${PWD}:/bin/bash -lci 'clear && sourcefrom http://bit.ly/ayevdi-backend-shell && while :; do printf .; sleep 60; done'\""
 ```
+### Deploy management and control services
 
 #### Daemonize garbage collector (abandoned container stopper)
 ```
