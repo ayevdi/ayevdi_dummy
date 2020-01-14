@@ -312,27 +312,15 @@ cat terms.txt
 ```
 ### Integration Testing
 
-#### Build, deploy, test SIAB combo on host with Shell
+#### Build, deploy, test SIAB combo with Shell
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-shellserver-host
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-daemon-stop-all && sourcefrom https://bit.ly/ayevdi-shellserver-host
 ```
-#### Build, deploy, test SIAB combo on host with GUI
+#### Build, deploy, test SIAB combo with GUI
 ```
-sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-guiserver-host
-```
-#### Host - Test with GUI in container
-```
-sourcefrom https://bit.ly/ayevdi-docker-gui
-```
-#### Host - Test with Shell in container
-```
-sourcefrom https://bit.ly/ayevdi-docker-shell
+sourcefrom https://bit.ly/ayevdi-build-siab && sudo dpkg -r shellinabox && sudo dpkg -i ayebuild/shellinabox_2.21_amd64.deb && sourcefrom https://bit.ly/ayevdi-daemon-stop-all && sourcefrom https://bit.ly/ayevdi-guiserver-host
 ```
 
-#### Container - Test Shell directly on container
-```
-sourcefrom https://bit.ly/ayevdi-ayeuser-shell
-```
 #### Test RR load balancer
 ```
 export ayeport=4203 && shellinaboxd --css /etc/shellinabox/options-enabled/00_White\ On\ Black.css -p ${ayeport} -s "/:$(id -u):$(id -g):${PWD}:/bin/bash -c 'wget -q https://bit.ly/ayevdi-sched-rr -O${HOME}/.ayevdi/ayevdi-sched-rr.awk && curl https://raw.githubusercontent.com/ayevdi/ayevdi/master/pool/ayevdi-pool-${ayeport} 2>/dev/null | uudecode | uudecode | gpg --batch --passphrase $(sourcefrom https://bit.ly/ayevdi-passkey) 2>/dev/null -d | awk -vstrobefile=${HOME}/.ayevdi/ayestrobe_${ayeport} -f ${HOME}/.ayevdi/ayevdi-sched-rr.awk'" --disable-ssl
