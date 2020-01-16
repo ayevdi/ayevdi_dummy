@@ -62,7 +62,7 @@ fi
 export addusrres=1
 while [ ${addusrres} -ne 0 ]
 do
-  export uuid=ayeuser_$(date +%s)_$RANDOM
+  export uuid=ayevdi_$(date +%s)_$RANDOM
   sudo deluser ${uuid}
   sudo delgroup ${uuid}
   sudo rm -rf /home/${uuid}
