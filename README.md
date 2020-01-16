@@ -197,28 +197,28 @@ sourcefrom https://bit.ly/ayevdi-backend-shell
 
 #### Front-end GUI service (includes shell)
 ```
-sourcefrom https://bit.ly/ayevdi-frontend-gui
+sourcefrom https://bit.ly/ayevdi-frontend-gui-rs
 ```
 
 #### Front-end shell only service
 ```
-sourcefrom https://bit.ly/ayevdi-frontend-shell
+sourcefrom https://bit.ly/ayevdi-frontend-shell-rs
 ```
-### Deploy management and control services
+### Deploy management and control services (with auto start on fail resiliency)
 
 #### Daemonize garbage collector (abandoned container stopper)
 ```
-sourcefrom https://bit.ly/ayevdi-service-gc
+sourcefrom https://bit.ly/ayevdi-service-gc-rs
 ```
 
 #### Daemonize policy for time based exit
 ```
-sourcefrom https://bit.ly/ayevdi-policy-time
+sourcefrom https://bit.ly/ayevdi-policy-time-rs
 ```
 
 #### Daemonize policy for idle timeout
 ```
-sourcefrom https://bit.ly/ayevdi-policy-idle
+sourcefrom https://bit.ly/ayevdi-policy-idle-rs
 ```
 
 ### Working with AyeVDI pools
