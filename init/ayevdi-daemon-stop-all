@@ -27,7 +27,7 @@ done
 
 # Stop all docker containers, as we are stopping all services 
 # TBD: Check the logic that all containers must be stopped
-if [ $(docker ps -aq | wc -l -gt 0) ]
+if [ $(docker ps -aq | wc -l) -gt 0 ]
 then
   docker stop $(docker ps -aq)
 fi
