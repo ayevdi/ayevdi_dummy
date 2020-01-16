@@ -26,7 +26,7 @@ echo Looking for idle containers
 for n in $(docker ps -q)
 do
   echo "Trying " ${n}
-  export tmpres=$(docker exec -it ${n} bash -c "DISPLAY=:1 xprintidle") || export tmpres=-1
+  export tmpres=$(docker exec -it ${n} bash -c "DISPLAY=:1 xprintidle" | sed 's/[^0-9]*//g')
   echo "Idle time ${tmpres}"
   # TODO: Get the timeout value as an option
   if [ 60000 -lt ${tmpres} ]
