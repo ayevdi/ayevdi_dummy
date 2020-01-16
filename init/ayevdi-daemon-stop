@@ -24,13 +24,13 @@ fi
 if [ $(sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print $1}' | grep ${2}$ | wc -l) -lt 1 ]
 then
 
-  echo "AyeVDI Service $2 not found!"
+  echo "AyeVDI Service ${2} not found!"
   echo "Try start..."
 
 else
 
   # Stop the AyeVDI service
-  screen -XS $2 quit
+  screen -XS ${2} quit
   echo "AyeVDI Service ${2} stopped..."
 
   # TODO: Check status and handle errors
