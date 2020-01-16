@@ -21,16 +21,16 @@ fi
 # AYESEC:PREV_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 
 
-if [ $(screen -ls | grep ${2}$ | wc -l) -gt 0 ]
+if [ $(sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print $1}' | grep ${2}$ | wc -l) -gt 0 ]
 then
 
-echo "AyeVDI Service $2 found!"
+  echo "AyeVDI Service ${2} found!"
   echo "Try stop or restart..."
 
 else
 
   # Daemonize GUI service
-  screen -dmS $2 bash -lci "$3"
+  screen -dmS "${2}" bash -lci "${3}"
   echo "AyeVDI Service ${2} started..."
 
   # TODO: Check status and handle errors
