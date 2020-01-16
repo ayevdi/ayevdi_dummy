@@ -26,7 +26,7 @@ do
   if [ $( sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print $1}' | grep ${2}$ | wc -l ) -lt 1 ]
   then
     bash -lci "${3}"
-    sleep ${4}
-    date +%s
   fi
+  sleep ${4}
+  date +%s
 done
