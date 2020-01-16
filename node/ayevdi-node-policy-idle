@@ -26,12 +26,10 @@ echo Looking for idle containers
 for n in $(docker ps -q)
 do
   echo "Trying " ${n}
-  export tmpres=$(tempfile)
-  docker exec -it ${n} bash -lci 'export DISPLAY=:1 && mate-screensaver-command -q' >${tmpres}
-  export tmpstat=$(tempfile)
-  cat ${tempres} | grep 'is active' >${tmpstat}
-  cat ${tempres} | grep 'is being inhibited' >>${tmpstat}
-  if [ 0 -lt $(cat ${tmpstat} | wc -l) ]
+  export tmpres=$(docker exec -it ${n} bash -c "DISPLAY=:1 xprintidle") || export tmpres=-1
+  echo "Idle time ${tmpres}"
+  # TODO: Get the timeout value as an option
+  if [ 60000 -lt ${tmpres} ]
   then
     docker stop ${n}
     logger "POLICY:IDLE:Stopping ${n}"
