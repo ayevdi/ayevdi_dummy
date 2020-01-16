@@ -1,5 +1,5 @@
 #!/bin/bash
-# AYESEC:POST_SHS('173 lines')=afc922a587788d88ea7a210ce68795262117a7c0d115a7c27d988da631363f02ffc7cabf7dbef04bf6b5c7f858dd77823606626b7f7e95f77403fe4ca9d73486
+# AYESEC:POST_SHS('173 lines')=92207d2112e91936ab440b0b66c6656027f5d2fb51f851c24259ab09782701cfb7b224a8de90d99beab3c2b9a33fb2361a4879f81103041fe57ab6a4e1435aed
 # AYESEC:FILE_TOP('ayevdi/ost/ayevdi-sfrom-init')
 
 # AYESEC:POST_SHS('26 lines')=c108bc8dce63695b1554023282d716f23813136ddbba66c941c6e9f3bc86e775cfeddd1fea5ab66d9f8316f37ae727f7810fa872452b63983878f16c0b5714d2
@@ -102,9 +102,9 @@ fi
 # Suggestions: Ensure correctness and validity of the vaidator itself!
 # AYEINTERNS:TASK_END
 
-# AYESEC:POST_SHS('28 lines')=1cc96e4c5a9575e6f62bdea75639e8f35492dab688dd36ad6c36717a8bf995c84499ab83b7c64058d9c5647007228d313754eea698382d76e1e0dba5e344172c
+# AYESEC:POST_SHS('28 lines')=a348aebd80d97f4147310b690f48f637d049130082479b76a2f57213175cf93f0b6ac5a8bd6bb8d32bd42b51bfbfade2b16738b7e3f105f6e203d12fbd67a377
 # AYESEC_NOTICE:'The following 27 lines must not be modified or removed'
-# AYESEC:POST_SHS('25 lines')=d7cf84cf411f1f3156171dcd1c618c2c95ebb7219b1aea3c6af0ffc54688e9ba587baef4440e8ef0365918ab101120304711128a03ac01504e8718655c36e200
+# AYESEC:POST_SHS('25 lines')=e040aa614314e690474747deeb3a5f6ca3a1cf5dc4e0ade5ae4ffa1170fc5d503faca0aa14e844ffd0bf3501fff638ae482c302819e63ea25985c49d53d757d3
 # AYESEC:SIGNATURE_PLAINTEXT_SOURCEFROM
 # Line 2
 echo "Welocome to AyeVDI by https://ayeai.xyz"
@@ -123,15 +123,15 @@ echo "If you do not accept the above terms and conditions, you"
 echo "may not use this software, and are at liberty to use the"
 echo "following commands in a bash terminal to remove traces,"
 echo "under the supervision of someone familiar with 'bash shell'"
-echo "         rm -rf ${HOME}/.ayevdi"
+echo "         rm -rf "'${HOME}'"/.ayevdi"
 echo "         export ayevdi_sourcefrom=THANK YOU"
 echo ""
 echo "Towards greater glories with peace on Earth and beyond..."
 echo ""
 # Line 24
 # AYESEC:SIGNATURE_PLAINTEXT_SOURCEFROM_COMPLETED
-# AYESEC:PREV_SHS('25 lines')=d7cf84cf411f1f3156171dcd1c618c2c95ebb7219b1aea3c6af0ffc54688e9ba587baef4440e8ef0365918ab101120304711128a03ac01504e8718655c36e200
-# AYESEC:PREV_SHS('28 lines')=1cc96e4c5a9575e6f62bdea75639e8f35492dab688dd36ad6c36717a8bf995c84499ab83b7c64058d9c5647007228d313754eea698382d76e1e0dba5e344172c
+# AYESEC:PREV_SHS('25 lines')=e040aa614314e690474747deeb3a5f6ca3a1cf5dc4e0ade5ae4ffa1170fc5d503faca0aa14e844ffd0bf3501fff638ae482c302819e63ea25985c49d53d757d3
+# AYESEC:PREV_SHS('28 lines')=a348aebd80d97f4147310b690f48f637d049130082479b76a2f57213175cf93f0b6ac5a8bd6bb8d32bd42b51bfbfade2b16738b7e3f105f6e203d12fbd67a377
 
 # NOTICE: The use of aliases is convenient but exposes a potential
 # man-in-the-middle threat
@@ -173,4 +173,4 @@ then
 fi
 
 # AYESEC:FILE_END('ayevdi/ost/ayevdi-sfrom-init')
-# AYESEC:PREV_SHS('173 lines')=afc922a587788d88ea7a210ce68795262117a7c0d115a7c27d988da631363f02ffc7cabf7dbef04bf6b5c7f858dd77823606626b7f7e95f77403fe4ca9d73486
+# AYESEC:PREV_SHS('173 lines')=92207d2112e91936ab440b0b66c6656027f5d2fb51f851c24259ab09782701cfb7b224a8de90d99beab3c2b9a33fb2361a4879f81103041fe57ab6a4e1435aed
