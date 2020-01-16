@@ -23,7 +23,7 @@ fi
 
 # Execute outside screen context the first time to capture output and errors
 # TODO: Add facilities to capture errors in the screen context
-bash -lci "${3}"
+sourcefrom ${3}
 
 sourcefrom https://bit.ly/ayevdi-daemon-start "${2}-rs" "sourcefrom https://bit.ly/ayevdi-resilient-runner '${2}' '${3}' $4"
 
