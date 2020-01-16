@@ -22,7 +22,7 @@ fi
 
 # TODO: Validate the inputs
 
-if [ $(sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print $1}' | grep ${2}$ | wc -l) -gt 0 ]
+if [ $(sourcefrom https://bit.ly/ayevdi-daemon-ps | awk '{print $1}' | grep ${2}$ | wc -l) -gt 0 ]
 then
 
   echo "AyeVDI Service ${2} found!"
