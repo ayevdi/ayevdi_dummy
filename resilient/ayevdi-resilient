@@ -22,7 +22,8 @@ fi
 # TODO: Validate the inputs
 
 # Start the daemon the first time to ensure we get the output
-bash -lci "${3}"
+# TODO: Ensure the following line results in a valid command
+${3}
 
 sourcefrom https://bit.ly/ayevdi-daemon-start "${2}-rs" "sourcefrom https://bit.ly/ayevdi-resilient-runner '${2}' '${3}' $4"
 
