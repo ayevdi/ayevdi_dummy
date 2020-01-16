@@ -21,4 +21,4 @@ fi
 
 # TODO: Validate the input
 
-sourcefrom https://bit.ly/ayevdi-daemon-start "${2}-rs" "while :; do if [ $( sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print $1}' | grep ${2}$ | wc -l ) -lt 1 ]; then \"${3}\"; fi; sleep ${4}; date +%s; done"
+sourcefrom https://bit.ly/ayevdi-daemon-start "${2}-rs" '"while :; do if [ $\( sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '\''{print $1}'\'' | grep ${2}$ | wc -l ) -lt 1 ]; then \"${3}\"; fi; sleep ${4}; date +%s; done"'
