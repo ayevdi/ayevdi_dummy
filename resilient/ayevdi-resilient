@@ -23,4 +23,4 @@ echo $1
 echo $2
 echo $3
 echo $4
-screen -dmS ${2}-rs bash -lci 'while :; do if [ $( sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk "{print \$1}" | grep ${2}$ | wc -l ) -lt 1 ]; then ${3}; fi; sleep ${4}; date +%s; done'
+screen -dmS ${2}-rs bash -lci "while :; do if [ $( sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print \$1}' | grep ${2}$ | wc -l ) -lt 1 ]; then ${3}; fi; sleep ${4}; date +%s; done"
