@@ -24,7 +24,7 @@ echo ©Copyright 2019-2020 Abhishek Choudhary, Dr Srija Katta
 echo NO WARRANTY, and ZERO LIABILITY \(Limited to INR 1/- only\)
 echo Usage rights limited as per latest AyeAI™ SPL license
 echo https://raw.githubusercontent.com/ayeai/spl/master/LICENSE
-echo ""
+clear
 sourcefrom https://bit.ly/ayevdi-mascot-anim
 echo ""
 sourcefrom http://bit.ly/ayevdi-ephemeral-gui 2>/dev/null | tee >(tail -3) >/dev/null >(awk -f /usr/share/ayevdi/ayerun.awk)
