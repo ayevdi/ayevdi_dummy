@@ -21,6 +21,8 @@ fi
 
 # TODO: Validate the inputs
 
+# TODO: Design methods to identify why the previous instance died!
+
 while :
 do
   if [ $( sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print $1}' | grep ${2}$ | wc -l ) -lt 1 ]
