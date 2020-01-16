@@ -31,6 +31,7 @@ then
 else
 
   # Daemonize GUI service
+  echo "Starting daemon ${2} with ${3}"
   screen -dmS "${2}" bash -lci "${3}"
   echo "AyeVDI Service ${2} started..."
 
