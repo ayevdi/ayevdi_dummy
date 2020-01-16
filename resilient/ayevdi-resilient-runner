@@ -33,3 +33,4 @@ do
   date +%s
 done
 
+# TODO: Check for errors
