@@ -19,6 +19,6 @@ fi
 # AYESEC:STATUTORY_HEADER_COMPLETED
 # AYESEC:PREV_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 
-# TODO: Validate the input
+# TODO: Validate the inputs
 
 sourcefrom https://bit.ly/ayevdi-daemon-start "${2}-rs" '"while :; do if [ $( sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '\''{print $1}'\'' | grep ${2}$ | wc -l ) -lt 1 ]; then \"${3}\"; fi; sleep ${4}; date +%s; done"'
