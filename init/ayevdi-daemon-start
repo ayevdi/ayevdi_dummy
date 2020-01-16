@@ -24,6 +24,8 @@ echo $1
 echo $2
 echo $3
 
+# TODO: Validate the inputs
+
 if [ $(sourcefrom https://bit.ly/ayevdi-daemon-ps-all | awk '{print $1}' | grep ${2}$ | wc -l) -gt 0 ]
 then
 
