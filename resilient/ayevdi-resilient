@@ -25,6 +25,6 @@ fi
 # TODO: Add facilities to capture errors in the screen context
 sourcefrom ${3}
 
-sourcefrom https://bit.ly/ayevdi-daemon-start "${2}-rs" "sourcefrom https://bit.ly/ayevdi-resilient-runner '${2}' '${3}' $4"
+sourcefrom https://bit.ly/ayevdi-daemon-start "${2}-rs" "sourcefrom https://bit.ly/ayevdi-resilient-runner '${2}' 'sourcefrom ${3}' $4"
 
 # TODO: Check for errors
