@@ -59,7 +59,12 @@ body {font-family: Arial;}
 <p>Click on the x button in the top right corner to close the current tab:</p>
 
 <div class="tab">
+  <button class="tablinks" id="button0"  onclick="openTab(event, 'GUI')">GUI</button>
   <button class="addTerm"  id="addTermButton" onclick="addTerm(event)">Add Terminal...</button>
+</div>
+
+<div id="GUI" class="tabcontent" style="display: inline; visibility: hidden;">
+  <iframe width="820" height="480" src="http://35.244.14.58:13346/vnc_auto.html"></iframe>
 </div>
 
 <div id="addTermDiv" class="addTerm" style="display: inline; visibility: hidden;">
@@ -85,7 +90,7 @@ function openTab(evt, tabName) {
 }
 
 termNum=0
-termMax=5
+termMax=5 // It's 5, but the 5th one will be taken when GUI is replaced by term in shell service
 // TODO: Fix slow interaction speed with 5 or more parallel connections
 function addTerm(evt) {
 
@@ -125,6 +130,7 @@ function addTerm(evt) {
 
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("addTermButton").click();
+document.getElementById("button0").click();
 </script>
    
 </body>
