@@ -16,7 +16,6 @@ body {
   border: 0;
   margin: 0;
   padding: 0;
-  background-color: #eee;
 }
 
 /* Style the buttons inside the tab */
@@ -34,6 +33,7 @@ body {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   text-align: center;
+  margin-bottom: 0;
 }
 
 /* Change background color of buttons on hover */
@@ -60,9 +60,43 @@ body {
 
 /* Style the close button */
 .topright {
+  display: inline-block;
   float: right;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 32px;
+  position: absolute;
+  top: -35px;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: white;
+}
+
+.topright .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  opacity: 0.9;
+  color: red;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 7px;
+  right: 105%;
+  z-index: 1;
+
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.topright:hover .tooltiptext {
+  visibility: visible;
 }
 
 .topright:hover {color: red;}
@@ -97,7 +131,7 @@ function openTab(evt, tabName) {
 }
 
 CntrNum=0
-CntrMax=3 // Restrict max 3 containers per web session - 3 is good enough for HPC courses
+CntrMax=5 // Restrict max 3 containers per web session - 3 is good enough for HPC courses
 // TODO: Fix slow interaction speed with 5 or more parallel connections
 function addCntr(evt) {
 
@@ -105,19 +139,22 @@ function addCntr(evt) {
 
   if(CntrNum<=CntrMax) {
     
-    var  ifrm = document.createElement('div');
-    ifrm.setAttribute('id', 'Cntr' + CntrNum); //Add the Cntr number from a global
-    ifrm.setAttribute('class', 'tabcontent');
-    ifrm.style.display = "inline";
-    ifrm.style.visibility = "hidden"
-    ifrm.innerHTML='<iframe width="818" height="705" frameborder="0" src="file:///home/ayeman/test31.html"></iframe>';
-
-    var  ibut = document.createElement('button');
+    var ibut = document.createElement('button');
     ibut.setAttribute('class', 'tablinks');
     ibut.setAttribute('id', 'button' + CntrNum); //Add the Cntr number from a global
     ibut.setAttribute('onclick', "openTab(event, 'Cntr" + CntrNum + "')");
-    ibut.innerHTML='AyeVDI™ ' + CntrNum;
- 
+
+    var s = "0" + CntrNum;
+    ibut.innerHTML='AyeCon™ ' + s.substr(s.length-2);
+
+    var ifrm = document.createElement('div');
+    ifrm.setAttribute('id', 'Cntr' + CntrNum); //Add the Cntr number from a global
+    ifrm.setAttribute('class', 'tabcontent');
+    ifrm.style.display = "inline";
+    ifrm.style.visibility = "hidden";
+    ifrm.innerHTML='<div class="topright"><span onclick="delCntr(event,'+CntrNum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div>';
+    ifrm.innerHTML+='<iframe width="800" height="705" frameborder="0" src="file:///home/ayeman/test31.html"></iframe>';
+
     var el1 = document.getElementById('addCntrDiv');
     el1.parentNode.insertBefore(ifrm, el1);
 
@@ -130,8 +167,42 @@ function addCntr(evt) {
   if(CntrNum>=CntrMax) {
 
     var el1 = document.getElementById('addCntrButton');
-    el1.parentNode.removeChild(el1);
+    el1.style.display="none";
 
+  }
+}
+
+function delCntr(event,dCntrNum) {
+  CntrMax+=1;
+
+  var el1 = document.getElementById('button'+dCntrNum);
+  el1.remove();
+
+  var el2 = document.getElementById('Cntr'+dCntrNum);
+  el2.remove();
+
+  var el3 = document.getElementById('addCntrButton');
+  el3.style.display="inline";
+
+  // Now see if any container is alive - activate that, or
+  // start a new container?
+  for(i=CntrMax-1;i>=dCntrNum+1;i--) {
+    var el4 = document.getElementById('button'+i);
+    try {
+      el4.click();
+    }
+    catch(err) {
+      // Log the order
+    }
+  }
+  for(i=1;i<=dCntrNum-1;i++) {
+    var el5 = document.getElementById('button'+i);
+    try {
+      el5.click();
+    }
+    catch(err) {
+      // Log the order
+    }
   }
 }
 

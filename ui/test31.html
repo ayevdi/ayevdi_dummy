@@ -15,7 +15,6 @@ body {
   border: 0;
   margin: 0;
   padding: 0;
-  background-color: #eee;
 }
 
 /* Style the buttons inside the tab */
@@ -33,7 +32,7 @@ body {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   text-align: center;
-
+  margin-bottom: 0;
 }
 
 /* Change background color of buttons on hover */
@@ -73,13 +72,12 @@ body {
       <button class="tablinks" id="button1"  onclick="openTab(event, 'Cnsl')">Console</button>
       <button class="tablinks" id="button2"  onclick="openTab(event, 'Expl')">Explorer</button>
       <button class="tablinks" id="button3"  onclick="openTab(event, 'IDE')">IDE</button>
-      <button class="tablinks" id="button4"  onclick="openTab(event, 'Note')">Notebook</button>
-      <button class="tablinks" id="button5"  onclick="openTab(event, 'VCV')">ValidCV™</button>
-      <button class="tablinks" id="button6"  onclick="openTab(event, 'Share')">Share</button>
-      <button class="tablinks" id="button7"  onclick="openTab(event, 'Meet')">Meet</button>
-      <button class="tablinks" id="button8"  onclick="openTab(event, 'Apps')">Apps</button>
-      <button class="tablinks" id="button9"  onclick="openTab(event, 'Labs')">Labs</button>
-      <button class="tablinks" id="button10" onclick="openTab(event, 'TnC')">TnC</button>
+      <button class="tablinks" id="button4"  onclick="openTab(event, 'VCV')">ValidCV™</button>
+      <button class="tablinks" id="button5"  onclick="openTab(event, 'Share')">Share</button>
+      <button class="tablinks" id="button6"  onclick="openTab(event, 'Meet')">Meet</button>
+      <button class="tablinks" id="button7"  onclick="openTab(event, 'Apps')">Apps</button>
+      <button class="tablinks" id="button8"  onclick="openTab(event, 'Labs')">Labs</button>
+      <button class="tablinks" id="button9" onclick="openTab(event, 'TnC')">TnC</button>
     </div>
     <div id="Cnsl" class="tabcontent" style="display: inline; visibility: hidden;">
       <iframe width="800" height="670" frameborder="0" src="file:///home/ayeman/test41.html"></iframe>
@@ -88,9 +86,6 @@ body {
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="IDE" class="tabcontent" style="display: inline; visibility: hidden;">
-      <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
-    </div>
-    <div id="Note" class="tabcontent" style="display: inline; visibility: visible;">
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="VCV" class="tabcontent" style="display: inline; visibility: visible;">

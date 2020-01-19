@@ -16,7 +16,6 @@ body {
   border: 0;
   margin: 0;
   padding: 0;
-  background-color: #eee;
   visibility: visible;
   transition: 0.2s 1s; /* delay of 1 seconds on hover off */
 }
@@ -35,7 +34,7 @@ body {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   text-align: center;
-
+  margin-bottom: 0;
 }
 
 /* Change background color of buttons on hover */
@@ -62,9 +61,43 @@ body {
 
 /* Style the close button */
 .topright {
+  display: inline-block;
   float: right;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 32px;
+  position: absolute;
+  top: -35px;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: white;
+}
+
+.topright .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  opacity: 0.9;
+  color: red;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 5px;
+  right: 105%;
+  z-index: 200;
+
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.topright:hover .tooltiptext {
+  visibility: visible;
 }
 
 .topright:hover {color: red;}
@@ -73,12 +106,8 @@ body {
 <body>
 
 <div class="tab">
-  <button class="tablinks" id="button0"  onclick="openTab(event, 'GUI')">GUI</button>
+  <button class="addGUI"   id="addGUIButtonG" onclick="addGUI(event)">Add GUI...</button>
   <button class="addTerm"  id="addTermButton" onclick="addTerm(event)">Add Terminal...</button>
-</div>
-
-<div id="GUI" class="tabcontent" style="display: inline; visibility: hidden;">
-  <iframe width="800" height="632" frameborder="0" src="http://35.244.14.58:13346/vnc_auto.html"></iframe>
 </div>
 
 <div id="addTermDiv" class="addTerm" style="display: inline; visibility: hidden;">
@@ -112,19 +141,20 @@ function addTerm(evt) {
 
   if(termNum<=termMax) {
     
-    var  ifrm = document.createElement('div');
-    ifrm.setAttribute('id', 'Term' + termNum); //Add the term number from a global
-    ifrm.setAttribute('class', 'tabcontent');
-    ifrm.style.display = "inline";
-    ifrm.style.visibility = "hidden"
-    ifrm.innerHTML='<iframe width="800" height="432" frameborder="0" src="http://35.244.14.58:16433/"></iframe>';
-
     var  ibut = document.createElement('button');
     ibut.setAttribute('class', 'tablinks');
     ibut.setAttribute('id', 'button' + termNum); //Add the term number from a global
     ibut.setAttribute('onclick', "openTab(event, 'Term" + termNum + "')");
     ibut.innerHTML='Term' + termNum;
  
+    var  ifrm = document.createElement('div');
+    ifrm.setAttribute('id', 'Term' + termNum); //Add the term number from a global
+    ifrm.setAttribute('class', 'tabcontent');
+    ifrm.style.display = "inline";
+    ifrm.style.visibility = "hidden"
+    ifrm.innerHTML='<div class="topright"><span onclick="delTerm(event,'+termNum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div>';
+    ifrm.innerHTML+='<iframe width="800" height="632" frameborder="0" src="http://35.244.14.58:16433/"></iframe>';
+
     var el1 = document.getElementById('addTermDiv');
     el1.parentNode.insertBefore(ifrm, el1);
 
@@ -137,14 +167,145 @@ function addTerm(evt) {
   if(termNum>=termMax) {
 
     var el1 = document.getElementById('addTermButton');
-    el1.parentNode.removeChild(el1);
+    el1.style.display="none";
 
   }
 }
 
+function delTerm(event,dTermNum) {
+  termMax+=1;
+
+  var el1 = document.getElementById('button'+dTermNum);
+  el1.remove();
+
+  var el2 = document.getElementById('Term'+dTermNum);
+  el2.remove();
+
+  var el3 = document.getElementById('addTermButton');
+  el3.style.display="inline";
+
+  // Activate GUI, just in case no terms left
+  for(i=1;i<=GUIMax;i++) {
+    var elt1 = document.getElementById('buttonG'+i);
+    try {
+      elt1.click();
+    }
+    catch(err) {
+      // Log the order
+    }
+  }
+
+  // Now see if any container is alive - activate that, or
+  // start a new container?
+  for(i=termMax-1;i>=dTermNum+1;i--) {
+    var el4 = document.getElementById('button'+i);
+    try {
+      el4.click();
+    }
+    catch(err) {
+      // Log the order
+    }
+  }
+  for(i=1;i<=dTermNum-1;i++) {
+    var el5 = document.getElementById('button'+i);
+    try {
+      el5.click();
+    }
+    catch(err) {
+      // Log the order
+    }
+  }
+}
+
+
+GUINum=0
+GUIMax=5 
+function addGUI(evt) {
+
+  GUINum=GUINum+1;
+
+  if(GUINum<=GUIMax) {
+    
+    var  ibut = document.createElement('button');
+    ibut.setAttribute('class', 'tablinks');
+    ibut.setAttribute('id', 'buttonG' + GUINum); //Add the GUI number from a global
+    ibut.setAttribute('onclick', "openTab(event, 'GUI" + GUINum + "')");
+    ibut.innerHTML='GUI' + GUINum;
+ 
+    var  ifrm = document.createElement('div');
+    ifrm.setAttribute('id', 'GUI' + GUINum); //Add the GUI number from a global
+    ifrm.setAttribute('class', 'tabcontent');
+    ifrm.style.display = "inline";
+    ifrm.style.visibility = "hidden"
+    ifrm.innerHTML='<div class="topright"><span onclick="delGUI(event,'+GUINum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div>';
+    ifrm.innerHTML+='<iframe width="800" height="632" frameborder="0" src="http://35.244.14.58:13346/vnc_auto.html"></iframe>';
+
+    var el1 = document.getElementById('addTermDiv');
+    el1.parentNode.insertBefore(ifrm, el1);
+
+    var el2 = document.getElementById('addGUIButtonG');
+    el2.parentNode.insertBefore(ibut, el2);
+
+    document.getElementById('buttonG' + GUINum).click();
+
+  }
+  if(GUINum>=GUIMax) {
+
+    var el1 = document.getElementById('addGUIButtonG');
+    el1.style.display="none";
+
+  }
+}
+
+function delGUI(event,dGUINum) {
+  GUIMax+=1;
+
+  var el1 = document.getElementById('buttonG'+dGUINum);
+  el1.remove();
+
+  var el2 = document.getElementById('GUI'+dGUINum);
+  el2.remove();
+
+  var el3 = document.getElementById('addGUIButtonG');
+  el3.style.display="inline";
+
+  // Activate a Term if available, just in case no GUIs left
+  for(i=1;i<=termMax;i++) {
+    var elt1 = document.getElementById('button'+i);
+    try {
+      elt1.click();
+    }
+    catch(err) {
+      // Log the order
+    }
+  }
+  
+  // Now see if any container is alive - activate that, or
+  // start a new container?
+  for(i=GUIMax-1;i>=dGUINum+1;i--) {
+    var el4 = document.getElementById('buttonG'+i);
+    try {
+      el4.click();
+    }
+    catch(err) {
+      // Log the order
+    }
+  }
+  for(i=1;i<=dGUINum-1;i++) {
+    var el5 = document.getElementById('buttonG'+i);
+    try {
+      el5.click();
+    }
+    catch(err) {
+      // Log the order
+    }
+  }
+}
+
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("addTermButton").click();
-document.getElementById("button0").click();
+document.getElementById("addGUIButtonG").click();
 
 
 // TODO: Create menu dropdown effect
