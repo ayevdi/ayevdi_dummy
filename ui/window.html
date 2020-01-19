@@ -112,6 +112,15 @@ body {
   position: absolute;
   right: 35px;  
 }
+.titlebutmax:hover {
+  background-color: blue;
+}
+.titlebutmin:hover {
+  background-color: blue;
+}
+.titlebutclose:hover {
+  background-color: red;
+}
 .titlebutmin {
   color: white;
   font-size: 14px;
@@ -124,26 +133,66 @@ body {
 }
 
 /* Style the close button */
+.topleft {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  left: -40px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: #777;
+}
+
+.topleft .tooltipleft {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  opacity: 0.9;
+  color: black;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 5px;
+  left: 105%;
+  z-index: 200;
+
+  font-size: 14px;
+  font-weight: 100;
+}
+
+/* Style the close button */
 .topright {
   display: inline-block;
   float: right;
   cursor: pointer;
-  font-size: 32px;
+  font-size: 24px;
+  font-weight: 600;
   position: absolute;
-  top: -35px;
-  right: 10px;
+  top: 0;
+  right: -40px;
   padding: 0;
   margin: 0;
   border: none;
-  color: white;
+  color: #777;
 }
+
 
 .topright .tooltiptext {
   visibility: hidden;
   width: 150px;
   background-color: white;
   opacity: 0.9;
-  color: red;
+  color: black;
   text-align: center;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -164,7 +213,13 @@ body {
   visibility: visible;
 }
 
-.topright:hover {color: red;}
+.topright:hover {color: yellow;}
+
+.topleft:hover .tooltipleft {
+  visibility: visible;
+}
+
+.topleft:hover {color: yellow;}
 
 </style>
 </head>
@@ -457,13 +512,16 @@ function addHMI(evt) {
     ibut.setAttribute('id', 'buttonG' + HMINum); //Add the HMI number from a global
     ibut.setAttribute('onclick', "openHMI(event, 'HMI" + HMINum + "')");
     ibut.innerHTML='HMI' + HMINum;
+
+    //TODO: Important - HMI taskbar buttons are disabled pending debug
+    ibut.style.display = "none";
  
     var  ifrm = document.createElement('div');
     ifrm.setAttribute('id', 'HMI' + HMINum); //Add the HMI number from a global
     ifrm.setAttribute('class', 'tabcontent');
     ifrm.style.display = "inline";
     ifrm.style.visibility = "visible"; /*winclose(\'HMI'+ HMINum +'\');*/
-    ifrm.innerHTML='<div id="Title" class="titlebar" style="display: block; visibility: visible;"><span class="titletext"><a>AyeVDI™ by AyeAI™ : HMI ' + HMINum + '</a></span><span class="titlebutclose" onclick="delHMI(event,'+HMINum+');"><a>&nbsp;&times;&nbsp;</a></span><span class="titlebutmax" onclick="winmax(\'HMI'+ HMINum +'\');"><a>&nbsp;^&nbsp;</a></span><span class="titlebutmin" onclick="winmin(\'HMI'+ HMINum +'\');"><a>&nbsp;–&nbsp;</a></span><div class="topright"><span onclick="delHMI(event,'+HMINum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div></div><div id="winarea"><iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe></div>';
+    ifrm.innerHTML='<div id="Title" class="titlebar" style="display: block; visibility: visible;"><span class="titletext"><a>AyeVDI™ by AyeAI™ : HMI ' + HMINum + '</a></span><span class="titlebutclose" onclick="delHMI(event,'+HMINum+');"><a>&nbsp;&times;&nbsp;</a></span><span class="titlebutmax" onclick="winmax(\'HMI'+ HMINum +'\');"><a>&nbsp;^&nbsp;</a></span><span class="titlebutmin" onclick="winmin(\'HMI'+ HMINum +'\');"><a>&nbsp;–&nbsp;</a></span><div class="topleft"><span onclick="toHMI(event,'+HMINum+');">O⇨</span><span class="tooltipleft">Input to '+ibut.innerHTML+'</span></div><div class="topright"><span onclick="fromHMI(event,'+HMINum+');">⇨O</span><span class="tooltiptext">Output from '+ibut.innerHTML+'</span></div></div><div id="winarea"><iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe></div>';
 
     var el1 = document.getElementById('addHMIDiv');
     el1.parentNode.insertBefore(ifrm, el1);
@@ -484,6 +542,12 @@ function addHMI(evt) {
     el1.style.display="none";
 
   }
+}
+
+function toHMI(event,dHMINum) {
+}
+
+function fromHMI(event,dHMINum) {
 }
 
 function delHMI(event,dHMINum) {
@@ -533,7 +597,7 @@ function delHMI(event,dHMINum) {
 
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("addTermButton").click();
+//document.getElementById("addTermButton").click();
 document.getElementById("addHMIButtonG").click();
 
 
