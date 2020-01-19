@@ -59,6 +59,67 @@ body {
   position: absolute;
 }
 
+.titlebar {
+  display: inline;
+  background: #777;
+  padding: 5px;
+  margin: 0;
+  border: 3px solid #777;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  min-width: 824px;
+  max-height: 40px;
+  vertical-align: text-top;
+  text-align: center;
+  position: absolute;
+  top: -15px;
+}
+
+.titletext {
+  display: inline;
+  vertical-align: text-top;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px;
+  margin: 5px;
+  border: 0;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  color: white;
+}
+
+.titlebutclose {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  outline: 1px solid white;
+  cursor: pointer;
+  
+  position: absolute;
+  right: 10px;  
+}
+.titlebutmax {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  outline: 1px solid white;
+  cursor: pointer;
+  
+  position: absolute;
+  right: 35px;  
+}
+.titlebutmin {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  outline: 1px solid white;
+  cursor: pointer;
+  
+  position: absolute;
+  right: 60px;  
+}
+
 /* Style the close button */
 .topright {
   display: inline-block;
@@ -101,6 +162,7 @@ body {
 }
 
 .topright:hover {color: red;}
+
 </style>
 </head>
 <body>
@@ -110,11 +172,136 @@ body {
   <button class="addTerm"  id="addTermButton" onclick="addTerm(event)">Add Terminal...</button>
 </div>
 
-<div id="addTermDiv" class="addTerm" style="display: inline; visibility: hidden;">
-  <p>Add a new terminal...</P>
+<div id="Window1" class="tabcontent" style="display: inline; visibility: visible;">
+  <div id="Title" class="titlebar" style="display: block; visibility: visible;">
+    <span class="titletext">
+    <a>AyeVDI™ by AyeAI™ : HMI 1</a>
+    </span>
+    <span class="titlebutclose" onclick="winclose('Window1');">
+    <a>&nbsp;&times;&nbsp;</a>
+    </span>
+    <span class="titlebutmax" onclick="winmax('Window1');">
+    <a>&nbsp;^&nbsp;</a>
+    </span>
+    <span class="titlebutmin" onclick="winmin('Window1');">
+    <a>&nbsp;–&nbsp;</a>
+    </span>
+  </div>
+  <div id="winarea">
+    <iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe>
+  </div>
+</div>
+<div id="Window2" class="tabcontent" style="display: inline; visibility: visible;">
+  <div id="Title" class="titlebar" style="display: block; visibility: visible;">
+    <span class="titletext">
+    <a>AyeVDI™ by AyeAI™ : View1</a>
+    </span>
+  </div>
+  <iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe>
+</div>
+<div id="addWinDiv" class="addTerm" style="display: inline; visibility: hidden;">
+  <p>Add a new window...</P>
 </div>
 
 <script>
+//Window funcs
+function winclose(id) {
+
+  var elmnt=document.getElementById(id);
+
+  elmnt.remove();  
+} 
+function winmax(id) {
+
+  var elmnt=document.getElementById(id);
+
+  var winarea=elmnt.querySelector("#winarea");
+  winarea.style.display="block";  
+  winarea.style.visibility="visible"; 
+
+  var title=elmnt.querySelector("#Title");
+  title.style.borderBottomLeftRadius  = "0";
+  title.style.borderBottomRightRadius = "0";
+  title.style.minWidth = "824px";
+} 
+function winmin(id) {
+
+  var elmnt=document.getElementById(id);
+
+  var winarea=elmnt.querySelector("#winarea");
+  winarea.style.display="inline";  
+  winarea.style.visibility="hidden";  
+  elmnt.style.height="5px";
+
+  var title=elmnt.querySelector("#Title");
+  title.style.borderBottomLeftRadius  = "15px";
+  title.style.borderBottomRightRadius = "15px";
+  title.style.minWidth = "425px";
+} 
+
+//Make elements clickable - bring to front
+tofore();
+
+function tofore() {
+
+  var allDivs = document.getElementsByTagName("div");
+  var prev = false;
+
+  for(ii = 0; ii < allDivs.length; ii++) {
+      allDivs[ii].onclick = function() {
+        this.style.position = 'absolute';
+        if (prev) { prev.style.zIndex = 1; }
+        this.style.zIndex = 1000;
+        prev = this;
+      }
+  }
+}
+
+
+//Make the DIV element draggagle:
+dragElement(document.getElementById("Window2"));
+dragElement(document.getElementById("Window1"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+ 
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    elmnt.style.zIndex = 1001;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
