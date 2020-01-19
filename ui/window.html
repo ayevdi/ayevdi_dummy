@@ -8,6 +8,9 @@ body {
   padding: 0;
   margin: 0;
   border: 0;
+  background-size: cover;
+  /*background-image: repeating-radial-gradient(silver, #f6c3c3 10%, #c3f6c3 15%);
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/0/0e/Terragen_render.jpg");*/
 }
 
 /* Style the tab */
@@ -168,42 +171,29 @@ body {
 <body>
 
 <div class="tab">
-  <button class="addGUI"   id="addGUIButtonG" onclick="addGUI(event)">Add GUI...</button>
-  <button class="addTerm"  id="addTermButton" onclick="addTerm(event)">Add Terminal...</button>
+  <button class="addHMI"   id="addHMIButtonG" onclick="addHMI(event)">Add HMI...</button>
+  <!--<button class="addTerm"  id="addTermButton" onclick="addTerm(event)">Add Terminal...</button>!-->
 </div>
 
-<div id="Window1" class="tabcontent" style="display: inline; visibility: visible;">
-  <div id="Title" class="titlebar" style="display: block; visibility: visible;">
-    <span class="titletext">
-    <a>AyeVDI™ by AyeAI™ : HMI 1</a>
-    </span>
-    <span class="titlebutclose" onclick="winclose('Window1');">
-    <a>&nbsp;&times;&nbsp;</a>
-    </span>
-    <span class="titlebutmax" onclick="winmax('Window1');">
-    <a>&nbsp;^&nbsp;</a>
-    </span>
-    <span class="titlebutmin" onclick="winmin('Window1');">
-    <a>&nbsp;–&nbsp;</a>
-    </span>
-  </div>
-  <div id="winarea">
-    <iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe>
-  </div>
-</div>
-<div id="Window2" class="tabcontent" style="display: inline; visibility: visible;">
-  <div id="Title" class="titlebar" style="display: block; visibility: visible;">
-    <span class="titletext">
-    <a>AyeVDI™ by AyeAI™ : View1</a>
-    </span>
-  </div>
-  <iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe>
-</div>
-<div id="addWinDiv" class="addTerm" style="display: inline; visibility: hidden;">
+<div id="addHMIDiv" class="addTerm" style="display: inline; visibility: hidden;">
   <p>Add a new window...</P>
 </div>
 
 <script>
+//BG changer
+  var listBG = [
+  "url('https://upload.wikimedia.org/wikipedia/commons/0/0e/Terragen_render.jpg')",
+  "url('https://upload.wikimedia.org/wikipedia/commons/e/e6/Hazy_Crazy_Sunrise.jpg')"
+  ];
+function myFunction() {
+  var d = Math.floor(listBG.length * Math.random());
+  document.body.style.backgroundImage=listBG[d].toString();
+}
+
+myFunction();
+
+setInterval(myFunction,60000);
+
 //Window funcs
 function winclose(id) {
 
@@ -223,6 +213,7 @@ function winmax(id) {
   title.style.borderBottomLeftRadius  = "0";
   title.style.borderBottomRightRadius = "0";
   title.style.minWidth = "824px";
+  title.style.textAlign = "center";
 } 
 function winmin(id) {
 
@@ -236,10 +227,10 @@ function winmin(id) {
   var title=elmnt.querySelector("#Title");
   title.style.borderBottomLeftRadius  = "15px";
   title.style.borderBottomRightRadius = "15px";
-  title.style.minWidth = "425px";
+  title.style.minWidth = "325px";
+  title.style.textAlign = "left";
 } 
 
-//Make elements clickable - bring to front
 tofore();
 
 function tofore() {
@@ -255,13 +246,43 @@ function tofore() {
         prev = this;
       }
   }
+
+
+//Clumsy implementation below. Leaving behind for ideas
+/*
+  for(ii = 0; ii < allDivs.length; ii++) {
+      //Initialize on new window
+      var tmaxZ=0;
+      for(jj = 0; jj < allDivs.length; jj++) {
+        if (tmaxZ<allDivs[jj].style.zIndex) {
+          tmaxZ=allDivs[jj].style.zIndex;
+        }
+      }
+      newwin.style.zIndex=2000+allDivs.length;
+      if (newwin.style.zIndex<tmaxZ) {
+        newwin.style.zIndex=tmaxZ+1;
+      }
+      allDivs[ii].onclick = function() {
+        var tDivs = document.getElementsByTagName("div");
+        var prev = false;
+        var maxZ = 0;
+
+        // set all windows to zIndex-=1, find max, and set max+1 for the target
+        for(t = 0; t < tDivs.length; t++) {
+          tDivs[t].style.zIndex -= 1;
+          if(maxZ<tDivs[t].style.zIndex) {
+            maxZ=tDivs[t].style.zIndex;
+          }
+        }
+        this.style.zIndex = maxZ + 1;
+      }
+  }
+*/
+
 }
 
 
 //Make the DIV element draggagle:
-dragElement(document.getElementById("Window2"));
-dragElement(document.getElementById("Window1"));
-
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
  
@@ -319,8 +340,26 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
+function openHMI(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  /*for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "inline";
+  }
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.visibility = "hidden";
+  }*/ // Since not needed for windows
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  evt.currentTarget.className += " active";
+  winmax(tabName);
+  //document.getElementById(tabName).click();
+}
+
 termNum=0
-termMax=5 // It's 5, but the 5th one will be taken when GUI is replaced by term in shell service
+termMax=5 // It's 5, but the 5th one will be taken when HMI is replaced by term in shell service
 // TODO: Fix slow interaction speed with 5 or more parallel connections
 function addTerm(evt) {
 
@@ -371,8 +410,8 @@ function delTerm(event,dTermNum) {
   var el3 = document.getElementById('addTermButton');
   el3.style.display="inline";
 
-  // Activate GUI, just in case no terms left
-  for(i=1;i<=GUIMax;i++) {
+  // Activate HMI, just in case no terms left
+  for(i=1;i<=HMIMax;i++) {
     var elt1 = document.getElementById('buttonG'+i);
     try {
       elt1.click();
@@ -405,58 +444,61 @@ function delTerm(event,dTermNum) {
 }
 
 
-GUINum=0
-GUIMax=1 // We run only one GUI server, but can accomodate more if needed 
-function addGUI(evt) {
+HMINum=0
+HMIMax=10 // We run only one HMI server, but can accomodate more if needed 
+function addHMI(evt) {
 
-  GUINum=GUINum+1;
+  HMINum=HMINum+1;
 
-  if(GUINum<=GUIMax) {
+  if(HMINum<=HMIMax) {
     
     var  ibut = document.createElement('button');
     ibut.setAttribute('class', 'tablinks');
-    ibut.setAttribute('id', 'buttonG' + GUINum); //Add the GUI number from a global
-    ibut.setAttribute('onclick', "openTab(event, 'GUI" + GUINum + "')");
-    ibut.innerHTML='GUI' + GUINum;
+    ibut.setAttribute('id', 'buttonG' + HMINum); //Add the HMI number from a global
+    ibut.setAttribute('onclick', "openHMI(event, 'HMI" + HMINum + "')");
+    ibut.innerHTML='HMI' + HMINum;
  
     var  ifrm = document.createElement('div');
-    ifrm.setAttribute('id', 'GUI' + GUINum); //Add the GUI number from a global
+    ifrm.setAttribute('id', 'HMI' + HMINum); //Add the HMI number from a global
     ifrm.setAttribute('class', 'tabcontent');
     ifrm.style.display = "inline";
-    ifrm.style.visibility = "hidden"
-    ifrm.innerHTML='<div class="topright"><span onclick="delGUI(event,'+GUINum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div>';
-    ifrm.innerHTML+='<iframe width="800" height="632" frameborder="0" src="http://35.244.14.58:13346/vnc_auto.html"></iframe>';
+    ifrm.style.visibility = "visible"; /*winclose(\'HMI'+ HMINum +'\');*/
+    ifrm.innerHTML='<div id="Title" class="titlebar" style="display: block; visibility: visible;"><span class="titletext"><a>AyeVDI™ by AyeAI™ : HMI ' + HMINum + '</a></span><span class="titlebutclose" onclick="delHMI(event,'+HMINum+');"><a>&nbsp;&times;&nbsp;</a></span><span class="titlebutmax" onclick="winmax(\'HMI'+ HMINum +'\');"><a>&nbsp;^&nbsp;</a></span><span class="titlebutmin" onclick="winmin(\'HMI'+ HMINum +'\');"><a>&nbsp;–&nbsp;</a></span><div class="topright"><span onclick="delHMI(event,'+HMINum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div></div><div id="winarea"><iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe></div>';
 
-    var el1 = document.getElementById('addTermDiv');
+    var el1 = document.getElementById('addHMIDiv');
     el1.parentNode.insertBefore(ifrm, el1);
 
-    var el2 = document.getElementById('addGUIButtonG');
+    var el2 = document.getElementById('addHMIButtonG');
     el2.parentNode.insertBefore(ibut, el2);
 
-    document.getElementById('buttonG' + GUINum).click();
+    document.getElementById('buttonG' + HMINum).click();
+    dragElement(document.getElementById('HMI' + HMINum));
+
+    //Make elements clickable - bring to front
+    tofore();
 
   }
-  if(GUINum>=GUIMax) {
+  if(HMINum>=HMIMax) {
 
-    var el1 = document.getElementById('addGUIButtonG');
+    var el1 = document.getElementById('addHMIButtonG');
     el1.style.display="none";
 
   }
 }
 
-function delGUI(event,dGUINum) {
-  GUIMax+=1;
+function delHMI(event,dHMINum) {
+  HMIMax+=1;
 
-  var el1 = document.getElementById('buttonG'+dGUINum);
+  var el1 = document.getElementById('buttonG'+dHMINum);
   el1.remove();
 
-  var el2 = document.getElementById('GUI'+dGUINum);
+  var el2 = document.getElementById('HMI'+dHMINum);
   el2.remove();
 
-  var el3 = document.getElementById('addGUIButtonG');
+  var el3 = document.getElementById('addHMIButtonG');
   el3.style.display="inline";
 
-  // Activate a Term if available, just in case no GUIs left
+  // Activate a Term if available, just in case no HMIs left
   for(i=1;i<=termMax;i++) {
     var elt1 = document.getElementById('button'+i);
     try {
@@ -469,7 +511,7 @@ function delGUI(event,dGUINum) {
   
   // Now see if any container is alive - activate that, or
   // start a new container?
-  for(i=GUIMax-1;i>=dGUINum+1;i--) {
+  for(i=HMIMax-1;i>=dHMINum+1;i--) {
     var el4 = document.getElementById('buttonG'+i);
     try {
       el4.click();
@@ -478,7 +520,7 @@ function delGUI(event,dGUINum) {
       // Log the order
     }
   }
-  for(i=1;i<=dGUINum-1;i++) {
+  for(i=1;i<=dHMINum-1;i++) {
     var el5 = document.getElementById('buttonG'+i);
     try {
       el5.click();
@@ -492,7 +534,7 @@ function delGUI(event,dGUINum) {
 
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("addTermButton").click();
-document.getElementById("addGUIButtonG").click();
+document.getElementById("addHMIButtonG").click();
 
 
 // TODO: Create menu dropdown effect
