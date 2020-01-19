@@ -87,9 +87,9 @@ body {
 
   /* Position the tooltip */
   position: absolute;
-  top: 7px;
+  top: 25px;
   right: 105%;
-  z-index: 1;
+  z-index: 200;
 
   font-size: 14px;
   font-weight: 100;
@@ -100,6 +100,50 @@ body {
 }
 
 .topright:hover {color: red;}
+
+/**/
+.topright2 {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  top: -30px;
+  right: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: white;
+}
+
+.topright2 .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  opacity: 0.9;
+  color: blue;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 20px;
+  right: 105%;
+  z-index: 200;
+
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.topright2:hover .tooltiptext {
+  visibility: visible;
+}
+
+.topright2:hover {color: blue;}
 </style>
 </head>
 <body>
@@ -153,6 +197,7 @@ function addCntr(evt) {
     ifrm.style.display = "inline";
     ifrm.style.visibility = "hidden";
     ifrm.innerHTML='<div class="topright"><span onclick="delCntr(event,'+CntrNum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div>';
+    ifrm.innerHTML+='<div class="topright2"><span onclick="maxCntr(event,'+CntrNum+');">@</span><span class="tooltiptext">Float '+ibut.innerHTML+'</span></div>';
     ifrm.innerHTML+='<iframe width="800" height="705" frameborder="0" src="file:///home/ayeman/test31.html"></iframe>';
 
     var el1 = document.getElementById('addCntrDiv');
@@ -170,6 +215,11 @@ function addCntr(evt) {
     el1.style.display="none";
 
   }
+}
+
+function maxCntr(event,dCntrNum) {
+  var el = document.getElementById('Cntr'+dCntrNum);
+  document.body.innerHTML=el.innerHTML;
 }
 
 function delCntr(event,dCntrNum) {

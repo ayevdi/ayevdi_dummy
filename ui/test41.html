@@ -88,7 +88,7 @@ body {
 
   /* Position the tooltip */
   position: absolute;
-  top: 5px;
+  top: 25px;
   right: 105%;
   z-index: 200;
 
@@ -101,6 +101,50 @@ body {
 }
 
 .topright:hover {color: red;}
+
+/**/
+.topright2 {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  top: -30px;
+  right: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: white;
+}
+
+.topright2 .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  opacity: 0.9;
+  color: blue;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 20px;
+  right: 105%;
+  z-index: 200;
+
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.topright2:hover .tooltiptext {
+  visibility: visible;
+}
+
+.topright2:hover {color: blue;}
 </style>
 </head>
 <body>
@@ -153,6 +197,7 @@ function addTerm(evt) {
     ifrm.style.display = "inline";
     ifrm.style.visibility = "hidden"
     ifrm.innerHTML='<div class="topright"><span onclick="delTerm(event,'+termNum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div>';
+    ifrm.innerHTML+='<div class="topright2"><span onclick="maxTerm(event,'+termNum+');">@</span><span class="tooltiptext">Float '+ibut.innerHTML+'</span></div>';
     ifrm.innerHTML+='<iframe width="800" height="632" frameborder="0" src="http://35.244.14.58:16433/"></iframe>';
 
     var el1 = document.getElementById('addTermDiv');
@@ -170,6 +215,11 @@ function addTerm(evt) {
     el1.style.display="none";
 
   }
+}
+
+function maxTerm(event,dTermNum) {
+  var el = document.getElementById('Term'+dTermNum);
+  document.body.innerHTML=el.innerHTML;
 }
 
 function delTerm(event,dTermNum) {
@@ -238,6 +288,7 @@ function addGUI(evt) {
     ifrm.style.display = "inline";
     ifrm.style.visibility = "hidden"
     ifrm.innerHTML='<div class="topright"><span onclick="delGUI(event,'+GUINum+');">&times</span><span class="tooltiptext">Close '+ibut.innerHTML+'</span></div>';
+    ifrm.innerHTML+='<div class="topright2"><span onclick="maxGUI(event,'+GUINum+');">@</span><span class="tooltiptext">Float '+ibut.innerHTML+'</span></div>';
     ifrm.innerHTML+='<iframe width="800" height="632" frameborder="0" src="http://35.244.14.58:13346/vnc_auto.html"></iframe>';
 
     var el1 = document.getElementById('addTermDiv');
@@ -255,6 +306,11 @@ function addGUI(evt) {
     el1.style.display="none";
 
   }
+}
+
+function maxGUI(event,dGUINum) {
+  var el = document.getElementById('GUI'+dGUINum);
+  document.body.innerHTML=el.innerHTML;
 }
 
 function delGUI(event,dGUINum) {

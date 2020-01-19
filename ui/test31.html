@@ -59,12 +59,90 @@ body {
 
 /* Style the close button */
 .topright {
+  display: inline-block;
   float: right;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 32px;
+  position: absolute;
+  top: -35px;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: white;
+}
+
+.topright .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  opacity: 0.9;
+  color: red;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 25px;
+  right: 105%;
+  z-index: 200;
+
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.topright:hover .tooltiptext {
+  visibility: visible;
 }
 
 .topright:hover {color: red;}
+
+/**/
+.topright2 {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  top: -30px;
+  right: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: white;
+}
+
+.topright2 .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  opacity: 0.9;
+  color: blue;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 20px;
+  right: 105%;
+  z-index: 200;
+
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.topright2:hover .tooltiptext {
+  visibility: visible;
+}
+
+.topright2:hover {color: blue;}
 </style>
   </head>
   <body>
@@ -80,53 +158,66 @@ body {
       <button class="tablinks" id="button9" onclick="openTab(event, 'TnC')">TnC</button>
     </div>
     <div id="Cnsl" class="tabcontent" style="display: inline; visibility: hidden;">
+      <div class="topright2"><span onclick="maxGUI(event,'Cnsl');">@</span><span class="tooltiptext">Float Console</span></div>';
       <iframe width="800" height="670" frameborder="0" src="file:///home/ayeman/test41.html"></iframe>
     </div>
     <div id="Expl" class="tabcontent" style="display: inline; visibility: hidden;">
+      <div class="topright2"><span onclick="maxGUI(event,'Expl');">@</span><span class="tooltiptext">Float Explorer</span></div>';
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="IDE" class="tabcontent" style="display: inline; visibility: hidden;">
+      <div class="topright2"><span onclick="maxGUI(event,'IDE');">@</span><span class="tooltiptext">Float IDE</span></div>';
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="VCV" class="tabcontent" style="display: inline; visibility: visible;">
+      <div class="topright2"><span onclick="maxGUI(event,'VCV');">@</span><span class="tooltiptext">Float ValidCV™</span></div>';
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="Share" class="tabcontent" style="display: inline; visibility: visible;">
+      <div class="topright2"><span onclick="maxGUI(event,'Share');">@</span><span class="tooltiptext">Float Share</span></div>';
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="Meet" class="tabcontent" style="display: inline; visibility: hidden;">
+      <div class="topright2"><span onclick="maxGUI(event,'Meet');">@</span><span class="tooltiptext">Float Meet</span></div>';
       <iframe width="800" height="670" frameborder="0" src="https://meet.jit.si/PinkRhinosObserveHastily"></iframe>
     </div>
     <div id="Apps" class="tabcontent" style="display: inline; visibility: visible;">
+      <div class="topright2"><span onclick="maxGUI(event,'Apps');">@</span><span class="tooltiptext">Float Apps</span></div>';
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="Labs" class="tabcontent" style="display: inline; visibility: visible;">
+      <div class="topright2"><span onclick="maxGUI(event,'Labs');">@</span><span class="tooltiptext">Float Labs</span></div>';
       <iframe width="800" height="670" frameborder="0" src="http://35.244.14.58:13346/"></iframe>
     </div>
     <div id="TnC" class="tabcontent" style="display: inline; visibility: visible;">
+      <div class="topright2"><span onclick="maxGUI(event,'TnC');">@</span><span class="tooltiptext">Float TnC</span></div>';
       <iframe width="800" height="670" frameborder="0" src="https://ayeai.xyz/site/terms-conditions/"></iframe>
     </div>
     <script>
-      function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "inline";
-        }
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.visibility = "hidden";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.visibility = "visible";
-        evt.currentTarget.className += " active";
-      }
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "inline";
+  }
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.visibility = "hidden";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.visibility = "visible";
+  evt.currentTarget.className += " active";
+}
       
-      // Get the element with id="defaultOpen" and click on it
-      document.getElementById("button1").click();
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("button1").click();
 
+function maxGUI(event,dGUIName) {
+  var el = document.getElementById(dGUIName);
+  document.body.innerHTML=el.innerHTML;
+}
     </script>
   </body>
 </html>
