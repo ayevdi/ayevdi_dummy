@@ -24,4 +24,4 @@ echo Connected on ${ayeterm};
 sourcefrom https://bit.ly/ayevdi-daemon-start "$(echo ${ayeterm}_session_${SHELLINABOX_PEERNAME} | tr '.' '_')" "echo Session ${SHELLINABOX_PEERNAME}_${ayeterm}_session && bash -li";
 screen -rD "$(echo ${ayeterm}_session_${SHELLINABOX_PEERNAME} | tr '.' '_')"
 
-# TODO: HAndle errors
+# TODO: Handle errors
