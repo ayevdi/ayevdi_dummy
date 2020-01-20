@@ -37,6 +37,7 @@ echo Detached from ${ayesession}...
 for n in {3..1}
 do
   echo Will try to restore ${ayesession} in $n secs... Press Ctrl+C to abort
+  sleep 1
 done
 echo Restoring ${ayesession}...
 
