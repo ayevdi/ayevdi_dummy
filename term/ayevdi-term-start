@@ -21,7 +21,7 @@ fi
 
 export ayeterm=$(echo $SHELLINABOX_URL | tr '?&' '\n\n' | grep 'term=' | cut -d'=' -f2);
 echo Connected on ${ayeterm};
-sourcefrom https://bit.ly/ayevdi-daemon-start "$(echo ${ayeterm}_session_${SHELLINABOX_PEERNAME} | tr '.' '_'" "echo Session ${SHELLINABOX_PEERNAME}_${ayeterm}_session && bash -li";
+sourcefrom https://bit.ly/ayevdi-daemon-start "$(echo ${ayeterm}_session_${SHELLINABOX_PEERNAME} | tr '.' '_')" "echo Session ${SHELLINABOX_PEERNAME}_${ayeterm}_session && bash -li";
 screen -rD "${SHELLINABOX_PEERNAME}_${ayeterm}_session"
 
 # TODO: HAndle errors
