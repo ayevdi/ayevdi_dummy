@@ -28,7 +28,7 @@ if [ ! "${ayescreen}" = "${ayesession}" ]
 then
   echo Connecting ${ayesession}
   sourcefrom https://bit.ly/ayevdi-daemon-start "${ayesession}" "echo Starting ${ayesession} && bash -li";
-  screen -r "${ayesession}"
+  screen -dr "${ayesession}"
 else 
   echo Restored ${ayesession}
 fi
