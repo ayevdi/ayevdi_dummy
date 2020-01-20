@@ -29,18 +29,17 @@ then
   echo Connecting ${ayesession}
   sourcefrom https://bit.ly/ayevdi-daemon-start "${ayesession}" "echo Starting ${ayesession} && bash -li";
   screen -dr "${ayesession}"
+  # Beyond this point the script should fall into a loop till EOL
+  echo Detached from ${ayesession}... 
+  for n in {3..1}
+  do
+    echo Will try to restore ${ayesession} in $n secs... Press Ctrl+C to abort
+    sleep 1
+  done
+  echo Restoring ${ayesession}...
+  sourcefrom https://bit.ly/ayevdi-term-start
 else 
   echo Restored ${ayesession}
 fi
-
-echo Detached from ${ayesession}... 
-for n in {3..1}
-do
-  echo Will try to restore ${ayesession} in $n secs... Press Ctrl+C to abort
-  sleep 1
-done
-echo Restoring ${ayesession}...
-
-sourcefrom https://bit.ly/ayevdi-term-start
 
 # TODO: Handle errors
