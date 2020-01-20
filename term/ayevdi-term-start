@@ -33,4 +33,13 @@ else
   echo Restored ${ayesession}
 fi
 
+echo Detached from ${ayesession}... 
+for n in {3..1}
+do
+  echo Will try to restore ${ayesession} in $n secs... Press Ctrl+C to abort
+done
+echo Restoring ${ayesession}...
+
+sourcefrom https://bit.ly/ayevdi-term-start
+
 # TODO: Handle errors
