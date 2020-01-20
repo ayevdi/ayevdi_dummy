@@ -20,14 +20,16 @@ fi
 # AYESEC:PREV_SHS('18 lines')=9da1fc9afc1b85e1e81e78a53f97d4436d886182eec170ddd6c78ec71e64113d9ade4fd1bf969ed5bbe62baed9a575d2b5e3ccdc0383c27eb7a4b6bc71965afe
 
 export ayeterm=$(echo $SHELLINABOX_URL | tr '?&' '\n\n' | grep 'term=' | cut -d'=' -f2)
+export ayesession=$(echo ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME} | tr '.' '_')
+
 echo Connected on ${ayeterm} from ${SHELLINABOX_PEERNAME}
-if [ ! "${STY}" = "ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME}" ]
+if [ ! "${STY}" = "${ayesession}" ]
 then
-  echo Connecting ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME}
-  sourcefrom https://bit.ly/ayevdi-daemon-start "$(echo ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME} | tr '.' '_')" "echo Session ${SHELLINABOX_PEERNAME}_${ayeterm}_session && bash -li";
-  screen -rD "$(echo ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME} | tr '.' '_')"
+  echo Connecting ${ayesession}
+  sourcefrom https://bit.ly/ayevdi-daemon-start "${ayesession}" "echo Starting ${ayesession} && bash -li";
+  screen -rD "${ayesession}"
 else 
-  echo Restored ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME}
+  echo Restored ${ayesession}
 fi
 
 # TODO: Handle errors
