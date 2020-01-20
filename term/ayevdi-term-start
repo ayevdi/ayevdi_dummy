@@ -21,9 +21,10 @@ fi
 
 export ayeterm=$(echo $SHELLINABOX_URL | tr '?&' '\n\n' | grep 'term=' | cut -d'=' -f2)
 export ayesession=$(echo ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME} | tr '.' '_')
+export ayescreen=$( echo ${STY} | cut -d'.' -f2)
 
 echo Connected on ${ayeterm} from ${SHELLINABOX_PEERNAME}
-if [ ! "${STY}" = "${ayesession}" ]
+if [ ! "${ayescreen}" = "${ayesession}" ]
 then
   echo Connecting ${ayesession}
   sourcefrom https://bit.ly/ayevdi-daemon-start "${ayesession}" "echo Starting ${ayesession} && bash -li";
