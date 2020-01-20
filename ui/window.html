@@ -64,7 +64,10 @@ body {
 
 .titlebar {
   display: inline;
-  background: #777;
+  background-image: url("https://media.giphy.com/media/krQzJaxbU1aXS/giphy.gif");
+  background-position: center;
+  background-size: 1200px 400px;
+  opacity: 0.8;
   padding: 5px;
   margin: 0;
   border: 3px solid #777;
@@ -90,6 +93,7 @@ body {
   top: 0px;
   left: 0px;
   color: white;
+  opacity: 1;
 }
 
 .titlebutclose {
@@ -162,16 +166,24 @@ body {
   visibility: visible;
   display: inline;
   position: absolute;
-  left: 45px;
-  top: -43px;
+  left: 18px;
+  top: -57px;
   opacity: 1;
 }
 .topleft .iconsleft2 {
   visibility: visible;
   display: inline;
   position: absolute;
-  left: 85px;
-  top: -43px;
+  left: 82px;
+  top: -39px;
+  opacity: 1;
+}
+.topleft .iconsleft3 {
+  visibility: visible;
+  display: inline;
+  position: absolute;
+  left: 117px;
+  top: -42px;
   opacity: 1;
 }
 
@@ -221,6 +233,39 @@ body {
   top: -15px;
   filter: hue-rotate(37deg);
   opacity: 0.7;
+}
+
+.topright .iconsright1 {
+  visibility: visible;
+  display: inline;
+  position: absolute;
+  right: 50px;
+  top: -39px;
+  opacity: 0.8;
+}
+.topright .iconsright2 {
+  visibility: visible;
+  display: inline;
+  position: absolute;
+  right: 80px;
+  top: -35px;
+  opacity: 0.8;
+}
+.topright .iconsright3 {
+  visibility: visible;
+  display: inline;
+  position: absolute;
+  right: 114px;
+  top: -33px;
+  opacity: 1;
+}
+.topright .iconmiddle {
+  visibility: visible;
+  display: inline;
+  position: absolute;
+  right: 80px;
+  top: -34px;
+  opacity: 0.8;
 }
 
 .topright .tooltiptext {
@@ -274,7 +319,10 @@ body {
 //BG changer
   var listBG = [
   "url('https://upload.wikimedia.org/wikipedia/commons/0/0e/Terragen_render.jpg')",
-  "url('https://upload.wikimedia.org/wikipedia/commons/e/e6/Hazy_Crazy_Sunrise.jpg')"
+  "url('https://upload.wikimedia.org/wikipedia/commons/e/e6/Hazy_Crazy_Sunrise.jpg')",
+  "url('https://media.giphy.com/media/kwlvrqugaY3Ic/source.gif')",
+  "url('https://i.gifer.com/MUJw.gif')",
+  "url('https://media.giphy.com/media/l3nSGQ045gEvvQFRm/source.gif')"
   ];
 function myFunction() {
   var d = Math.floor(listBG.length * Math.random());
@@ -557,7 +605,7 @@ function addHMI(evt) {
     ifrm.setAttribute('class', 'tabcontent');
     ifrm.style.display = "inline";
     ifrm.style.visibility = "visible"; /*winclose(\'HMI'+ HMINum +'\');*/
-    ifrm.innerHTML='<div id="Title" class="titlebar" style="display: block; visibility: visible;"><span class="titletext"><a>AyeVDI™ by AyeAI™ : HMI ' + HMINum + '</a></span><span class="titlebutclose" onclick="delHMI(event,'+HMINum+');"><a>&nbsp;&times;&nbsp;</a></span><span class="titlebutmax" onclick="winmax(\'HMI'+ HMINum +'\');"><a>&nbsp;^&nbsp;</a></span><span class="titlebutmin" onclick="winmin(\'HMI'+ HMINum +'\');"><a>&nbsp;–&nbsp;</a></span><div class="topleft"><span onclick="toHMI(event,'+HMINum+');">O⇨</span><span class="connimgleft"><img src="https://media.giphy.com/media/KJUS17ZY3Q3tu/200w_d.gif" width="20" height="20"></img></span><span class="iconsleft1"><img src="https://www.gnu.org/graphics/babies/BabyGnuAlpha.png" width="50" height="50"></img></span><<span class="iconsleft2"><img src="https://www.gnu.org/graphics/babies/BabyTuxSitAlpha.png" width="50" height="50"></img></span><span class="tooltipleft">Input to '+ibut.innerHTML+'</span></div><div class="topright"><span onclick="fromHMI(event,'+HMINum+');">⇨O</span><span class="connimgright"><img src="https://media.giphy.com/media/KJUS17ZY3Q3tu/200w_d.gif" width="20" height="20"></img></span><span class="tooltiptext">Output from '+ibut.innerHTML+'</span></div></div><div id="winarea"><iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe></div>';
+    ifrm.innerHTML='<div id="Title" class="titlebar" style="display: block; visibility: visible;"><span class="titletext"><a>AyeVDI™ by AyeAI™ : HMI ' + HMINum + '</a></span><span class="titlebutclose" onclick="delHMI(event,'+HMINum+');"><a>&nbsp;&times;&nbsp;</a></span><span class="titlebutmax" onclick="winmax(\'HMI'+ HMINum +'\');"><a>&nbsp;^&nbsp;</a></span><span class="titlebutmin" onclick="winmin(\'HMI'+ HMINum +'\');"><a>&nbsp;–&nbsp;</a></span><div class="topleft"><span onclick="toHMI(event,'+HMINum+');">O⇨</span><span class="connimgleft"><img src="https://media.giphy.com/media/KJUS17ZY3Q3tu/200w_d.gif" width="20" height="20"></img></span><span class="iconsleft1"><img src="https://media.giphy.com/media/ctacpbX4FHIasGKGqK/200w_d.gif" width="90" height="90"><img></span><span class="iconsleft2"><img src="https://www.gnu.org/graphics/babies/BabyGnuAlpha.png" width="45" height="45"></img></span><span class="iconsleft3"><img src="https://www.gnu.org/graphics/babies/BabyTuxSitAlpha.png" width="50" height="50"></img></span><span class="tooltipleft">Input to '+ibut.innerHTML+'</span></div><div class="topright"><span onclick="fromHMI(event,'+HMINum+');">⇨O</span><span class="iconsright3"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Under_construction_animated.gif" width="29" height="29"><img></span><span class="iconsright2"><img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Alarm_Clock_GIF_Animation.gif" width="30" height="30"><img></span><span class="iconsright1"><img src="https://www.animatedimages.org/data/media/576/animated-garbage-bin-image-0008.gif" width="35" height="35"><img></span><span class="connimgright"><img src="https://media.giphy.com/media/KJUS17ZY3Q3tu/200w_d.gif" width="20" height="20"></img></span><span class="tooltiptext">Output from '+ibut.innerHTML+'</span></div></div><div id="winarea"><iframe width="840" height="805" frameborder="0" src="file:///home/ayeman/level0.html"></iframe></div>';
 
     var el1 = document.getElementById('addHMIDiv');
     el1.parentNode.insertBefore(ifrm, el1);
