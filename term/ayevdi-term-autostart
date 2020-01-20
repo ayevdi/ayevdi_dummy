@@ -21,7 +21,7 @@ fi
 
 if [ 1 -gt $(cat ${HOME}/.bashrc | grep ayevdi-term-start | wc -l) ]
 then
-  echo <<EOF >>${HOME}/.bashrc
+  cat <<EOF >>${HOME}/.bashrc
 export ayeterm=$(echo $SHELLINABOX_URL | tr '?&' '\n\n' | grep 'term=' | cut -d'=' -f2)
 export ayesession=$(echo ayevdi_session_${ayeterm}_${SHELLINABOX_PEERNAME} | tr '.' '_')
 export ayescreen=$( echo ${STY} | cut -d'.' -f2)
