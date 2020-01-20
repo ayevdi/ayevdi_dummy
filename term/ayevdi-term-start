@@ -28,7 +28,7 @@ if [ ! "${ayescreen}" = "${ayesession}" ]
 then
   echo Connecting ${ayesession}
   sourcefrom https://bit.ly/ayevdi-daemon-start "${ayesession}" "echo Starting ${ayesession} && bash -li";
-  screen -dr "${ayesession}"
+  screen -Dr "${ayesession}"
   # Beyond this point the script should fall into a loop till EOL
   echo Detached from ${ayesession}... 
   for n in {3..1}
