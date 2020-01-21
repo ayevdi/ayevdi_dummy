@@ -1,0 +1,660 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Set style for the page */
+body {
+  font-family: Arial;
+  border: 4px solid red;
+  background-color: black;
+  border-top: none;
+  border-left: none;
+  margin: 0;
+  padding: 0;
+  max-width: 800; /* To ensure positioning is correct on larger screens */
+}
+
+
+/* Remove the focus dotted outline in firefox */
+button::-moz-focus-inner {
+  border: 0;
+}
+
+/* Set style for the tab area - this holds the buttons */
+.tab {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  display: block; /* Ensure vertical blocking for window area */
+  position: absolute; /* Ensure buttons tab is flush with top */
+  top: 0;
+  transition: 0.2s 1.5s; /* Onset delay 200ms, offset delay 1500ms */
+}
+
+
+/* Set style for tab buttons */
+.tab button {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  display: inline; /* This allows buttons to appear side by side */
+  cursor: pointer; /* Change the cursor shape while focus is on the button */
+
+  padding: 6px 12px; /* Make buttons bigger by adding padding */
+
+  border-top-left-radius: 10px;  /* Make the top left of buttons rounded */
+  border-top-right-radius: 10px; /* Make the top right of buttons rounded */
+
+  outline: 0; /* This prevents the display of a bo around the buttons on click */
+
+  float: left; /* Stack the buttons together */ 
+
+  margin: 1px 1px;  /* Give the buttons a distinguishing margin */
+  margin-bottom: 0; /* Ensure buttons are flush with content below */
+
+  transition: 0.3s;
+  text-align: center;
+
+  /* The following style elements have been superseded in config files */
+  /* Do NOT modify here */
+  font-size: 15px;  /* Set the font size for buttons */
+  font-weight: 600; /* Make the button text bold */
+  background-color: #b3e6b3; /* Set the button default color */
+}
+
+/* Hover effect on buttons */
+.tab button:hover {
+  /* The following style elements have been superseded in config files */
+  /* Do NOT modify here */
+  background-color: #8cd98c;
+  color: gray;
+}
+
+/* Set style for active buttons */
+.tab button.active {
+  /* The following style elements have been superseded in config files */
+  /* Do NOT modify here */
+  background-color: #53c653;
+  color: white;
+}
+
+/* Set style for the window area - contents of the tab */
+.tabcontent {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  display: block; /* Ensure vertical blocking for window area */
+  position: absolute; /* Allow overlapping windows */
+  top: 30px;
+}
+
+/* Style the close button */
+.topright1 {
+  font-family: Arial;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background-color: black;
+
+  float: right;
+  cursor: pointer;
+
+  position: absolute;
+  top: -25;
+  left: 777;
+}
+
+.topright1:hover {
+  color: red;
+  background-color: #777;
+  border: 2px solid #777;
+}
+
+.topright1 .tooltiptext {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: red;
+  background-color: white;
+
+  border-radius: 10px;
+  padding: 5px 5px;
+  min-width: 150px;
+  text-align: center;
+
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  z-index: 200;
+
+  visibility: hidden;
+
+  opacity: 0.8;
+}
+
+.topright1:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* Style the float button */
+.topright2 {
+  font-family: Arial;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background-color: black;
+
+  float: right;
+  cursor: pointer;
+
+  position: absolute;
+  top: -25;
+  left: 753;
+}
+
+.topright2:hover {
+  color: orange;
+  background-color: #fff;
+}
+
+.topright2 .tooltiptext {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: orange;
+  background-color: white;
+
+  border-radius: 10px;
+  padding: 5px 5px;
+  min-width: 150px;
+  text-align: center;
+
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  z-index: 200;
+
+  visibility: hidden;
+
+  opacity: 0.8;
+}
+
+.topright2:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* Style the project button */
+.topright3 {
+  font-family: Arial;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background-color: black;
+
+  float: right;
+  cursor: pointer;
+
+  position: absolute;
+  top: -25;
+  left: 730;
+}
+
+.topright3:hover {
+  color: green;
+  background-color: #fff;
+}
+
+.topright3 .tooltiptext {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: green;
+  background-color: white;
+
+  border-radius: 10px;
+  padding: 5px 5px;
+  min-width: 150px;
+  text-align: center;
+
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  z-index: 200;
+
+  visibility: hidden;
+
+  opacity: 0.8;
+}
+
+.topright3:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* Style the project button */
+.topright4 {
+  font-family: Arial;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background-color: black;
+
+  float: right;
+  cursor: pointer;
+
+  position: absolute;
+  top: -25;
+  left: 707;
+}
+
+.topright4:hover {
+  color: blue;
+  background-color: #fff;
+}
+
+.topright4 .tooltiptext {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: blue;
+  background-color: white;
+
+  border-radius: 10px;
+  padding: 5px 5px;
+  min-width: 150px;
+  text-align: center;
+
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  z-index: 200;
+
+  visibility: hidden;
+
+  opacity: 0.8;
+}
+
+.topright4:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* Style the sink button */
+.sinkright {
+  font-family: Arial;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background-color: black;
+
+  float: right;
+  cursor: pointer;
+
+  position: absolute;
+  top: 5;
+  left: 707;
+}
+
+.sinkright:hover {
+  color: blue;
+  background-color: #fff;
+}
+
+.sinkright .tooltiptext {
+  font-family: Arial;
+  border: 0;
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: blue;
+  background-color: white;
+
+  border-radius: 10px;
+  padding: 5px 5px;
+  min-width: 150px;
+  text-align: center;
+
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  z-index: 200;
+
+  visibility: hidden;
+
+  opacity: 0.8;
+}
+
+.sinkright:hover .tooltiptext {
+  visibility: visible;
+}
+
+</style>
+</head>
+
+<body>
+<div class="tab">
+  <button class="addNewBut" id="addNewButton"  style="display: none; visibility: hidden">Add new button...</button>
+</div>
+
+<div id="addNewDiv" class="addTab" style="display: inline; visibility: hidden;">
+  <p>Add a new div... If you can see this message then there's some bug in AyeUI! Please report it.</P>
+</div>
+
+<script>
+var tabTypeList=["WebApp","Term","GUI"];
+var tabTypeSizeX=[800,800,800];
+var tabTypeSizeY=[640,500,640];
+var tabTypeNum=[0,0,0];
+var tabTypeMax=[1,5,1];
+var tabTypeSrc=[
+                "http://35.244.14.58:13346/vnc.html",
+                "http://35.244.14.58:16433/",
+                "http://35.244.14.58:13346/vnc_auto.html"
+               ];
+var tabTypeStyleIndex={Button:{backgroundColor:0,color:1,fontSize:2,fontWeight:3,backgroundImage:4}}
+var tabTypeButtonStyle=[{ normal:["#b3e6b3","white","15px",600,""],
+                          active:["#b3e6b3","red","15px",600,""],
+                          hover:["#b3e6b3","yellow","15px",600,""],
+                          add:["#b3e6b3","purple","15px",600,""],
+                          addHover:["magenta","orange","15px",600] },
+                        { normal:["purple","white","15px",600],
+                          active:["blue","red","15px",600],
+                          hover:["red","yellow","15px",600],
+                          add:["red","purple","15px",600],
+                          addHover:["green","orange","15px",600] },
+                        { normal:["purple","white","15px",600],
+                          active:["blue","red","15px",600],
+                          hover:["red","yellow","15px",600],
+                          add:["red","purple","15px",600],
+                          addHover:["yellow","orange","15px",600] }
+                        ];
+
+function assocIndex(refArr,dHash) {
+  var numIndex=0;
+
+  while(numIndex<refArr.length) {
+    if (refArr[numIndex]==dHash) {
+      return numIndex;
+    }
+    numIndex+=1;
+  }
+  return -1;
+}
+
+
+function parseSetButtonStyle(iBut,TabType,normalStyle,hoverStyle) {
+    //TODO: Optimize these sections to parse and generate the code stubs
+    //normal
+    iBut.style.backgroundColor=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][0];
+    iBut.style.color=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][1];
+    iBut.style.fontSize=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][2];
+    iBut.style.fontWeight=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][3];
+
+    //hover
+    //->enter
+    iBut.setAttribute('onmouseenter','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][0]+'";'
+    +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][1]+'";'
+    +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][2]+'";'
+    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][3]+'"');
+    //->leave
+    iBut.setAttribute('onmouseleave','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][0]+'";'
+    +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][1]+'";'
+    +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][2]+'";'
+    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][3]+'"');
+}
+
+function openTab(evt, TabType, TabNum) {
+  var i, tabcontent, tablinks;
+  var tabName=TabType + TabNum;
+
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "block";
+  }
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.visibility = "hidden";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    parseSetButtonStyle(tablinks[i],TabType,"normal","hover");
+  }
+  document.getElementById(tabName).style.visibility = "visible";
+  evt.currentTarget.className += " active";
+  parseSetButtonStyle(evt.currentTarget,TabType,"active","active");
+}
+
+
+function maxTab(event,TabType,TabNum) {
+  var el = document.getElementById(TabType + TabNum);
+
+  var  ifrm = document.createElement('div');
+  ifrm.setAttribute('id', 'orisource');
+  ifrm.setAttribute('class', 'tabcontent');
+  ifrm.style.display = "none";
+  ifrm.style.visibility = "hidden";
+  ifrm.innerHTML = document.body.innerHTML;
+
+  document.body.innerHTML='<div id="sink" class="sinkright"><span onclick="var el1 = document.getElementById(\'orisource\'); document.body.innerHTML=el1.innerHTML;">&nbsp;&nabla;&nbsp;</span><span class="tooltiptext">Sink '+TabType+TabNum+'</span></div>';
+
+  document.body.innerHTML+=el.querySelector('#TabFrame').innerHTML;
+
+  var el1 = document.getElementById('sink');
+  el1.parentNode.insertBefore(ifrm, el1);
+}
+
+
+// TODO: Fix slow interaction speed with 5 or more parallel connections in SIAB (siab task)
+function addTab(evt,TabType) {
+
+  tabTypeNum[assocIndex(tabTypeList,TabType)]+=1;
+
+  var TabNum=tabTypeNum[assocIndex(tabTypeList,TabType)];
+  var TabWidth=tabTypeSizeX[assocIndex(tabTypeList,TabType)];
+  var TabHeight=tabTypeSizeY[assocIndex(tabTypeList,TabType)];
+  var TabSrc=tabTypeSrc[assocIndex(tabTypeList,TabType)];
+  var TabMax=tabTypeMax[assocIndex(tabTypeList,TabType)];
+
+  if(TabNum<=tabTypeMax[assocIndex(tabTypeList,TabType)]) {
+    
+    var ibut = document.createElement('button');
+    ibut.setAttribute('class', 'tablinks');
+    ibut.setAttribute('id', 'button' + TabType + TabNum);
+    ibut.setAttribute('onclick', "openTab(event, '" + TabType + "'," + TabNum + ")");
+    ibut.innerHTML=TabType + TabNum;
+
+    parseSetButtonStyle(ibut,TabType,"normal","hover");
+
+    var ifrm = document.createElement('div');
+    ifrm.setAttribute('id', TabType + TabNum);
+    ifrm.setAttribute('class', 'tabcontent');
+    ifrm.style.display = "block";
+    ifrm.style.visibility = "hidden"
+
+    // TODO: Replace with properly decorated code
+    ifrm.innerHTML='<div id="TabFrame"><iframe width="' + TabWidth + '" height="' + TabHeight + '" frameborder="0" src="'+ TabSrc +'?term=' + TabType + TabNum +'" allowfullscreen></iframe></div>'
+    ifrm.innerHTML+='<div class="topright1"><span onclick="delTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Chi;&nbsp;</span><span class="tooltiptext">Close '+TabType+TabNum+'</span></div>'
+    ifrm.innerHTML+='<div class="topright2"><span onclick="maxTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Omicron;&nbsp;</span><span class="tooltiptext">Project '+TabType+TabNum+'</span></div>'
+    ifrm.innerHTML+='<div class="topright3"><span onclick="maxTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Delta;&nbsp;</span><span class="tooltiptext">Float '+TabType+TabNum+'</span></div>'
+    ifrm.innerHTML+='<div class="topright4"><span onclick="maxTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&nabla;&nbsp;</span><span class="tooltiptext">Sink '+TabType+TabNum+'</span></div>'
+ 
+    var el1 = document.getElementById('addNewDiv');
+    el1.parentNode.insertBefore(ifrm, el1);
+
+    var el2 = document.getElementById('add' + TabType + 'Button');
+    el2.parentNode.insertBefore(ibut, el2);
+
+    document.getElementById('button' + TabType + TabNum).click();
+
+  }
+  if(TabNum>=TabMax) {
+
+    var el1 = document.getElementById('add' + TabType + 'Button');
+    el1.style.display="none";
+
+  }
+}
+
+
+function delTab(event,TabType,TabNum) {
+
+  tabTypeMax[assocIndex(tabTypeList,TabType)]+=1;
+
+  var TabMax=tabTypeMax[assocIndex(tabTypeList,TabType)];
+
+  var el=null;
+
+  el = document.getElementById('button'+TabType+TabNum);
+  el.remove();
+
+  el = document.getElementById(TabType+TabNum);
+  el.remove();
+
+  el = document.getElementById('add' + TabType + 'Button');
+  el.style.display="inline";
+
+  // Activate other tab types, just in case no TabType tab remains
+  var typeIndex=0, index=0;
+  while(typeIndex<=tabTypeList.length) {
+    if (tabTypeList[typeIndex]!=TabType) {
+      for(index=tabTypeNum[typeIndex];index<=tabTypeMax[typeIndex];index++) {
+        el = document.getElementById('button'+tabTypeList[typeIndex]+index);
+        try {
+          if(typeof el !== 'undefined' && el !== null) {
+            el.click();
+          }
+        }
+        catch(err) {
+          // TODO: Log the error
+        }
+      }
+    }
+    typeIndex+=1;
+  }
+
+  // Now see if any of the given type is alive?
+  // Nearest neighbor to the right
+  for(index=TabMax-1;index>=TabNum+1;index--) {
+    el = document.getElementById('button'+TabType+index);
+    try {
+      if(typeof el !== 'undefined' && el !== null) {
+        el.click();
+      }
+    }
+    catch(err) {
+      // TODO: Log the error
+    }
+  }
+  // Nearest neighbor to the left
+  for(index=1;index<=TabNum-1;index++) {
+    el = document.getElementById('button'+TabType+index);
+    try {
+      if(typeof el !== 'undefined' && el !== null) {
+        el.click();
+      }
+    }
+    catch(err) {
+      // TODO: Log the error
+    }
+  }
+}
+
+// Get the element with id="defaultOpen" and click on it
+function initLevel() {
+  var numIndex=0;
+
+  var TabType=null,ibut=null;
+
+  while(numIndex<tabTypeList.length) {
+    TabType=tabTypeList[numIndex];
+    ibut = document.createElement('button');
+    ibut.setAttribute('class', 'add' + TabType);
+    ibut.setAttribute('id', 'add' + TabType + 'Button');
+    ibut.setAttribute('onclick', "addTab(event, '" + TabType + "')");
+    ibut.innerHTML='Add ' + TabType + '...';
+
+    parseSetButtonStyle(ibut,TabType,"add","addHover");
+
+/*    //add
+    ibut.style.backgroundColor=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][0];
+    ibut.style.color=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][1];
+    ibut.style.fontSize=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][2];
+    ibut.style.fontWeight=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][3];
+
+    //addhover
+    //->enter
+    ibut.setAttribute('onmouseenter','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][0]+'";'
+    +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][1]+'";'
+    +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][2]+'";'
+    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][3]+'"');
+    //->leave
+    ibut.setAttribute('onmouseleave','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][0]+'";'
+    +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][1]+'";'
+    +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][2]+'";'
+    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][3]+'"');
+*/
+    el = document.getElementById('addNewButton');
+    el.parentNode.insertBefore(ibut, el);
+
+    document.getElementById('add' + TabType + 'Button').click();
+
+    numIndex+=1;
+  }
+
+  return 0;
+}
+
+initLevel();
+
+// TODO: Create menu dropdown effect
+
+</script>
+</body>
+</html> 
