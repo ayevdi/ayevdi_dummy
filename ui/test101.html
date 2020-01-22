@@ -2,6 +2,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+/*(C) Copyright 2020 Abhishek Choudhary, Dr Srija Katta
+Under AyeAI SPL license version 1 rev 2 or later 
+No warranties and zero liability */
+
 /* Set style for the page */
 body {
   font-family: Arial;
@@ -173,7 +177,7 @@ button::-moz-focus-inner {
 }
 
 .topright2:hover {
-  color: orange;
+  color: #e65c00;
   background-color: #fff;
 }
 
@@ -184,7 +188,7 @@ button::-moz-focus-inner {
 
   font-size: 14px;
   font-weight: 600;
-  color: orange;
+  color: #e65c00;
   background-color: white;
 
   border-radius: 10px;
@@ -392,29 +396,31 @@ var tabTypeList=["WebApp","Term","GUI"];
 var tabTypeSizeX=[800,800,800];
 var tabTypeSizeY=[640,500,640];
 var tabTypeNum=[0,0,0];
-var tabTypeMax=[1,5,1];
+var tabTypeStartNum=[1,1,1];
+var tabTypeInit=[0,2,1];
+var tabTypeMax=[2,5,1];
 var tabTypeSrc=[
                 "http://35.244.14.58:13346/vnc.html",
                 "http://35.244.14.58:16433/",
                 "http://35.244.14.58:13346/vnc_auto.html"
                ];
 var tabTypeStyleIndex={Button:{backgroundColor:0,color:1,fontSize:2,fontWeight:3,backgroundImage:4}}
-var tabTypeButtonStyle=[{ normal:["#b3e6b3","white","15px",600,""],
-                          active:["#b3e6b3","red","15px",600,""],
-                          hover:["#b3e6b3","yellow","15px",600,""],
-                          add:["#b3e6b3","purple","15px",600,""],
-                          addHover:["magenta","orange","15px",600] },
-                        { normal:["purple","white","15px",600],
-                          active:["blue","red","15px",600],
-                          hover:["red","yellow","15px",600],
-                          add:["red","purple","15px",600],
-                          addHover:["green","orange","15px",600] },
-                        { normal:["purple","white","15px",600],
-                          active:["blue","red","15px",600],
-                          hover:["red","yellow","15px",600],
-                          add:["red","purple","15px",600],
-                          addHover:["yellow","orange","15px",600] }
-                        ];
+var tabTypeButtonStyle=[{ normal:["#c2c2a3","black","15px",600,""],
+                          active:["#8a8a5c","white","15px",600,""],
+                          hover:["#a3a375","gray","15px",600,""],
+                          add:["#c2c2a3","black","15px",600,"linear-gradient(to right, #fff 0%, #8a8a5c 100%)"],
+                          addHover:["#a3a375","black","15px",600,"linear-gradient(to right, #8a8a5c 0%, #fff 100%)"] },
+                        { normal:["#b3e6b3","black","15px",600,""],
+                          active:["#53c653","white","15px",600,""],
+                          hover:["#8cd98c","gray","15px",600,""],
+                          add:["#b3e6b3","black","15px",600,"linear-gradient(to right, #d9f2d9 0%, #53c653 100%)"],
+                          addHover:["#8cd98c","black","15px",600,"linear-gradient(to right, #53c653 0%, #d9f2d9 100%)"] },
+                        { normal:["#b3b3e6","black","15px",600,""],
+                          active:["#8c8cd9","white","15px",600,""],
+                          hover:["#d9d9f2","gray","15px",600,""],
+                          add:["#b3e6b3","black","15px",600,"linear-gradient(to right, #d9d9f2 0%, #8c8cd9 100%)"],
+                          addHover:["#8cd98c","black","15px",600,"linear-gradient(to right, #8c8cd9 0%, #d9d9f2 100%)"] }
+                       ];
 
 function assocIndex(refArr,dHash) {
   var numIndex=0;
@@ -436,39 +442,68 @@ function parseSetButtonStyle(iBut,TabType,normalStyle,hoverStyle) {
     iBut.style.color=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][1];
     iBut.style.fontSize=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][2];
     iBut.style.fontWeight=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][3];
+    iBut.style.backgroundImage=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][4];
 
     //hover
     //->enter
     iBut.setAttribute('onmouseenter','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][0]+'";'
     +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][1]+'";'
     +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][2]+'";'
-    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][3]+'"');
+    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][3]+'";'
+    +'this.style.backgroundImage="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][hoverStyle][4]+'"');
     //->leave
     iBut.setAttribute('onmouseleave','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][0]+'";'
     +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][1]+'";'
     +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][2]+'";'
-    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][3]+'"');
+    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][3]+'";'
+    +'this.style.backgroundImage="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][4]+'"');
 }
 
 function openTab(evt, TabType, TabNum) {
-  var i, tabcontent, tablinks;
+  var index, typeIndex, tabcontent, tablinks;
+
   var tabName=TabType + TabNum;
 
   tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "block";
+  for (index = 0; index < tabcontent.length; index++) {
+    tabcontent[index].style.display = "block";
+    tabcontent[index].style.visibility = "hidden";
   }
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.visibility = "hidden";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-    parseSetButtonStyle(tablinks[i],TabType,"normal","hover");
+  for(typeIndex=0;typeIndex<tabTypeList.length;typeIndex++) {
+    tablinks = document.getElementsByClassName('tablink-' + tabTypeList[typeIndex]);
+    for (index = 0; index < tablinks.length; index++) {
+      tablinks[index].className = tablinks[index].className.replace(" active", "");
+      parseSetButtonStyle(tablinks[index],tabTypeList[typeIndex],"normal","hover");
+    }
   }
   document.getElementById(tabName).style.visibility = "visible";
   evt.currentTarget.className += " active";
   parseSetButtonStyle(evt.currentTarget,TabType,"active","active");
+}
+
+
+function requestFullScreen(element) {
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+    if (requestMethod != false) { // Native full screen.
+        requestMethod.call(element);
+    }
+}
+
+function projectTab(event,TabType,TabNum) {
+/* TODO: This is a 'special-case' projector
+ that projects onto the current PHY device (monitor).
+ We need a general-case projector that can project onto 
+ any HMI (in other words - casting)
+ 
+  var myWindow = window.open("", "projectWindow");
+  myWindow.document.body.innerHTML=ifrm.innerHTML;
+*/
+  var tab = document.getElementById(TabType + TabNum);
+  var innerFrame = tab.querySelector('#TabFrameInner');
+
+  requestFullScreen(innerFrame);
 }
 
 
@@ -505,7 +540,7 @@ function addTab(evt,TabType) {
   if(TabNum<=tabTypeMax[assocIndex(tabTypeList,TabType)]) {
     
     var ibut = document.createElement('button');
-    ibut.setAttribute('class', 'tablinks');
+    ibut.setAttribute('class', 'tablink-'+TabType);
     ibut.setAttribute('id', 'button' + TabType + TabNum);
     ibut.setAttribute('onclick', "openTab(event, '" + TabType + "'," + TabNum + ")");
     ibut.innerHTML=TabType + TabNum;
@@ -519,11 +554,11 @@ function addTab(evt,TabType) {
     ifrm.style.visibility = "hidden"
 
     // TODO: Replace with properly decorated code
-    ifrm.innerHTML='<div id="TabFrame"><iframe width="' + TabWidth + '" height="' + TabHeight + '" frameborder="0" src="'+ TabSrc +'?term=' + TabType + TabNum +'" allowfullscreen></iframe></div>'
+    ifrm.innerHTML='<div id="TabFrame"><iframe id="TabFrameInner" width="' + TabWidth + '" height="' + TabHeight + '" frameborder="0" src="'+ TabSrc +'?term=' + TabType + TabNum +'" allowfullscreen></iframe></div>'
     ifrm.innerHTML+='<div class="topright1"><span onclick="delTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Chi;&nbsp;</span><span class="tooltiptext">Close '+TabType+TabNum+'</span></div>'
-    ifrm.innerHTML+='<div class="topright2"><span onclick="maxTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Omicron;&nbsp;</span><span class="tooltiptext">Project '+TabType+TabNum+'</span></div>'
+    ifrm.innerHTML+='<div class="topright2"><span onclick="projectTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Omicron;&nbsp;</span><span class="tooltiptext">Project '+TabType+TabNum+'</span></div>'
     ifrm.innerHTML+='<div class="topright3"><span onclick="maxTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Delta;&nbsp;</span><span class="tooltiptext">Float '+TabType+TabNum+'</span></div>'
-    ifrm.innerHTML+='<div class="topright4"><span onclick="maxTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&nabla;&nbsp;</span><span class="tooltiptext">Sink '+TabType+TabNum+'</span></div>'
+    ifrm.innerHTML+='<div class="topright4"><span onclick="minTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&nabla;&nbsp;</span><span class="tooltiptext">Sink '+TabType+TabNum+'</span></div>'
  
     var el1 = document.getElementById('addNewDiv');
     el1.parentNode.insertBefore(ifrm, el1);
@@ -606,11 +641,11 @@ function delTab(event,TabType,TabNum) {
   }
 }
 
-// Get the element with id="defaultOpen" and click on it
-function initLevel() {
-  var numIndex=0;
+// Initialize the buttons is init property is set
+function initLayer() {
+  var numIndex=0,initCount=0;
 
-  var TabType=null,ibut=null;
+  var TabType=null,ibut=null,el=null;
 
   while(numIndex<tabTypeList.length) {
     TabType=tabTypeList[numIndex];
@@ -622,28 +657,31 @@ function initLevel() {
 
     parseSetButtonStyle(ibut,TabType,"add","addHover");
 
-/*    //add
-    ibut.style.backgroundColor=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][0];
-    ibut.style.color=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][1];
-    ibut.style.fontSize=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][2];
-    ibut.style.fontWeight=tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][3];
-
-    //addhover
-    //->enter
-    ibut.setAttribute('onmouseenter','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][0]+'";'
-    +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][1]+'";'
-    +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][2]+'";'
-    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["addHover"][3]+'"');
-    //->leave
-    ibut.setAttribute('onmouseleave','this.style.backgroundColor="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][0]+'";'
-    +'this.style.color="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][1]+'";'
-    +'this.style.fontSize="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][2]+'";'
-    +'this.style.fontWeight="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)]["add"][3]+'"');
-*/
     el = document.getElementById('addNewButton');
     el.parentNode.insertBefore(ibut, el);
 
-    document.getElementById('add' + TabType + 'Button').click();
+    for(initCount=0;initCount<tabTypeInit[numIndex];initCount++) {
+      el=document.getElementById('add' + TabType + 'Button');
+      try {
+        if(typeof el !== 'undefined' && el !== null) {
+          el.click();
+        }
+      }
+      catch(err) {
+        // TODO: Log the error
+      }
+ 
+      // Keep the first tab of the type active
+      el=document.getElementById('button' + TabType + tabTypeStartNum[numIndex]);
+      try {
+        if(typeof el !== 'undefined' && el !== null) {
+          el.click();
+        }
+      }
+      catch(err) {
+        // TODO: Log the error
+      }
+    }
 
     numIndex+=1;
   }
@@ -651,9 +689,9 @@ function initLevel() {
   return 0;
 }
 
-initLevel();
+initLayer();
 
-// TODO: Create menu dropdown effect
+// TODO: Create menu dropdown effects for non-leaf level layers
 
 </script>
 </body>
