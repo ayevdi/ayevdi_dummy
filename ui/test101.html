@@ -554,7 +554,7 @@ function addTab(evt,TabType) {
     ifrm.style.visibility = "hidden"
 
     // TODO: Replace with properly decorated code
-    ifrm.innerHTML='<div id="TabFrame"><iframe id="TabFrameInner" width="' + TabWidth + '" height="' + TabHeight + '" frameborder="0" src="'+ TabSrc +'?term=' + TabType + TabNum +'" allowfullscreen></iframe></div>'
+    ifrm.innerHTML='<div id="TabFrame"><iframe id="TabFrameInner" width="' + TabWidth + '" height="' + TabHeight + '" frameborder="0" src="'+ TabSrc +'?term=' + TabType + TabNum +'&screenWidth='+screen.width+'&screenHeight='+screen.height+'" allowfullscreen></iframe></div>'
     ifrm.innerHTML+='<div class="topright1"><span onclick="delTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Chi;&nbsp;</span><span class="tooltiptext">Close '+TabType+TabNum+'</span></div>'
     ifrm.innerHTML+='<div class="topright2"><span onclick="projectTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Omicron;&nbsp;</span><span class="tooltiptext">Project '+TabType+TabNum+'</span></div>'
     ifrm.innerHTML+='<div class="topright3"><span onclick="maxTab(event,\''+TabType+'\','+TabNum+');">&nbsp;&Delta;&nbsp;</span><span class="tooltiptext">Float '+TabType+TabNum+'</span></div>'
