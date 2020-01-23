@@ -1,5 +1,5 @@
 #!/bin/bash
-# AYESEC:POST_SHS('173 lines')=92207d2112e91936ab440b0b66c6656027f5d2fb51f851c24259ab09782701cfb7b224a8de90d99beab3c2b9a33fb2361a4879f81103041fe57ab6a4e1435aed
+# AYESEC:POST_SHS('187 lines')=76ade6a71a2b3c0834141df667e1b34459c98239e338318bc3001c8a71b3471ef0a2dd0e9f49c424985da56afbdb921e283383bb4d142d9b466da7cde00dfd35
 # AYESEC:FILE_TOP('ayevdi/ost/ayevdi-sfrom-init')
 
 # AYESEC:POST_SHS('26 lines')=c108bc8dce63695b1554023282d716f23813136ddbba66c941c6e9f3bc86e775cfeddd1fea5ab66d9f8316f37ae727f7810fa872452b63983878f16c0b5714d2
@@ -102,12 +102,12 @@ fi
 # Suggestions: Ensure correctness and validity of the vaidator itself!
 # AYEINTERNS:TASK_END
 
-# AYESEC:POST_SHS('28 lines')=a348aebd80d97f4147310b690f48f637d049130082479b76a2f57213175cf93f0b6ac5a8bd6bb8d32bd42b51bfbfade2b16738b7e3f105f6e203d12fbd67a377
+# AYESEC:POST_SHS('28 lines')=8f9979b77319ac60aec37a1fbc37207fa9e5d887b37abc503c26a1755ce2c6a124b2a9d68f61f1509798056a7c5945fef23a57f968c5cd933f0d6ae6066822e8
 # AYESEC_NOTICE:'The following 27 lines must not be modified or removed'
-# AYESEC:POST_SHS('25 lines')=e040aa614314e690474747deeb3a5f6ca3a1cf5dc4e0ade5ae4ffa1170fc5d503faca0aa14e844ffd0bf3501fff638ae482c302819e63ea25985c49d53d757d3
+# AYESEC:POST_SHS('25 lines')=dd5d630c42c47c2a22c4d59ab20fde3a390f92d17dd571dc535994ab002d1ca6d2690005615ae0a03951204b4adfd713b8ddcfd44c61360161cb65254dd0dd44
 # AYESEC:SIGNATURE_PLAINTEXT_SOURCEFROM
 # Line 2
-echo "Welocome to AyeVDI by https://ayeai.xyz"
+echo "Welcome to AyeVDI by https://ayeai.xyz"
 echo "Copyright (C) 2019-2020 Abhishek Choudhary, Dr Srija Katta"
 echo ""
 # Line 6
@@ -115,7 +115,7 @@ echo "AyeVDI sourcefrom activated!"
 echo ""
 echo "NO WARRANTY, and ZERO LIABILITY (Limited to INR 1/- only)"
 echo "Further usage of these software, artifacts or methods"
-echo "are subject to the 'latest' license agreement avaialble at"
+echo "are subject to the 'latest' license agreement available at"
 echo "https://raw.githubusercontent.com/ayeai/spl/master/LICENSE"
 echo ""
 # Line 14
@@ -130,12 +130,14 @@ echo "Towards greater glories with peace on Earth and beyond..."
 echo ""
 # Line 24
 # AYESEC:SIGNATURE_PLAINTEXT_SOURCEFROM_COMPLETED
-# AYESEC:PREV_SHS('25 lines')=e040aa614314e690474747deeb3a5f6ca3a1cf5dc4e0ade5ae4ffa1170fc5d503faca0aa14e844ffd0bf3501fff638ae482c302819e63ea25985c49d53d757d3
-# AYESEC:PREV_SHS('28 lines')=a348aebd80d97f4147310b690f48f637d049130082479b76a2f57213175cf93f0b6ac5a8bd6bb8d32bd42b51bfbfade2b16738b7e3f105f6e203d12fbd67a377
+# AYESEC:PREV_SHS('25 lines')=dd5d630c42c47c2a22c4d59ab20fde3a390f92d17dd571dc535994ab002d1ca6d2690005615ae0a03951204b4adfd713b8ddcfd44c61360161cb65254dd0dd44
+# AYESEC:PREV_SHS('28 lines')=8f9979b77319ac60aec37a1fbc37207fa9e5d887b37abc503c26a1755ce2c6a124b2a9d68f61f1509798056a7c5945fef23a57f968c5cd933f0d6ae6066822e8
 
 # NOTICE: The use of aliases is convenient but exposes a potential
 # man-in-the-middle threat
 
+
+# TODO: Add automated aliasing of shortened links
 alias ayevdi-sourcefrom='. ${ayevdi_sourcefrom}'
 alias sourcefrom='ayevdi-sourcefrom'
 
@@ -161,9 +163,21 @@ cat ${HOME}/.ayevdi/ayevdi-validator.$(basename ${ayesh}) | (if [ 0 -lt $(grep A
     echo "Aborting on AYESEC:ERROR"
     cp ${HOME}/.ayevdi/ayevdi-validator.$(basename ${ayesh}) ${HOME}/.ayevdi/ayevdi-error.fatal
   else
-    logger "The Lion has roared!"
+    # Display the mascot (Driksh for AyeAI green zone release)
+    # To reduce redundancy display the mascot only for the initial shell
+    # We compare againt ${SHLVL} <=2 to prevent repeat display in children
+    if [ $SHLVL -le 2 ]
+    then
+      # Even for ${SHLVL} <=2 display mascot no sooner than 60s
+      touch ${HOME}/.ayevdi/ayevdi-mascot-lastrun
+      if [ $(expr $(date +%s) - 0$(cat ${HOME}/.ayevdi/ayevdi-mascot-lastrun)) -ge 60 ]
+      then 
+        sourcefrom https://bit.ly/ayevdi-mascot-anim
+        date +%s >${HOME}/.ayevdi/ayevdi-mascot-lastrun
+      fi
+    fi
+    logger "Driksh has roared!"
     echo ""
-    sourcefrom https://bit.ly/ayevdi-mascot
   fi) && echo ""
   
 if [ -e ${HOME}/.ayevdi/ayevdi-error.fatal ]
@@ -173,4 +187,4 @@ then
 fi
 
 # AYESEC:FILE_END('ayevdi/ost/ayevdi-sfrom-init')
-# AYESEC:PREV_SHS('173 lines')=92207d2112e91936ab440b0b66c6656027f5d2fb51f851c24259ab09782701cfb7b224a8de90d99beab3c2b9a33fb2361a4879f81103041fe57ab6a4e1435aed
+# AYESEC:PREV_SHS('187 lines')=76ade6a71a2b3c0834141df667e1b34459c98239e338318bc3001c8a71b3471ef0a2dd0e9f49c424985da56afbdb921e283383bb4d142d9b466da7cde00dfd35
