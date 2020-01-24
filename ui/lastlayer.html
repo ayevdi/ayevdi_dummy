@@ -9,8 +9,7 @@ No warranties and zero liability */
 /* Set style for the page */
 body {
   font-family: Arial;
-  border: 4px solid red;
-  background-color: black;
+  border: 0;
   border-top: none;
   border-left: none;
   margin: 0;
@@ -390,7 +389,7 @@ button::-moz-focus-inner {
 <div id="addNewDiv" class="addTab" style="display: inline; visibility: hidden;">
   <p>Add a new div... If you can see this message then there's some bug in AyeUI! Please report it.</p>
 </div>
-<script src="vendor/html2pdf.bundle.js"></script>
+
 <script>
 var tabTypeList=["WebApp","Term","GUI"];
 var tabTypeSizeX=[800,800,800];
@@ -459,6 +458,9 @@ function parseSetButtonStyle(iBut,TabType,normalStyle,hoverStyle) {
     +'this.style.backgroundImage="'+tabTypeButtonStyle[assocIndex(tabTypeList,TabType)][normalStyle][4]+'"');
 }
 
+var ActiveTabType=null;
+var ActiveTabNum=null;
+
 function openTab(evt, TabType, TabNum) {
   var index, typeIndex, tabcontent, tablinks;
 
@@ -479,8 +481,30 @@ function openTab(evt, TabType, TabNum) {
   document.getElementById(tabName).style.visibility = "visible";
   evt.currentTarget.className += " active";
   parseSetButtonStyle(evt.currentTarget,TabType,"active","active");
+
+  ActiveTabType = TabType;
+  ActiveTabNum = TabNum;
 }
 
+window.setInterval(function(){ // Set interval for checking
+  // Note: Fix specific focus issues here
+  // TODO: This should be profile driven and not brute force
+
+  // #1. Fix the noVNC keyboard focus issue
+  // TODO: Add error handling
+  if ((ActiveTabType == "GUI") || (ActiveTabType == "Term") && (ActiveTabNum != null)) {
+    var tab = document.getElementById(ActiveTabType + ActiveTabNum);
+    if ( tab != null ) {
+      var innerFrame = tab.querySelector('#TabFrameInner');
+      if (innerFrame != null) {
+        innerFrame.focus();
+        innerFrame.click();
+      }
+    }
+  }
+}, 75); // Repeat every 75 milliseconds
+// Note: This may still miss the initial keystrokes, but tolerable
+// TODO: This is a patchy fix! Needs to be adddressed based on noVNC rfb refresh
 
 function requestFullScreen(element) {
     // Supports most browsers and their versions.
@@ -578,7 +602,6 @@ function addTab(evt,TabType) {
     el2.parentNode.insertBefore(ibut, el2);
 
     document.getElementById('button' + TabType + TabNum).click();
-
   }
   if(TabNum>=TabMax) {
 
