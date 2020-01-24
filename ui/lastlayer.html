@@ -388,16 +388,16 @@ button::-moz-focus-inner {
 </div>
 
 <div id="addNewDiv" class="addTab" style="display: inline; visibility: hidden;">
-  <p>Add a new div... If you can see this message then there's some bug in AyeUI! Please report it.</P>
+  <p>Add a new div... If you can see this message then there's some bug in AyeUI! Please report it.</p>
 </div>
-
+<script src="vendor/html2pdf.bundle.js"></script>
 <script>
 var tabTypeList=["WebApp","Term","GUI"];
 var tabTypeSizeX=[800,800,800];
 var tabTypeSizeY=[640,500,640];
 var tabTypeNum=[0,0,0];
 var tabTypeStartNum=[1,1,1];
-var tabTypeInit=[0,2,1];
+var tabTypeInit=[0,1,1];
 var tabTypeMax=[2,5,1];
 var tabTypeSrc=[
                 "http://35.244.14.58:13346/vnc.html",
@@ -506,6 +506,17 @@ function projectTab(event,TabType,TabNum) {
   requestFullScreen(innerFrame);
 }
 
+
+function minTab(event,TabType,TabNum) {
+/* The sink button can serve either download or refresh
+ functions at the basic page level */
+  var tab = document.getElementById(TabType + TabNum);
+  var innerFrame = tab.querySelector('#TabFrameInner');
+
+  // Lets refresh for now
+  // TODO: Add download image, audio, video etc
+  innerFrame.src=innerFrame.src;
+}
 
 function maxTab(event,TabType,TabNum) {
   var el = document.getElementById(TabType + TabNum);
