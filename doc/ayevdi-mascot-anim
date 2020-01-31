@@ -50,3 +50,5 @@ cat <<QREND | /usr/games/lolcat -F 0.3 -S 2020 -p 20
 ███████████████████████████████
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 QREND
+
+echo https://ayeai.xyz | /usr/games/lolcat -F 0.7 -S 2020 -p 20
